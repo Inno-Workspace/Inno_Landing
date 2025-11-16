@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/header";
 
 const bbhSansHegarty = localFont({
   src: "../public/fonts/BBH_Sans_Hegarty,Kufam/BBH_Sans_Hegarty/BBHSansHegarty-Regular.ttf",
@@ -40,7 +41,8 @@ export default function RootLayout({
       <body
         className={`${bbhSansHegarty.variable} ${kufam.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <div className="page-content">{children}</div>
       </body>
     </html>
   );
