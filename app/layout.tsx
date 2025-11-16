@@ -1,15 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const bbhSansHegarty = localFont({
+  src: "../public/fonts/BBH_Sans_Hegarty,Kufam/BBH_Sans_Hegarty/BBHSansHegarty-Regular.ttf",
+  variable: "--font-bbh-sans",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const kufam = localFont({
+  src: [
+    {
+      path: "../public/fonts/BBH_Sans_Hegarty,Kufam/Kufam/Kufam-VariableFont_wght.ttf",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/BBH_Sans_Hegarty,Kufam/Kufam/Kufam-Italic-VariableFont_wght.ttf",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-kufam",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bbhSansHegarty.variable} ${kufam.variable} antialiased`}
       >
         {children}
       </body>
