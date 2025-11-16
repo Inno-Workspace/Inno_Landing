@@ -40,7 +40,6 @@ const splitTextIntoChars = (element: HTMLElement): HTMLElement[] => {
 };
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuOverlayRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -260,13 +259,10 @@ const Header = () => {
         if (menuOverlayRef.current) {
           menuOverlayRef.current.style.pointerEvents = "none";
         }
-        setIsMenuOpen(false);
       });
-      setIsMenuOpen(false);
     } else {
       // Menu is closed, open it
       menuTimeline.play();
-      setIsMenuOpen(true);
     }
   };
 
