@@ -23,7 +23,7 @@ const splitTextIntoChars = (element: HTMLElement): HTMLElement[] => {
   if (element.children.length > 0 && element.querySelector("span")) {
     return Array.from(element.querySelectorAll("span")) as HTMLElement[];
   }
-  
+
   const text = element.textContent || "";
   const chars = text.split("").map((char) => {
     const span = document.createElement("span");
@@ -32,10 +32,10 @@ const splitTextIntoChars = (element: HTMLElement): HTMLElement[] => {
     span.style.visibility = "hidden";
     return span;
   });
-  
+
   element.textContent = "";
   chars.forEach((char) => element.appendChild(char));
-  
+
   return chars;
 };
 
@@ -56,7 +56,7 @@ const Header = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const threshold = 50; // Show background after 50px scroll
-      
+
       if (scrollY > threshold && !isScrolled) {
         setIsScrolled(true);
         if (headerBgRef.current) {
@@ -87,9 +87,9 @@ const Header = () => {
 
     const menuOverlay = menuOverlayRef.current;
     const pageContent = document.querySelector(".page-content") as HTMLElement;
-    
+
     if (!pageContent) return;
-    
+
     // Get all img elements from the background images container
     const bgImgs = Array.from(
       bgImagesContainerRef.current.querySelectorAll("img")
@@ -107,7 +107,7 @@ const Header = () => {
 
     // Menu overlay background animation on hover
     const cleanupFunctions: (() => void)[] = [];
-    
+
     items.forEach((item, index) => {
       const handleMouseEnter = () => {
         // Fade out all images
@@ -280,17 +280,17 @@ const Header = () => {
         {/* Background blur overlay - appears on scroll */}
         <div
           ref={headerBgRef}
-          className="absolute inset-0 bg-teal-950/70 backdrop-blur-lg -z-10 opacity-0"
+          className="absolute inset-0 bg-overlay backdrop-blur-lg -z-10 opacity-0"
           style={{
             backdropFilter: "blur(16px) saturate(180%)",
             WebkitBackdropFilter: "blur(16px) saturate(180%)",
           }}
         />
-        
+
         <div className="relative flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl md:text-3xl font-bold text-white">
-            <span style={{ fontFamily: "var(--font-bbh-sans)" }}>INNO</span>
+          <div className="text-2xl md:text-3xl font-bold text-primary">
+            <span style={{ fontFamily: "var(--font-devil-breeze)" }}>INNO</span>
           </div>
 
           {/* Menu Toggle Button */}
@@ -301,8 +301,8 @@ const Header = () => {
             className="relative w-10 h-10 flex flex-col items-center justify-center gap-2 z-50"
             aria-label="Toggle menu"
           >
-            <span className="toggle-line-top w-8 h-0.5 bg-white rounded-full transition-all" />
-            <span className="toggle-line-bottom w-8 h-0.5 bg-white rounded-full transition-all" />
+            <span className="toggle-line-top w-8 h-0.5 bg-text-primary rounded-full transition-all" />
+            <span className="toggle-line-bottom w-8 h-0.5 bg-text-primary rounded-full transition-all" />
           </button>
         </div>
       </header>
@@ -310,7 +310,7 @@ const Header = () => {
       {/* Menu Overlay */}
       <div
         ref={menuOverlayRef}
-        className="menu-overlay fixed inset-0 bg-gradient-to-br from-teal-900 via-cyan-900 to-teal-950 z-40 pointer-events-none"
+        className="menu-overlay fixed inset-0 bg-gradient-primary z-40 pointer-events-none"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
         {/* Background Images */}
@@ -344,7 +344,7 @@ const Header = () => {
         </div>
 
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/80 via-cyan-900/70 to-teal-950/90" />
+        <div className="absolute inset-0 bg-gradient-overlay" />
 
         {/* Menu Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
@@ -360,8 +360,8 @@ const Header = () => {
                 >
                   <a
                     href={item.href}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold text-white hover:text-cyan-300 transition-colors"
-                    style={{ fontFamily: "var(--font-bbh-sans)" }}
+                    className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary hover:text-hover-primary transition-colors"
+                    style={{ fontFamily: "var(--font-devil-breeze)" }}
                     data-text-anim
                     ref={(el) => {
                       if (el) linkTextsRef.current[index] = el;
@@ -375,10 +375,8 @@ const Header = () => {
           </nav>
         </div>
       </div>
-
     </>
   );
 };
 
 export default Header;
-

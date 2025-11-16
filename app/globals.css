@@ -1,22 +1,140 @@
 @import "tailwindcss";
 
 :root {
+  /* Base */
   --background: #ffffff;
   --foreground: white;
+
+  /* Primary colors (Teal) */
+  --primary-700: #0f766e;
+  --primary-800: #115e59;
+  --primary-900: #134e4a;
+  --primary-950: #042f2e;
+
+  /* Secondary colors (Cyan) */
+  --secondary-700: #0e7490;
+  --secondary-800: #155e75;
+  --secondary-900: #164e63;
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #a5f3fc;
+  --text-accent: #67e8f9;
+  --text-hover: #67e8f9;
+  --text-dark: #042f2e;
+
+  /* Backgrounds */
+  --bg-overlay: rgba(4, 47, 46, 0.7);
+  --bg-dark: #042f2e;
+
+  /* Gradient stops */
+  --gradient-start: #0f766e;
+  --gradient-mid: #155e75;
+  --gradient-end: #042f2e;
+  --gradient-overlay-start: rgba(19, 78, 74, 0.8);
+  --gradient-overlay-mid: rgba(22, 78, 99, 0.7);
+  --gradient-overlay-end: rgba(4, 47, 46, 0.9);
+
+  /* Effects */
+  --effect-brush: rgba(13, 148, 136, 0.8);
+  --effect-spray: rgba(13, 148, 136, 0.6);
+  --effect-fine-spray: rgba(13, 148, 136, 0.9);
+  --effect-wireframe-start: rgba(20, 184, 166, 0.4);
+  --effect-wireframe-mid: rgba(14, 116, 144, 0.6);
+  --effect-wireframe-end: rgba(15, 118, 110, 0.4);
+  --effect-geometric-primary: #164e63;
+  --effect-geometric-secondary: #115e59;
+  --effect-overlay-top: rgba(19, 78, 74, 0.4);
+  --effect-overlay-bottom: rgba(14, 116, 144, 0.25);
+  --effect-radial-start: rgba(14, 116, 144, 0.25);
+  --effect-radial-end: rgba(4, 47, 46, 0.15);
+  --effect-linear: rgba(15, 118, 110, 0.08);
+  --effect-bottom-fade: rgba(4, 47, 46, 0.5);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-bbh-sans);
-  --font-kufam: var(--font-kufam);
+  --font-devil-breeze: "Devil Breeze", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-bimbo: "Bimbo", sans-serif;
 }
 
+/* Dark mode - ready for future implementation */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: white;
     --foreground: white;
+    /* Dark mode colors can be added here later */
   }
+}
+
+/* Core Color Classes - Use everywhere */
+.bg-primary {
+  background-color: var(--primary-700);
+}
+.bg-primary-dark {
+  background-color: var(--primary-950);
+}
+.bg-secondary {
+  background-color: var(--secondary-800);
+}
+.bg-overlay {
+  background-color: var(--bg-overlay);
+}
+.bg-dark {
+  background-color: var(--bg-dark);
+}
+.bg-section {
+  background-color: var(--background);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-accent {
+  color: var(--text-accent);
+}
+.bg-accent {
+  background-color: var(--text-accent);
+}
+.text-hover-primary {
+  color: var(--text-hover);
+}
+.text-dark {
+  color: var(--text-dark);
+}
+.bg-text-primary {
+  background-color: var(--text-primary);
+}
+
+.text-geometric-primary {
+  color: var(--effect-geometric-primary);
+}
+.text-geometric-secondary {
+  color: var(--effect-geometric-secondary);
+}
+
+/* Reusable Gradient Classes */
+.bg-gradient-primary {
+  background: linear-gradient(
+    to bottom right,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+}
+
+.bg-gradient-overlay {
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-overlay-start),
+    var(--gradient-overlay-mid),
+    var(--gradient-overlay-end)
+  );
 }
 
 html,
@@ -30,8 +148,7 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-bbh-sans), var(--font-kufam), Arial, Helvetica,
-    sans-serif;
+  font-family: var(--font-poppins), sans-serif;
 }
 
 /* Custom radial gradient utilities */

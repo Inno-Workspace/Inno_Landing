@@ -142,7 +142,7 @@ const Hero = () => {
       </svg>
 
       {/* Base gradient background - darker turquoise */}
-      <div className="absolute inset-0 bg-linear-to-br from-teal-700 via-cyan-800 to-teal-900"></div>
+      <div className="absolute inset-0 bg-gradient-primary"></div>
 
       {/* 3D Wireframe Gradient Effect */}
       <div className="absolute inset-0 overflow-hidden opacity-70">
@@ -160,9 +160,9 @@ const Hero = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="rgba(20, 184, 166, 0.4)" />
-              <stop offset="50%" stopColor="rgba(14, 116, 144, 0.6)" />
-              <stop offset="100%" stopColor="rgba(15, 118, 110, 0.4)" />
+              <stop offset="0%" stopColor="var(--effect-wireframe-start)" />
+              <stop offset="50%" stopColor="var(--effect-wireframe-mid)" />
+              <stop offset="100%" stopColor="var(--effect-wireframe-end)" />
             </linearGradient>
             <radialGradient id="cornerFade" cx="50%" cy="50%" r="70%">
               <stop offset="0%" stopColor="white" stopOpacity="1" />
@@ -238,7 +238,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 60% 40% at 15% 25%, rgba(13, 148, 136, 0.8) 0%, transparent 60%)`,
+          background: `radial-gradient(ellipse 60% 40% at 15% 25%, var(--effect-brush) 0%, transparent 60%)`,
           filter: "blur(60px)",
           mixBlendMode: "multiply",
         }}
@@ -248,7 +248,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 85% 75%, rgba(15, 118, 110, 0.85) 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse 70% 50% at 85% 75%, var(--effect-brush) 0%, transparent 65%)`,
           filter: "blur(70px)",
           mixBlendMode: "screen",
         }}
@@ -258,7 +258,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 50% 60% at 50% 50%, rgba(14, 116, 144, 0.7) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 50% 60% at 50% 50%, var(--effect-brush) 0%, transparent 70%)`,
           filter: "blur(50px)",
           mixBlendMode: "multiply",
         }}
@@ -268,7 +268,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 40% 30% at 80% 20%, rgba(14, 116, 144, 0.75) 0%, transparent 55%)`,
+          background: `radial-gradient(ellipse 40% 30% at 80% 20%, var(--effect-brush) 0%, transparent 55%)`,
           filter: "blur(45px)",
           mixBlendMode: "overlay",
         }}
@@ -278,7 +278,7 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 45% 35% at 20% 80%, rgba(17, 94, 89, 0.7) 0%, transparent 60%)`,
+          background: `radial-gradient(ellipse 45% 35% at 20% 80%, var(--effect-brush) 0%, transparent 60%)`,
           filter: "blur(55px)",
           mixBlendMode: "screen",
         }}
@@ -289,14 +289,14 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle 8% at 25% 35%, rgba(13, 148, 136, 0.6) 0%, transparent 50%),
-            radial-gradient(circle 6% at 65% 15%, rgba(15, 118, 110, 0.7) 0%, transparent 45%),
-            radial-gradient(circle 7% at 80% 55%, rgba(14, 116, 144, 0.65) 0%, transparent 50%),
-            radial-gradient(circle 5% at 15% 70%, rgba(17, 94, 89, 0.6) 0%, transparent 40%),
-            radial-gradient(circle 6% at 50% 85%, rgba(19, 78, 74, 0.7) 0%, transparent 45%),
-            radial-gradient(circle 7% at 75% 30%, rgba(13, 148, 136, 0.65) 0%, transparent 50%),
-            radial-gradient(circle 5% at 35% 60%, rgba(15, 118, 110, 0.6) 0%, transparent 40%),
-            radial-gradient(circle 6% at 90% 75%, rgba(14, 116, 144, 0.7) 0%, transparent 45%)
+            radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
+            radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%),
+            radial-gradient(circle 6% at 50% 85%, var(--effect-spray) 0%, transparent 45%),
+            radial-gradient(circle 7% at 75% 30%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 5% at 35% 60%, var(--effect-spray) 0%, transparent 40%),
+            radial-gradient(circle 6% at 90% 75%, var(--effect-spray) 0%, transparent 45%)
           `,
           filter: "blur(25px)",
           mixBlendMode: "overlay",
@@ -308,16 +308,16 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            radial-gradient(circle 3px at 20% 30%, rgba(13, 148, 136, 0.9) 0%, transparent 0%),
-            radial-gradient(circle 4px at 40% 50%, rgba(15, 118, 110, 0.85) 0%, transparent 0%),
-            radial-gradient(circle 2px at 60% 20%, rgba(14, 116, 144, 0.9) 0%, transparent 0%),
-            radial-gradient(circle 5px at 80% 40%, rgba(17, 94, 89, 0.8) 0%, transparent 0%),
-            radial-gradient(circle 3px at 30% 70%, rgba(19, 78, 74, 0.85) 0%, transparent 0%),
-            radial-gradient(circle 4px at 70% 80%, rgba(13, 148, 136, 0.8) 0%, transparent 0%),
-            radial-gradient(circle 2px at 10% 55%, rgba(15, 118, 110, 0.9) 0%, transparent 0%),
-            radial-gradient(circle 3px at 55% 90%, rgba(14, 116, 144, 0.85) 0%, transparent 0%),
-            radial-gradient(circle 4px at 85% 15%, rgba(17, 94, 89, 0.8) 0%, transparent 0%),
-            radial-gradient(circle 2px at 45% 25%, rgba(19, 78, 74, 0.9) 0%, transparent 0%)
+            radial-gradient(circle 3px at 20% 30%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 4px at 40% 50%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 2px at 60% 20%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 5px at 80% 40%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 3px at 30% 70%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 4px at 70% 80%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 2px at 10% 55%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 3px at 55% 90%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 4px at 85% 15%, var(--effect-fine-spray) 0%, transparent 0%),
+            radial-gradient(circle 2px at 45% 25%, var(--effect-fine-spray) 0%, transparent 0%)
           `,
           backgroundSize: "100% 100%",
           filter: "blur(12px)",
@@ -346,7 +346,12 @@ const Hero = () => {
       ></div>
 
       {/* Animated gradient overlay for depth - darker */}
-      <div className="absolute inset-0 bg-linear-to-t from-teal-900/40 via-transparent to-cyan-700/25"></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
+        }}
+      ></div>
 
       {/* Geometric pattern overlay - triangular lines - Reduced on mobile */}
       <div className="absolute inset-0 opacity-10 md:opacity-20">
@@ -365,14 +370,14 @@ const Hero = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="0.5"
-                className="text-cyan-900"
+                className="text-geometric-primary"
               />
               <path
                 d="M25,25 L75,25 L50,75 Z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="0.3"
-                className="text-teal-800"
+                className="text-geometric-secondary"
               />
             </pattern>
           </defs>
@@ -381,12 +386,32 @@ const Hero = () => {
       </div>
 
       {/* Radial gradient fade effects - darker */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-teal-950/15"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-cyan-800/25 via-transparent to-transparent"></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(circle, transparent, transparent, var(--effect-radial-end))`,
+        }}
+      ></div>
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          background: `radial-gradient(circle, var(--effect-radial-start), transparent, transparent)`,
+        }}
+      ></div>
 
       {/* Additional depth layers with turquoise variations - darker */}
-      <div className="absolute inset-0 bg-linear-to-r from-transparent via-teal-700/8 to-transparent"></div>
-      <div className="absolute inset-0 bg-linear-to-l from-transparent via-cyan-700/8 to-transparent"></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to right, transparent, var(--effect-linear), transparent)`,
+        }}
+      ></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to left, transparent, var(--effect-linear), transparent)`,
+        }}
+      ></div>
 
       {/* Animated Images with Parallax Effect - Optimized */}
       {/* Liquid 1 - Top Right - Scroll Parallax */}
@@ -475,8 +500,8 @@ const Hero = () => {
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="text-center px-4">
           <h1
-            className="text-5xl sm:text-6xl md:text-8xl lg:text-[200px] font-bold text-white mb-4 drop-shadow-lg tracking-wider md:tracking-widest"
-            style={{ fontFamily: "var(--font-bbh-sans)" }}
+            className="text-5xl sm:text-6xl md:text-8xl lg:text-[200px] font-bold text-primary mb-4 drop-shadow-lg tracking-wider md:tracking-widest"
+            style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
             INNO
           </h1>
@@ -484,7 +509,12 @@ const Hero = () => {
       </div>
 
       {/* Bottom fade effect - darker */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-teal-950/50 to-transparent"></div>
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32"
+        style={{
+          background: `linear-gradient(to top, var(--effect-bottom-fade), transparent)`,
+        }}
+      ></div>
     </div>
   );
 };

@@ -1,30 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header";
-
-const bbhSansHegarty = localFont({
-  src: "../public/fonts/BBH_Sans_Hegarty,Kufam/BBH_Sans_Hegarty/BBHSansHegarty-Regular.ttf",
-  variable: "--font-bbh-sans",
-  display: "swap",
-});
-
-const kufam = localFont({
-  src: [
-    {
-      path: "../public/fonts/BBH_Sans_Hegarty,Kufam/Kufam/Kufam-VariableFont_wght.ttf",
-      weight: "100 900",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/BBH_Sans_Hegarty,Kufam/Kufam/Kufam-Italic-VariableFont_wght.ttf",
-      weight: "100 900",
-      style: "italic",
-    },
-  ],
-  variable: "--font-kufam",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -38,9 +14,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${bbhSansHegarty.variable} ${kufam.variable} antialiased`}
-      >
+      <head>
+        <link
+          href="https://fonts.cdnfonts.com/css/devil-breeze"
+          rel="stylesheet"
+        />
+        <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
+        <link href="https://fonts.cdnfonts.com/css/bimbo" rel="stylesheet" />
+      </head>
+      <body className="antialiased">
         <Header />
         <div className="page-content">{children}</div>
       </body>
