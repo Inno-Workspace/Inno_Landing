@@ -503,8 +503,14 @@ const Hero = () => {
             className="text-5xl sm:text-6xl md:text-8xl lg:text-[200px] font-bold text-primary mb-4 drop-shadow-lg tracking-wider md:tracking-widest"
             style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
-            INNO
+            innovation
           </h1>
+          <h2
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-primary drop-shadow-md"
+            style={{ fontFamily: "var(--font-poppins)" }}
+          >
+            Your Best Technical Partner
+          </h2>
         </div>
       </div>
 
