@@ -355,7 +355,7 @@ const Hero = () => {
       ></div>
 
       <motion.div
-        className="absolute top-[8%] right-[2%] w-72 h-72 sm:w-96 sm:h-96 md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
+        className="absolute top-[5%] right-[-3%] sm:top-[8%] sm:right-[2%] w-96 h-96 sm:w-[400px] sm:h-[400px] md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
         style={{
           y: y2,
           x: x2,
@@ -384,7 +384,7 @@ const Hero = () => {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[12%] left-[5%] w-64 h-64 sm:w-80 sm:h-80 md:bottom-[15%] md:left-[10%] md:w-[350px] md:h-[350px] lg:bottom-[8%] lg:left-[0%] lg:w-[500px] lg:h-[500px] z-9"
+        className="absolute bottom-[2%] left-[-9%] sm:bottom-[12%] sm:left-[5%] w-80 h-80 sm:w-[350px] sm:h-[350px] md:bottom-[15%] md:left-[10%] md:w-[350px] md:h-[350px] lg:bottom-[8%] lg:left-[0%] lg:w-[500px] lg:h-[500px] z-9"
         style={{
           y: y3,
           x: x3,
@@ -413,7 +413,7 @@ const Hero = () => {
       </motion.div>
 
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] sm:w-[800px] sm:h-[600px] md:w-[1200px] md:h-[900px] lg:w-[1800px] lg:h-[1400px] z-8 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[700px] sm:w-[1200px] sm:h-[900px] md:w-[1200px] md:h-[900px] lg:w-[1800px] lg:h-[1400px] z-8 pointer-events-none"
         style={{
           willChange: language === "ar" ? "auto" : "transform",
           transformStyle: language === "ar" ? "flat" : "preserve-3d",
