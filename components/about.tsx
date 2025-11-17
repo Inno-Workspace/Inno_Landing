@@ -21,9 +21,9 @@ const About = () => {
       ></div>
 
       <motion.div
-        className={`absolute top-[17%] sm:top-[10%] sm:bottom-auto ${
+        className={`absolute top-[17%] sm:top-auto sm:bottom-[10%] md:bottom-[10%] ${
           language === "ar"
-            ? "left-[-10%] sm:left-[10%]"
+            ? "left-[-10%] sm:left-[3%]"
             : "right-[-0%] sm:right-[3%]"
         } w-[200px] h-[200px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[520px] lg:h-[520px] z-5`}
         initial={{ opacity: 0, scale: 0.8 }}
