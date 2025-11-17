@@ -21,9 +21,11 @@ const About = () => {
       ></div>
 
       <motion.div
-        className={`absolute bottom-[10%] ${
-          language === "ar" ? "left-[3%]" : "right-[3%]"
-        } w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[520px] md:h-[520px] z-5`}
+        className={`absolute top-[17%] sm:top-[10%] sm:bottom-auto ${
+          language === "ar"
+            ? "left-[-10%] sm:left-[10%]"
+            : "right-[-0%] sm:right-[3%]"
+        } w-[200px] h-[200px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[520px] lg:h-[520px] z-5`}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
