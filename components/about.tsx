@@ -2,28 +2,28 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useLanguage } from "@/contexts/language-context";
 
-// Dynamically import 3D component (client-side only)
 const ThreeDCircle = dynamic(() => import("./3d-circle"), {
   ssr: false,
   loading: () => <div className="w-full h-full" />,
 });
 
 const About = () => {
-  // Generate 20 bubbles with different properties
-  const bubbleCount = 20;
+  const { t, language } = useLanguage();
+  const bubbleCount = language === "ar" ? 12 : 20;
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Solid background - soft and light */}
+    <div id="about" className="relative min-h-screen w-full overflow-hidden">
       <div
         className="absolute inset-0"
         style={{ backgroundColor: "#f0fdfa" }}
       ></div>
 
-      {/* 3D Circle - Right side */}
       <motion.div
-        className="absolute bottom-[10%] right-[3%] w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[520px] md:h-[520px] z-5"
+        className={`absolute bottom-[10%] ${
+          language === "ar" ? "left-[3%]" : "right-[3%]"
+        } w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[520px] md:h-[520px] z-5`}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -32,15 +32,13 @@ const About = () => {
         <ThreeDCircle speed={0.5} scale={2} rotationAxis={[1, 0, 0]} />
       </motion.div>
 
-      {/* Floating Bubbles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: bubbleCount }).map((_, i) => {
-          // Fixed values per bubble
-          const size = 40 + ((i * 7) % 100); // 40-140px
-          const left = (i * 13) % 100; // Spread across width
-          const delay = (i * 0.8) % 5; // 0-5s delay
-          const duration = 15 + (i % 10); // 15-25s duration
-          const opacity = 0.15 + (i % 5) * 0.05; // 0.15-0.35 opacity
+          const size = 40 + ((i * 7) % 100);
+          const left = (i * 13) % 100;
+          const delay = (i * 0.8) % 5;
+          const duration = 15 + (i % 10);
+          const opacity = 0.15 + (i % 5) * 0.05;
 
           return (
             <motion.div
@@ -75,7 +73,6 @@ const About = () => {
         })}
       </div>
 
-      {/* Content */}
       <div className="relative z-10 container mx-auto px-6 py-24 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -94,7 +91,7 @@ const About = () => {
               backgroundClip: "text",
             }}
           >
-            How do we make your work easier?
+            {t("about.title")}
           </h1>
         </motion.div>
 
@@ -109,22 +106,8 @@ const About = () => {
             fontWeight: 400,
           }}
         >
-          <p>
-            Inno is a technology company specialized in empowering businesses
-            through building advanced digital solutions. We work as a technical
-            partner that provides vision, implementation, and operation of
-            systems that help companies grow, develop their way of working, and
-            improve their customer experience.
-          </p>
-
-          <p>
-            We develop digital platforms and provide automation and artificial
-            intelligence solutions, and work on transforming traditional
-            processes into flexible workflows that operate with higher
-            efficiency and clearer results. Our focus is on building scalable,
-            understandable, and easy-to-use solutions, with a solid technical
-            foundation that lasts for years.
-          </p>
+          <p>{t("about.paragraph1")}</p>
+          <p>{t("about.paragraph2")}</p>
         </motion.div>
       </div>
     </div>

@@ -1,41 +1,44 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Kufam";
+  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kufam";
+  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  /* Base */
   --background: #ffffff;
   --foreground: white;
-
-  /* Primary colors (Teal) */
   --primary-700: #0f766e;
   --primary-800: #115e59;
   --primary-900: #134e4a;
   --primary-950: #042f2e;
-
-  /* Secondary colors (Cyan) */
   --secondary-700: #0e7490;
   --secondary-800: #155e75;
   --secondary-900: #164e63;
-
-  /* Text */
   --text-primary: #ffffff;
   --text-secondary: #a5f3fc;
   --text-accent: #67e8f9;
   --text-hover: #67e8f9;
   --text-dark: #042f2e;
-
-  /* Backgrounds */
   --bg-overlay: rgba(4, 47, 46, 0.7);
   --bg-dark: #042f2e;
-
-  /* Gradient stops */
   --gradient-start: #0f766e;
   --gradient-mid: #155e75;
   --gradient-end: #042f2e;
   --gradient-overlay-start: rgba(19, 78, 74, 0.8);
   --gradient-overlay-mid: rgba(22, 78, 99, 0.7);
   --gradient-overlay-end: rgba(4, 47, 46, 0.9);
-
-  /* Effects */
   --effect-brush: rgba(13, 148, 136, 0.8);
   --effect-spray: rgba(13, 148, 136, 0.6);
   --effect-fine-spray: rgba(13, 148, 136, 0.9);
@@ -58,18 +61,16 @@
   --font-devil-breeze: "Devil Breeze", sans-serif;
   --font-poppins: "Poppins", sans-serif;
   --font-bimbo: "Bimbo", sans-serif;
+  --font-cairo: "Kufam", sans-serif;
 }
 
-/* Dark mode - ready for future implementation */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: white;
     --foreground: white;
-    /* Dark mode colors can be added here later */
   }
 }
 
-/* Core Color Classes - Use everywhere */
 .bg-primary {
   background-color: var(--primary-700);
 }
@@ -118,7 +119,6 @@
   color: var(--effect-geometric-secondary);
 }
 
-/* Reusable Gradient Classes */
 .bg-gradient-primary {
   background: linear-gradient(
     to bottom right,
@@ -149,14 +149,48 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
+  font-display: swap;
 }
 
-/* Custom radial gradient utilities */
+[dir="rtl"],
+[dir="rtl"] body,
+[dir="rtl"] html {
+  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+[dir="rtl"] * {
+  font-family: inherit;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] div,
+[dir="rtl"] a,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] label,
+[dir="rtl"] li,
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+[dir="rtl"] [style*="font-family: var(--font-poppins)"],
+[dir="rtl"] [style*="font-family: var(--font-devil-breeze)"] {
+  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
-/* Smooth animations for geometric shapes */
 @keyframes float {
   0%,
   100% {
@@ -171,7 +205,6 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Brush stroke mask for organic edges */
 .brush-mask {
   mask-image: radial-gradient(ellipse 80% 50%, black 40%, transparent 70%);
   -webkit-mask-image: radial-gradient(
@@ -181,7 +214,6 @@ body {
   );
 }
 
-/* Spray paint texture */
 .spray-texture {
   background-image: radial-gradient(
       circle at 20% 30%,
@@ -229,7 +261,6 @@ body {
   animation: gradientShift 8s ease infinite;
 }
 
-/* Menu overlay styles */
 .menu-overlay__bg-img img {
   position: absolute;
   top: 0;
@@ -241,4 +272,49 @@ body {
 
 .page-content {
   will-change: transform;
+}
+
+header {
+  direction: ltr !important;
+}
+
+header * {
+  direction: ltr !important;
+}
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .text-center {
+  text-align: center;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] p {
+  line-height: 1.8;
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+[dir="rtl"] .tracking-wider,
+[dir="rtl"] .tracking-widest {
+  letter-spacing: normal;
+}
+
+[dir="rtl"] .text-5xl,
+[dir="rtl"] .text-6xl,
+[dir="rtl"] .text-7xl,
+[dir="rtl"] .text-8xl,
+[dir="rtl"] .lg\:text-\[200px\] {
+  font-weight: 900;
+  will-change: auto;
+}
+
+[dir="rtl"] .animate-float {
+  animation: none;
 }

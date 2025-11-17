@@ -9,20 +9,20 @@ import {
 } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/language-context";
 
 const Hero = () => {
+  const { t, language } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  // Mouse position tracking (only for non-touch devices)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   useEffect(() => {
-    // Check if device is touch-enabled
     const isTouchDevice =
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
@@ -32,7 +32,6 @@ const Hero = () => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
 
-      // Calculate mouse position relative to center (-1 to 1)
       const x = (clientX / innerWidth - 0.5) * 2;
       const y = (clientY / innerHeight - 0.5) * 2;
 
@@ -44,30 +43,25 @@ const Hero = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Use spring for smoother animations
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
 
-  // Parallax transforms for liquid images (scroll)
   const scrollY2 = useTransform(smoothProgress, [0, 1], [0, -300]);
   const scrollX2 = useTransform(smoothProgress, [0, 1], [0, 150]);
   const scrollY3 = useTransform(smoothProgress, [0, 1], [0, -250]);
   const scrollX3 = useTransform(smoothProgress, [0, 1], [0, -120]);
 
-  // Smooth mouse movement with spring
   const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
-  // Mouse movement transforms (subtle parallax effect)
   const mouseX2 = useTransform(smoothMouseX, [-1, 1], [-30, 30]);
   const mouseY2 = useTransform(smoothMouseY, [-1, 1], [-30, 30]);
   const mouseX3 = useTransform(smoothMouseX, [-1, 1], [-25, 25]);
   const mouseY3 = useTransform(smoothMouseY, [-1, 1], [-25, 25]);
 
-  // Combine scroll and mouse transforms
   const y2 = useTransform(
     [scrollY2, mouseY2],
     ([scroll, mouse]) => (scroll as number) + (mouse as number)
@@ -85,20 +79,18 @@ const Hero = () => {
     ([scroll, mouse]) => (scroll as number) + (mouse as number)
   );
 
-  // Rotation for liquid images (scroll only)
   const rotate2 = useTransform(smoothProgress, [0, 1], [0, 15]);
   const rotate3 = useTransform(smoothProgress, [0, 1], [0, -12]);
 
-  // Opacity for liquid images
   const opacity2 = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.9, 0.6]);
   const opacity3 = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.9, 0.6]);
 
   return (
     <div
+      id="home"
       ref={containerRef}
       className="relative min-h-screen w-full overflow-hidden"
     >
-      {/* SVG filters for brushed/spray texture */}
       <svg className="absolute w-0 h-0">
         <defs>
           <filter id="brush-texture">
@@ -188,14 +180,12 @@ const Hero = () => {
               />
             </pattern>
           </defs>
-          {/* Curved wireframe mesh */}
           <g
             stroke="rgba(255, 255, 255, 0.4)"
             strokeWidth="1"
             fill="none"
             mask="url(#wireframeMask)"
           >
-            {/* Horizontal curved lines creating wave effect */}
             <path d="M0,100 Q200,80 400,100 T800,100 T1200,100" />
             <path d="M0,150 Q200,130 400,150 T800,150 T1200,150" />
             <path d="M0,200 Q200,180 400,200 T800,200 T1200,200" />
@@ -210,7 +200,6 @@ const Hero = () => {
             <path d="M0,650 Q200,630 400,650 T800,650 T1200,650" />
             <path d="M0,700 Q200,680 400,700 T800,700 T1200,700" />
 
-            {/* Vertical curved lines */}
             <path d="M100,0 Q120,200 100,400 T100,800" />
             <path d="M200,0 Q220,200 200,400 T200,800" />
             <path d="M300,0 Q320,200 300,400 T300,800" />
@@ -223,7 +212,6 @@ const Hero = () => {
             <path d="M1000,0 Q1020,200 1000,400 T1000,800" />
             <path d="M1100,0 Q1120,200 1100,400 T1100,800" />
           </g>
-          {/* Gradient overlay for depth */}
           <rect
             width="100%"
             height="100%"
@@ -234,7 +222,6 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Large brush stroke 1 - top left */}
       <div
         className="absolute inset-0"
         style={{
@@ -244,7 +231,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Large brush stroke 2 - bottom right */}
       <div
         className="absolute inset-0"
         style={{
@@ -254,7 +240,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Large brush stroke 3 - center */}
       <div
         className="absolute inset-0"
         style={{
@@ -264,7 +249,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Medium brush stroke 4 - top right */}
       <div
         className="absolute inset-0"
         style={{
@@ -274,7 +258,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Medium brush stroke 5 - bottom left */}
       <div
         className="absolute inset-0"
         style={{
@@ -284,7 +267,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Spray paint splatters - multiple layers - darker */}
       <div
         className="absolute inset-0"
         style={{
@@ -292,60 +274,22 @@ const Hero = () => {
             radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
             radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
             radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%),
-            radial-gradient(circle 6% at 50% 85%, var(--effect-spray) 0%, transparent 45%),
-            radial-gradient(circle 7% at 75% 30%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 5% at 35% 60%, var(--effect-spray) 0%, transparent 40%),
-            radial-gradient(circle 6% at 90% 75%, var(--effect-spray) 0%, transparent 45%)
+            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%)
           `,
           filter: "blur(25px)",
           mixBlendMode: "overlay",
         }}
       ></div>
 
-      {/* Fine spray texture dots - darker */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle 3px at 20% 30%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 4px at 40% 50%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 2px at 60% 20%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 5px at 80% 40%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 3px at 30% 70%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 4px at 70% 80%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 2px at 10% 55%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 3px at 55% 90%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 4px at 85% 15%, var(--effect-fine-spray) 0%, transparent 0%),
-            radial-gradient(circle 2px at 45% 25%, var(--effect-fine-spray) 0%, transparent 0%)
-          `,
-          backgroundSize: "100% 100%",
-          filter: "blur(12px)",
-          opacity: 0.7,
-        }}
-      ></div>
-
-      {/* Noise texture overlay for brushed effect */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
-          opacity: 0.3,
+          opacity: 0.2,
         }}
       ></div>
 
-      {/* Additional texture layer with SVG filter */}
-      <div
-        className="absolute inset-0"
-        style={{
-          filter: "url(#noise-filter)",
-          opacity: 0.1,
-          mixBlendMode: "soft-light",
-        }}
-      ></div>
-
-      {/* Animated gradient overlay for depth - darker */}
       <div
         className="absolute inset-0"
         style={{
@@ -353,7 +297,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Geometric pattern overlay - triangular lines - Reduced on mobile */}
       <div className="absolute inset-0 opacity-10 md:opacity-20">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -385,7 +328,6 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Radial gradient fade effects - darker */}
       <div
         className="absolute inset-0"
         style={{
@@ -399,7 +341,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Additional depth layers with turquoise variations - darker */}
       <div
         className="absolute inset-0"
         style={{
@@ -413,8 +354,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Animated Images with Parallax Effect - Optimized */}
-      {/* Liquid 1 - Top Right - Scroll Parallax */}
       <motion.div
         className="absolute top-[8%] right-[2%] w-72 h-72 sm:w-96 sm:h-96 md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
         style={{
@@ -435,12 +374,15 @@ const Hero = () => {
           alt="Liquid 1"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
+            filter:
+              language === "ar"
+                ? "none"
+                : "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
           }}
+          priority
         />
       </motion.div>
 
-      {/* Liquid 2 - Bottom Left - Scroll Parallax */}
       <motion.div
         className="absolute bottom-[12%] left-[5%] w-64 h-64 sm:w-80 sm:h-80 md:bottom-[15%] md:left-[10%] md:w-[350px] md:h-[350px] lg:bottom-[8%] lg:left-[0%] lg:w-[500px] lg:h-[500px] z-9"
         style={{
@@ -461,28 +403,39 @@ const Hero = () => {
           alt="Liquid 2"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
+            filter:
+              language === "ar"
+                ? "none"
+                : "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
           }}
+          priority
         />
       </motion.div>
 
-      {/* Cloud - Behind Text with Floating Animation */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] sm:w-[800px] sm:h-[600px] md:w-[1200px] md:h-[900px] lg:w-[1800px] lg:h-[1400px] z-8 pointer-events-none"
         style={{
-          willChange: "transform",
-          transformStyle: "preserve-3d",
+          willChange: language === "ar" ? "auto" : "transform",
+          transformStyle: language === "ar" ? "flat" : "preserve-3d",
         }}
-        animate={{
-          y: [0, -15, 0],
-          x: [0, 10, 0],
-          scale: [1, 1.02, 1],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={
+          language === "ar"
+            ? {}
+            : {
+                y: [0, -15, 0],
+                x: [0, 10, 0],
+                scale: [1, 1.02, 1],
+              }
+        }
+        transition={
+          language === "ar"
+            ? {}
+            : {
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+        }
       >
         <Image
           width={1800}
@@ -491,30 +444,32 @@ const Hero = () => {
           alt="Cloud"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2))",
+            filter:
+              language === "ar"
+                ? "none"
+                : "drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2))",
           }}
+          priority
         />
       </motion.div>
 
-      {/* Content area */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="text-center px-4">
           <h1
             className="text-5xl sm:text-6xl md:text-8xl lg:text-[200px] font-bold text-primary mb-4 drop-shadow-lg tracking-wider md:tracking-widest"
             style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
-            innovation
+            {t("hero.innovation")}
           </h1>
           <h2
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-primary drop-shadow-md"
             style={{ fontFamily: "var(--font-poppins)" }}
           >
-            Your Best Technical Partner
+            {t("hero.title")}
           </h2>
         </div>
       </div>
 
-      {/* Bottom fade effect - darker */}
       <div
         className="absolute bottom-0 left-0 right-0 h-32"
         style={{
