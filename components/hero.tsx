@@ -355,7 +355,7 @@ const Hero = () => {
       ></div>
 
       <motion.div
-        className="absolute top-[5%] right-[-3%] sm:top-[8%] sm:right-[2%] w-96 h-96 sm:w-[400px] sm:h-[400px] md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
+        className="absolute top-[-4%] right-[-20%] sm:top-[6%] sm:right-[3%] w-96 h-96 sm:w-[400px] sm:h-[400px] md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
         style={{
           y: y2,
           x: x2,
