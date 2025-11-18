@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/language-context";
 import Image from "next/image";
 
 const Footer = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const socialLinks = [
     {
@@ -194,7 +194,7 @@ const Footer = () => {
                 style={{ fontFamily: "var(--font-poppins)" }}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className="w-5 h-5 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -214,7 +214,7 @@ const Footer = () => {
                 style={{ fontFamily: "var(--font-poppins)" }}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className="w-5 h-5 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -233,7 +233,7 @@ const Footer = () => {
                 style={{ fontFamily: "var(--font-poppins)" }}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0 mt-0.5"
+                  className="w-5 h-5 shrink-0 mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
