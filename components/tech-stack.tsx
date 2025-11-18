@@ -123,190 +123,85 @@ const TechStack = () => {
       </svg>
 
       {/* Base gradient background */}
-      <div className="absolute inset-0 bg-gradient-primary"></div>
-
-
-      {/* Radial gradient overlays with brush texture */}
-      <div
-        className="absolute inset-0"
+      <div 
+        className="absolute inset-0 bg-gradient-primary"
         style={{
-          background: `radial-gradient(ellipse 60% 40% at 15% 25%, var(--effect-brush) 0%, transparent 60%)`,
-          filter: "blur(60px)",
-          mixBlendMode: "multiply",
+          transform: "translate3d(0, 0, 0)",
         }}
       ></div>
 
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 70% 50% at 85% 75%, var(--effect-brush) 0%, transparent 65%)`,
-          filter: "blur(70px)",
-          mixBlendMode: "screen",
-        }}
-      ></div>
 
+      {/* Optimized gradient overlays - combined layers */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 50% 60% at 50% 50%, var(--effect-brush) 0%, transparent 70%)`,
+          background: `
+            radial-gradient(ellipse 60% 40% at 15% 25%, rgba(13, 148, 136, 0.3) 0%, transparent 60%),
+            radial-gradient(ellipse 70% 50% at 85% 75%, rgba(13, 148, 136, 0.25) 0%, transparent 65%),
+            radial-gradient(ellipse 50% 60% at 50% 50%, rgba(13, 148, 136, 0.28) 0%, transparent 70%)
+          `,
           filter: "blur(50px)",
-          mixBlendMode: "multiply",
+          willChange: "transform",
         }}
       ></div>
 
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 40% 30% at 80% 20%, var(--effect-brush) 0%, transparent 55%)`,
-          filter: "blur(45px)",
-          mixBlendMode: "overlay",
-        }}
-      ></div>
-
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 45% 35% at 20% 80%, var(--effect-brush) 0%, transparent 60%)`,
-          filter: "blur(55px)",
-          mixBlendMode: "screen",
-        }}
-      ></div>
-
-      {/* Spray texture overlays */}
+      {/* Optimized spray texture - combined vibrant layers */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
-            radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%)
+            radial-gradient(circle 30% at 18% 25%, rgba(6, 182, 212, 0.85) 0%, transparent 68%),
+            radial-gradient(circle 35% at 78% 20%, rgba(14, 165, 233, 0.8) 0%, transparent 72%),
+            radial-gradient(circle 32% at 62% 70%, rgba(20, 184, 166, 0.82) 0%, transparent 70%),
+            radial-gradient(circle 38% at 48% 48%, rgba(14, 165, 233, 0.7) 0%, transparent 78%),
+            radial-gradient(circle 10% at 15% 38%, rgba(56, 189, 248, 0.95) 0%, transparent 68%),
+            radial-gradient(circle 12% at 72% 58%, rgba(34, 211, 238, 0.88) 0%, transparent 70%),
+            radial-gradient(circle 9% at 88% 35%, rgba(103, 232, 249, 0.85) 0%, transparent 68%)
           `,
-          filter: "blur(25px)",
-          mixBlendMode: "overlay",
-        }}
-      ></div>
-
-      {/* Heavy spray paint texture - vibrant splotches */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle 30% at 18% 25%, rgba(6, 182, 212, 0.9) 0%, rgba(20, 184, 166, 0.5) 28%, transparent 68%),
-            radial-gradient(circle 35% at 78% 20%, rgba(14, 165, 233, 0.85) 0%, rgba(56, 189, 248, 0.45) 32%, transparent 72%),
-            radial-gradient(circle 32% at 62% 70%, rgba(20, 184, 166, 0.88) 0%, rgba(6, 182, 212, 0.48) 30%, transparent 70%),
-            radial-gradient(circle 25% at 28% 68%, rgba(16, 185, 129, 0.92) 0%, rgba(20, 184, 166, 0.5) 28%, transparent 65%),
-            radial-gradient(circle 40% at 48% 48%, rgba(14, 165, 233, 0.75) 0%, rgba(56, 189, 248, 0.35) 38%, transparent 78%),
-            radial-gradient(circle 22% at 85% 55%, rgba(6, 182, 212, 0.95) 0%, rgba(20, 184, 166, 0.52) 26%, transparent 62%),
-            radial-gradient(circle 28% at 35% 15%, rgba(20, 184, 166, 0.82) 0%, rgba(16, 185, 129, 0.42) 32%, transparent 68%)
-          `,
-          filter: "blur(55px) contrast(1.4) saturate(1.3)",
+          filter: "blur(42px)",
           opacity: 1,
+          willChange: "transform",
         }}
       ></div>
 
-      {/* Medium spray particles - brighter */}
+      {/* Fine spray dots - reduced count */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle 10% at 15% 38%, rgba(56, 189, 248, 1) 0%, rgba(14, 165, 233, 0.5) 38%, transparent 68%),
-            radial-gradient(circle 8% at 58% 28%, rgba(103, 232, 249, 0.95) 0%, rgba(56, 189, 248, 0.45) 36%, transparent 65%),
-            radial-gradient(circle 12% at 72% 58%, rgba(34, 211, 238, 0.92) 0%, rgba(6, 182, 212, 0.48) 40%, transparent 70%),
-            radial-gradient(circle 9% at 22% 75%, rgba(56, 189, 248, 1) 0%, rgba(14, 165, 233, 0.42) 38%, transparent 66%),
-            radial-gradient(circle 11% at 88% 35%, rgba(103, 232, 249, 0.88) 0%, rgba(56, 189, 248, 0.4) 38%, transparent 68%),
-            radial-gradient(circle 7% at 42% 52%, rgba(34, 211, 238, 0.96) 0%, rgba(6, 182, 212, 0.46) 36%, transparent 62%),
-            radial-gradient(circle 9% at 65% 15%, rgba(56, 189, 248, 0.9) 0%, rgba(103, 232, 249, 0.44) 38%, transparent 64%)
+            radial-gradient(circle 2.5% at 20% 15%, rgba(103, 232, 249, 0.95) 0%, transparent 55%),
+            radial-gradient(circle 2.5% at 75% 25%, rgba(56, 189, 248, 0.92) 0%, transparent 58%),
+            radial-gradient(circle 2.5% at 35% 65%, rgba(103, 232, 249, 0.9) 0%, transparent 54%),
+            radial-gradient(circle 2.5% at 85% 48%, rgba(34, 211, 238, 0.93) 0%, transparent 53%),
+            radial-gradient(circle 2.5% at 62% 55%, rgba(103, 232, 249, 0.88) 0%, transparent 55%)
           `,
-          filter: "blur(18px) saturate(1.2)",
-          opacity: 1,
+          opacity: 0.75,
+          willChange: "transform",
         }}
       ></div>
 
-      {/* Fine spray mist - vivid dots */}
+      {/* Optimized noise texture */}
       <div
         className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(circle 2.5% at 20% 15%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.6) 35%, transparent 55%),
-            radial-gradient(circle 2% at 48% 38%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.55) 32%, transparent 52%),
-            radial-gradient(circle 3% at 75% 25%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.6) 38%, transparent 58%),
-            radial-gradient(circle 2.5% at 35% 65%, rgba(103, 232, 249, 0.98) 0%, rgba(56, 189, 248, 0.58) 34%, transparent 54%),
-            radial-gradient(circle 2% at 85% 48%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.56) 33%, transparent 53%),
-            radial-gradient(circle 3% at 15% 72%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.62) 36%, transparent 56%),
-            radial-gradient(circle 2.5% at 62% 55%, rgba(103, 232, 249, 0.96) 0%, rgba(34, 211, 238, 0.54) 35%, transparent 55%),
-            radial-gradient(circle 2% at 52% 82%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.58) 34%, transparent 54%),
-            radial-gradient(circle 3% at 90% 68%, rgba(34, 211, 238, 0.98) 0%, rgba(6, 182, 212, 0.56) 36%, transparent 56%),
-            radial-gradient(circle 2.5% at 12% 45%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.6) 35%, transparent 55%),
-            radial-gradient(circle 2% at 68% 22%, rgba(56, 189, 248, 0.98) 0%, rgba(103, 232, 249, 0.54) 33%, transparent 53%),
-            radial-gradient(circle 3% at 42% 12%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.58) 37%, transparent 57%),
-            radial-gradient(circle 2.5% at 78% 78%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.62) 36%, transparent 56%),
-            radial-gradient(circle 2% at 25% 28%, rgba(56, 189, 248, 0.96) 0%, rgba(103, 232, 249, 0.56) 34%, transparent 54%),
-            radial-gradient(circle 3% at 55% 88%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.6) 38%, transparent 58%)
-          `,
-          filter: "blur(1.5px) saturate(1.3)",
-          opacity: 0.9,
-        }}
-      ></div>
-
-      {/* Heavy noise grain for spray texture */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
-          opacity: 0.35,
+          opacity: 0.28,
+          willChange: "transform",
         }}
       ></div>
 
-      {/* Vibrant lighter spots - adds brightness and color */}
+      {/* Optimized lighter spots */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle 25% at 22% 32%, rgba(56, 189, 248, 0.45) 0%, rgba(103, 232, 249, 0.25) 45%, transparent 75%),
-            radial-gradient(circle 30% at 72% 58%, rgba(34, 211, 238, 0.4) 0%, rgba(6, 182, 212, 0.22) 48%, transparent 78%),
-            radial-gradient(circle 22% at 48% 78%, rgba(103, 232, 249, 0.42) 0%, rgba(56, 189, 248, 0.24) 46%, transparent 76%),
-            radial-gradient(circle 28% at 85% 25%, rgba(56, 189, 248, 0.38) 0%, rgba(103, 232, 249, 0.2) 50%, transparent 80%)
+            radial-gradient(circle 25% at 22% 32%, rgba(56, 189, 248, 0.4) 0%, transparent 75%),
+            radial-gradient(circle 28% at 72% 58%, rgba(34, 211, 238, 0.35) 0%, transparent 78%)
           `,
-          filter: "blur(65px) saturate(1.4)",
+          filter: "blur(52px)",
           mixBlendMode: "screen",
-        }}
-      ></div>
-
-      {/* Overlay gradients */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
-        }}
-      ></div>
-
-      {/* Radial gradients */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle, transparent, transparent, var(--effect-radial-end))`,
-        }}
-      ></div>
-      <div
-        className="absolute top-0 left-0 w-full h-full"
-        style={{
-          background: `radial-gradient(circle, var(--effect-radial-start), transparent, transparent)`,
-        }}
-      ></div>
-
-      {/* Linear gradients */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to right, transparent, var(--effect-linear), transparent)`,
-        }}
-      ></div>
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to left, transparent, var(--effect-linear), transparent)`,
+          willChange: "transform",
         }}
       ></div>
 
@@ -380,6 +275,7 @@ const TechStack = () => {
                           fill
                           className="object-contain"
                           sizes="64px"
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -414,6 +310,7 @@ const TechStack = () => {
                       repeat: Infinity,
                       ease: "linear",
                     }}
+                    style={{ willChange: "transform" }}
                   >
                     {[...duplicatedClients, ...duplicatedClients]
                       .filter((_, i) => i % 2 === 0)
@@ -430,6 +327,7 @@ const TechStack = () => {
                               fill
                               className="object-contain"
                               sizes="(max-width: 768px) 80px, (max-width: 1024px) 112px, 128px"
+                              loading="lazy"
                             />
                           </div>
                         </div>
@@ -447,6 +345,7 @@ const TechStack = () => {
                       repeat: Infinity,
                       ease: "linear",
                     }}
+                    style={{ willChange: "transform" }}
                   >
                     {[...duplicatedClients, ...duplicatedClients]
                       .filter((_, i) => i % 2 === 1)
@@ -463,6 +362,7 @@ const TechStack = () => {
                               fill
                               className="object-contain"
                               sizes="(max-width: 768px) 80px, (max-width: 1024px) 112px, 128px"
+                              loading="lazy"
                             />
                           </div>
                         </div>
@@ -555,9 +455,10 @@ const TechStack = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3, delay: index * 0.03 }}
+                    whileHover={{ scale: 1.03 }}
                     className="flex items-center justify-center"
+                    style={{ willChange: "transform" }}
                   >
                     <div
                       className="relative rounded-xl p-4 md:p-5 flex items-center justify-center"
@@ -570,6 +471,7 @@ const TechStack = () => {
                           fill
                           className="object-contain"
                           sizes="(max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
+                          loading="lazy"
                         />
                       </div>
                     </div>

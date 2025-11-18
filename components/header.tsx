@@ -5,6 +5,21 @@ import { useLanguage } from "@/contexts/language-context";
 import LanguageSwitch from "@/components/language-switch";
 import Image from "next/image";
 
+interface LenisInstance {
+  on: (event: string, callback: () => void) => void;
+  off: (event: string, callback: () => void) => void;
+  scrollTo: (
+    target: number,
+    options?: { duration?: number; easing?: (t: number) => number }
+  ) => void;
+}
+
+declare global {
+  interface Window {
+    lenis?: LenisInstance;
+  }
+}
+
 interface MenuItem {
   labelKey: string;
   href: string;
@@ -19,14 +34,14 @@ const menuItems: MenuItem[] = [
 ];
 
 const Header = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY || window.pageYOffset;
       const threshold = 50;
 
       if (scrollY > threshold && !isScrolled) {
@@ -36,16 +51,31 @@ const Header = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Use lenis scroll event if available, otherwise use window scroll
+    const lenisInstance = window.lenis;
+    if (lenisInstance) {
+      lenisInstance.on("scroll", handleScroll);
+    } else {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (lenisInstance) {
+        lenisInstance.off("scroll", handleScroll);
+      } else {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, [isScrolled]);
 
   useEffect(() => {
+    let ticking = false;
     const updateActiveSection = () => {
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY || window.pageYOffset;
 
       if (scrollY < 100) {
         setActiveSection("home");
+        ticking = false;
         return;
       }
 
@@ -78,11 +108,32 @@ const Header = () => {
       if (currentSection) {
         setActiveSection(currentSection.id);
       }
+      ticking = false;
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    return () => window.removeEventListener("scroll", updateActiveSection);
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
+      }
+    };
+
+    // Use lenis scroll event if available, otherwise use window scroll
+    const lenisInstance = window.lenis;
+    if (lenisInstance) {
+      lenisInstance.on("scroll", onScroll);
+    } else {
+      updateActiveSection();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+
+    return () => {
+      if (lenisInstance) {
+        lenisInstance.off("scroll", onScroll);
+      } else {
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
   }, []);
 
   const handleLinkClick = (
@@ -104,12 +155,23 @@ const Header = () => {
           const headerHeight = 80;
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition =
-            elementPosition + window.pageYOffset - headerHeight;
+            elementPosition +
+            (window.pageYOffset || window.scrollY) -
+            headerHeight;
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth",
-          });
+          // Use lenis scroll if available for smooth scrolling
+          const lenisInstance = window.lenis;
+          if (lenisInstance) {
+            lenisInstance.scrollTo(offsetPosition, {
+              duration: 1.2,
+              easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          } else {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
         }
       }
 
@@ -148,24 +210,26 @@ const Header = () => {
 
           {/* Desktop Navigation Links - Centered */}
           <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {menuItems.map((item, index) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={index}
-                  href={item.href}
-                  onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? "text-hover-primary"
-                      : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
-                  }`}
-                  style={{ fontFamily: "var(--font-devil-breeze)" }}
-                >
-                  {t(item.labelKey)}
-                </a>
-              );
-            })}
+            {(language === "ar" ? [...menuItems].reverse() : menuItems).map(
+              (item, index) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={index}
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(e, item.href)}
+                    className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 ${
+                      isActive
+                        ? "text-hover-primary"
+                        : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
+                    }`}
+                    style={{ fontFamily: "var(--font-devil-breeze)" }}
+                  >
+                    {t(item.labelKey)}
+                  </a>
+                );
+              }
+            )}
           </nav>
 
           {/* Right Side Actions */}
@@ -207,24 +271,26 @@ const Header = () => {
           }`}
         >
           <div className="px-4 pb-4 pt-2 space-y-2 border-t border-text-primary/10 mt-2">
-            {menuItems.map((item, index) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={index}
-                  href={item.href}
-                  onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg ${
-                    isActive
-                      ? "text-hover-primary bg-text-accent/10"
-                      : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
-                  }`}
-                  style={{ fontFamily: "var(--font-devil-breeze)" }}
-                >
-                  {t(item.labelKey)}
-                </a>
-              );
-            })}
+            {(language === "ar" ? [...menuItems].reverse() : menuItems).map(
+              (item, index) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={index}
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(e, item.href)}
+                    className={`block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg ${
+                      isActive
+                        ? "text-hover-primary bg-text-accent/10"
+                        : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
+                    }`}
+                    style={{ fontFamily: "var(--font-devil-breeze)" }}
+                  >
+                    {t(item.labelKey)}
+                  </a>
+                );
+              }
+            )}
             <div className="pt-2 border-t border-text-primary/10">
               <div className="px-4">
                 <LanguageSwitch />

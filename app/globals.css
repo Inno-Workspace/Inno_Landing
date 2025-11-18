@@ -139,25 +139,71 @@
   );
 }
 
-html,
-body {
+html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
   font-display: swap;
 }
 
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU acceleration for transforms */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Hero section optimizations */
+#home {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 [dir="rtl"],
 [dir="rtl"] body,
 [dir="rtl"] html {
   font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+[dir="rtl"] html,
+[dir="rtl"] body {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 [dir="rtl"] * {
@@ -319,6 +365,24 @@ header * {
 
 [dir="rtl"] .animate-float {
   animation: none;
+}
+
+/* RTL Performance Optimizations */
+[dir="rtl"] [class*="motion"] {
+  will-change: transform;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Fix RTL scroll performance */
+[dir="rtl"] #home,
+[dir="rtl"] #about,
+[dir="rtl"] #works,
+[dir="rtl"] #contact {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
 }
 
 /* Custom Scrollbar for Works Section */

@@ -44,22 +44,49 @@ const Hero = () => {
   }, [mouseX, mouseY]);
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 50,
+    damping: 25,
     restDelta: 0.001,
+    mass: 0.5,
   });
 
+  // Invert x-axis transforms for RTL - use useMemo to recalculate when language changes
   const scrollY2 = useTransform(smoothProgress, [0, 1], [0, -300]);
-  const scrollX2 = useTransform(smoothProgress, [0, 1], [0, 150]);
+  const scrollX2 = useTransform(
+    smoothProgress,
+    [0, 1],
+    language === "ar" ? [0, -150] : [0, 150]
+  );
   const scrollY3 = useTransform(smoothProgress, [0, 1], [0, -250]);
-  const scrollX3 = useTransform(smoothProgress, [0, 1], [0, -120]);
+  const scrollX3 = useTransform(
+    smoothProgress,
+    [0, 1],
+    language === "ar" ? [0, 120] : [0, -120]
+  );
 
-  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, {
+    stiffness: 30,
+    damping: 15,
+    mass: 0.5,
+  });
+  const smoothMouseY = useSpring(mouseY, {
+    stiffness: 30,
+    damping: 15,
+    mass: 0.5,
+  });
 
-  const mouseX2 = useTransform(smoothMouseX, [-1, 1], [-30, 30]);
+  // Invert mouse x-axis for RTL
+  const mouseX2 = useTransform(
+    smoothMouseX,
+    [-1, 1],
+    language === "ar" ? [30, -30] : [-30, 30]
+  );
   const mouseY2 = useTransform(smoothMouseY, [-1, 1], [-30, 30]);
-  const mouseX3 = useTransform(smoothMouseX, [-1, 1], [-25, 25]);
+  const mouseX3 = useTransform(
+    smoothMouseX,
+    [-1, 1],
+    language === "ar" ? [25, -25] : [-25, 25]
+  );
   const mouseY3 = useTransform(smoothMouseY, [-1, 1], [-25, 25]);
 
   const y2 = useTransform(
@@ -79,8 +106,17 @@ const Hero = () => {
     ([scroll, mouse]) => (scroll as number) + (mouse as number)
   );
 
-  const rotate2 = useTransform(smoothProgress, [0, 1], [0, 15]);
-  const rotate3 = useTransform(smoothProgress, [0, 1], [0, -12]);
+  // Invert rotation for RTL
+  const rotate2 = useTransform(
+    smoothProgress,
+    [0, 1],
+    language === "ar" ? [0, -15] : [0, 15]
+  );
+  const rotate3 = useTransform(
+    smoothProgress,
+    [0, 1],
+    language === "ar" ? [0, 12] : [0, -12]
+  );
 
   const opacity2 = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.9, 0.6]);
   const opacity3 = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.9, 0.6]);
@@ -90,59 +126,40 @@ const Hero = () => {
       id="home"
       ref={containerRef}
       className="relative min-h-screen w-full overflow-hidden"
+      style={{
+        transform: "translateZ(0)",
+        willChange: "scroll-position",
+      }}
     >
-      <svg className="absolute w-0 h-0">
-        <defs>
-          <filter id="brush-texture">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.9"
-              numOctaves="4"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="8"
-              result="displacement"
-            />
-          </filter>
-          <filter id="spray-texture">
-            <feTurbulence
-              type="turbulence"
-              baseFrequency="0.95"
-              numOctaves="3"
-              result="turbulence"
-            />
-            <feGaussianBlur in="turbulence" stdDeviation="2" result="blur" />
-            <feColorMatrix
-              in="blur"
-              type="saturate"
-              values="0"
-              result="desaturated"
-            />
-          </filter>
-          <filter id="noise-filter">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.8"
-              numOctaves="3"
-              stitchTiles="stitch"
-            />
-          </filter>
-        </defs>
-      </svg>
-
       {/* Base gradient background - darker turquoise */}
-      <div className="absolute inset-0 bg-gradient-primary"></div>
+      <div
+        className="absolute inset-0 bg-gradient-primary"
+        style={{
+          transform: "translate3d(0, 0, 0)",
+          willChange: "auto",
+          isolation: "isolate",
+        }}
+      ></div>
 
       {/* 3D Wireframe Gradient Effect */}
-      <div className="absolute inset-0 overflow-hidden opacity-70">
+      <div
+        className="absolute inset-0 overflow-hidden opacity-70"
+        style={{
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
+          direction: "ltr",
+        }}
+      >
         <svg
           className="absolute inset-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 800"
           preserveAspectRatio="none"
+          style={{
+            transform: language === "ar" ? "scaleX(-1)" : "none",
+            transformOrigin: "center",
+          }}
         >
           <defs>
             <linearGradient
@@ -225,18 +242,28 @@ const Hero = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 60% 40% at 15% 25%, var(--effect-brush) 0%, transparent 60%)`,
+          background: `radial-gradient(ellipse 60% 40% at ${
+            language === "ar" ? "85%" : "15%"
+          } 25%, var(--effect-brush) 0%, transparent 60%)`,
           filter: "blur(60px)",
           mixBlendMode: "multiply",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 85% 75%, var(--effect-brush) 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse 70% 50% at ${
+            language === "ar" ? "15%" : "85%"
+          } 75%, var(--effect-brush) 0%, transparent 65%)`,
           filter: "blur(70px)",
           mixBlendMode: "screen",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
@@ -246,24 +273,37 @@ const Hero = () => {
           background: `radial-gradient(ellipse 50% 60% at 50% 50%, var(--effect-brush) 0%, transparent 70%)`,
           filter: "blur(50px)",
           mixBlendMode: "multiply",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 40% 30% at 80% 20%, var(--effect-brush) 0%, transparent 55%)`,
+          background: `radial-gradient(ellipse 40% 30% at ${
+            language === "ar" ? "20%" : "80%"
+          } 20%, var(--effect-brush) 0%, transparent 55%)`,
           filter: "blur(45px)",
           mixBlendMode: "overlay",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 45% 35% at 20% 80%, var(--effect-brush) 0%, transparent 60%)`,
+          background: `radial-gradient(ellipse 45% 35% at ${
+            language === "ar" ? "80%" : "20%"
+          } 80%, var(--effect-brush) 0%, transparent 60%)`,
           filter: "blur(55px)",
           mixBlendMode: "screen",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
@@ -271,13 +311,24 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
-            radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%)
+            radial-gradient(circle 8% at ${
+              language === "ar" ? "75%" : "25%"
+            } 35%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 6% at ${
+              language === "ar" ? "35%" : "65%"
+            } 15%, var(--effect-spray) 0%, transparent 45%),
+            radial-gradient(circle 7% at ${
+              language === "ar" ? "20%" : "80%"
+            } 55%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 5% at ${
+              language === "ar" ? "85%" : "15%"
+            } 70%, var(--effect-spray) 0%, transparent 40%)
           `,
           filter: "blur(25px)",
           mixBlendMode: "overlay",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
@@ -287,6 +338,9 @@ const Hero = () => {
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
           opacity: 0.2,
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
@@ -294,11 +348,29 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
-      <div className="absolute inset-0 opacity-10 md:opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <div
+        className="absolute inset-0 opacity-10 md:opacity-20"
+        style={{
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
+          direction: "ltr",
+        }}
+      >
+        <svg
+          className="w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            transform: language === "ar" ? "scaleX(-1)" : "none",
+            transformOrigin: "center",
+          }}
+        >
           <defs>
             <pattern
               id="geometric-pattern"
@@ -332,27 +404,42 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           background: `radial-gradient(circle, transparent, transparent, var(--effect-radial-end))`,
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
       <div
         className="absolute top-0 left-0 w-full h-full"
         style={{
           background: `radial-gradient(circle, var(--effect-radial-start), transparent, transparent)`,
+          transform: "translateZ(0)",
+          willChange: "auto",
+          isolation: "isolate",
         }}
       ></div>
 
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to right, transparent, var(--effect-linear), transparent)`,
-        }}
-      ></div>
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to left, transparent, var(--effect-linear), transparent)`,
-        }}
-      ></div>
+      {language === "ar" ? (
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to left, transparent, var(--effect-linear), transparent)`,
+            transform: "translateZ(0)",
+            willChange: "auto",
+            isolation: "isolate",
+          }}
+        ></div>
+      ) : (
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to right, transparent, var(--effect-linear), transparent)`,
+            transform: "translateZ(0)",
+            willChange: "auto",
+            isolation: "isolate",
+          }}
+        ></div>
+      )}
 
       <motion.div
         className="absolute top-[-4%] right-[-20%] sm:top-[6%] sm:right-[3%] w-96 h-96 sm:w-[400px] sm:h-[400px] md:top-[10%] md:right-[5%] md:w-[400px] md:h-[400px] lg:top-[5%] lg:right-[0%] lg:w-[600px] lg:h-[600px] z-9"
@@ -361,11 +448,7 @@ const Hero = () => {
           x: x2,
           rotate: rotate2,
           opacity: opacity2,
-          willChange: "transform, opacity",
-          transformStyle: "preserve-3d",
         }}
-        initial={{ opacity: 1, y: 0, x: 0 }}
-        animate={{ opacity: 1, y: 0, x: 0 }}
       >
         <Image
           width={600}
@@ -378,6 +461,8 @@ const Hero = () => {
               language === "ar"
                 ? "none"
                 : "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
+            transform: "translateZ(0)",
+            willChange: "auto",
           }}
           priority
         />
@@ -390,11 +475,7 @@ const Hero = () => {
           x: x3,
           rotate: rotate3,
           opacity: opacity3,
-          willChange: "transform, opacity",
-          transformStyle: "preserve-3d",
         }}
-        initial={{ opacity: 1, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
       >
         <Image
           width={500}
@@ -407,6 +488,8 @@ const Hero = () => {
               language === "ar"
                 ? "none"
                 : "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3))",
+            transform: "translateZ(0)",
+            willChange: "auto",
           }}
           priority
         />
@@ -414,28 +497,25 @@ const Hero = () => {
 
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[700px] sm:w-[1200px] sm:h-[900px] md:w-[1200px] md:h-[900px] lg:w-[1800px] lg:h-[1400px] z-8 pointer-events-none"
-        style={{
-          willChange: language === "ar" ? "auto" : "transform",
-          transformStyle: language === "ar" ? "flat" : "preserve-3d",
-        }}
         animate={
           language === "ar"
-            ? {}
+            ? {
+                y: [0, -15, 0],
+                x: [0, -10, 0],
+                scale: [1, 1.02, 1],
+              }
             : {
                 y: [0, -15, 0],
                 x: [0, 10, 0],
                 scale: [1, 1.02, 1],
               }
         }
-        transition={
-          language === "ar"
-            ? {}
-            : {
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }
-        }
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          type: "tween",
+        }}
       >
         <Image
           width={1800}

@@ -11,7 +11,7 @@ const ThreeDCircle = dynamic(() => import("./3d-circle"), {
 
 const About = () => {
   const { t, language } = useLanguage();
-  const bubbleCount = language === "ar" ? 12 : 20;
+  const bubbleCount = language === "ar" ? 6 : 8;
 
   return (
     <div id="about" className="relative min-h-screen w-full overflow-hidden">
@@ -36,11 +36,11 @@ const About = () => {
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: bubbleCount }).map((_, i) => {
-          const size = 40 + ((i * 7) % 100);
-          const left = (i * 13) % 100;
-          const delay = (i * 0.8) % 5;
-          const duration = 15 + (i % 10);
-          const opacity = 0.15 + (i % 5) * 0.05;
+          const size = 50 + ((i * 10) % 80);
+          const left = (i * 15) % 100;
+          const delay = (i * 1.2) % 6;
+          const duration = 20 + (i % 8);
+          const opacity = 0.12 + (i % 4) * 0.04;
 
           return (
             <motion.div
@@ -51,17 +51,12 @@ const About = () => {
                 height: size,
                 left: `${left}%`,
                 bottom: "-150px",
-                background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(20, 184, 166, 0.4) 50%, rgba(14, 116, 144, 0.2))`,
-                boxShadow: `
-                  inset 0 0 20px rgba(255, 255, 255, 0.5),
-                  inset 10px 10px 20px rgba(255, 255, 255, 0.3),
-                  0 0 20px rgba(14, 116, 144, 0.2)
-                `,
-                border: "1px solid rgba(255, 255, 255, 0.3)",
+                background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), rgba(20, 184, 166, 0.3) 50%, rgba(14, 116, 144, 0.15))`,
+                border: "1px solid rgba(255, 255, 255, 0.25)",
+                willChange: "transform",
               }}
               animate={{
                 y: [0, -1200],
-                x: [0, i % 2 === 0 ? 50 : -50, 0],
                 opacity: [0, opacity, opacity, 0],
               }}
               transition={{

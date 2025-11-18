@@ -243,10 +243,17 @@ const Contact = () => {
 
             <div className="space-y-6 relative">
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300 hover:translate-x-2"
+                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  const isRTL = document.documentElement.dir === "rtl";
+                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateX(0)";
                 }}
               >
                 <div
@@ -298,10 +305,17 @@ const Contact = () => {
               </div>
 
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300 hover:translate-x-2"
+                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  const isRTL = document.documentElement.dir === "rtl";
+                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateX(0)";
                 }}
               >
                 <div
@@ -356,10 +370,17 @@ const Contact = () => {
               </div>
 
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300 hover:translate-x-2"
+                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  const isRTL = document.documentElement.dir === "rtl";
+                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateX(0)";
                 }}
               >
                 <div

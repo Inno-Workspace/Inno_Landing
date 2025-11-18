@@ -1,18 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/language-context";
 
 const Marquee = () => {
-  const text = "YOUR BEST TECHNICAL PARTNER";
+  const { language } = useLanguage();
+  const text = language === "ar" ? "شريكك التقني الأمثل" : "YOUR BEST TECHNICAL PARTNER";
   const repetitions = 7; // Number of times to repeat the text
 
   // Create duplicated content for seamless loop
   const marqueeContent = Array.from({ length: repetitions }).map((_, index) => (
     <h4
       key={index}
-      className="inline-block pl-[3rem] text-[2.2rem] font-medium leading-[125%] tracking-[-0.04em] uppercase flex-shrink-0"
+      className={`inline-block pl-[3rem] text-[2.2rem] font-medium leading-[125%] ${language === "ar" ? "" : "uppercase tracking-[-0.04em]"} flex-shrink-0`}
       style={{ 
-        fontFamily: "var(--font-poppins)",
+        fontFamily: language === "ar" ? "var(--font-cairo)" : "var(--font-poppins)",
         color: "#0f766e"
       }}
     >
@@ -29,7 +31,7 @@ const Marquee = () => {
         <motion.div
           className="flex items-center whitespace-nowrap"
           animate={{
-            x: [0, -50 + "%"],
+            x: language === "ar" ? [0, "50%"] : [0, -50 + "%"],
           }}
           transition={{
             duration: 16,
