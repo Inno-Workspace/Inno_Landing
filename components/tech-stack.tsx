@@ -125,91 +125,6 @@ const TechStack = () => {
       {/* Base gradient background */}
       <div className="absolute inset-0 bg-gradient-primary"></div>
 
-      {/* 3D Wireframe Gradient Effect */}
-      <div className="absolute inset-0 overflow-hidden opacity-70">
-        <svg
-          className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient
-              id="wireframeGradient-tech"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="var(--effect-wireframe-start)" />
-              <stop offset="50%" stopColor="var(--effect-wireframe-mid)" />
-              <stop offset="100%" stopColor="var(--effect-wireframe-end)" />
-            </linearGradient>
-            <radialGradient id="cornerFade-tech" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="70%" stopColor="white" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="white" stopOpacity="0.2" />
-            </radialGradient>
-            <mask id="wireframeMask-tech">
-              <rect width="100%" height="100%" fill="url(#cornerFade-tech)" />
-            </mask>
-            <pattern
-              id="wireframePattern-tech"
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M0,0 L100,0 M0,0 L0,100 M0,50 L100,50 M50,0 L50,100"
-                stroke="rgba(255, 255, 255, 0.3)"
-                strokeWidth="1"
-                fill="none"
-              />
-            </pattern>
-          </defs>
-          <g
-            stroke="rgba(255, 255, 255, 0.4)"
-            strokeWidth="1"
-            fill="none"
-            mask="url(#wireframeMask-tech)"
-          >
-            <path d="M0,100 Q200,80 400,100 T800,100 T1200,100" />
-            <path d="M0,150 Q200,130 400,150 T800,150 T1200,150" />
-            <path d="M0,200 Q200,180 400,200 T800,200 T1200,200" />
-            <path d="M0,250 Q200,230 400,250 T800,250 T1200,250" />
-            <path d="M0,300 Q200,280 400,300 T800,300 T1200,300" />
-            <path d="M0,350 Q200,330 400,350 T800,350 T1200,350" />
-            <path d="M0,400 Q200,380 400,400 T800,400 T1200,400" />
-            <path d="M0,450 Q200,430 400,450 T800,450 T1200,450" />
-            <path d="M0,500 Q200,480 400,500 T800,500 T1200,500" />
-            <path d="M0,550 Q200,530 400,550 T800,550 T1200,550" />
-            <path d="M0,600 Q200,580 400,600 T800,600 T1200,600" />
-            <path d="M0,650 Q200,630 400,650 T800,650 T1200,650" />
-            <path d="M0,700 Q200,680 400,700 T800,700 T1200,700" />
-
-            <path d="M100,0 Q120,200 100,400 T100,800" />
-            <path d="M200,0 Q220,200 200,400 T200,800" />
-            <path d="M300,0 Q320,200 300,400 T300,800" />
-            <path d="M400,0 Q420,200 400,400 T400,800" />
-            <path d="M500,0 Q520,200 500,400 T500,800" />
-            <path d="M600,0 Q620,200 600,400 T600,800" />
-            <path d="M700,0 Q720,200 700,400 T700,800" />
-            <path d="M800,0 Q820,200 800,400 T800,800" />
-            <path d="M900,0 Q920,200 900,400 T900,800" />
-            <path d="M1000,0 Q1020,200 1000,400 T1000,800" />
-            <path d="M1100,0 Q1120,200 1100,400 T1100,800" />
-          </g>
-          <rect
-            width="100%"
-            height="100%"
-            fill="url(#wireframeGradient-tech)"
-            opacity="0.5"
-            mask="url(#wireframeMask-tech)"
-          />
-        </svg>
-      </div>
 
       {/* Radial gradient overlays with brush texture */}
       <div
@@ -272,13 +187,90 @@ const TechStack = () => {
         }}
       ></div>
 
-      {/* Noise texture overlay */}
+      {/* Heavy spray paint texture - vibrant splotches */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          background: `
+            radial-gradient(circle 30% at 18% 25%, rgba(6, 182, 212, 0.9) 0%, rgba(20, 184, 166, 0.5) 28%, transparent 68%),
+            radial-gradient(circle 35% at 78% 20%, rgba(14, 165, 233, 0.85) 0%, rgba(56, 189, 248, 0.45) 32%, transparent 72%),
+            radial-gradient(circle 32% at 62% 70%, rgba(20, 184, 166, 0.88) 0%, rgba(6, 182, 212, 0.48) 30%, transparent 70%),
+            radial-gradient(circle 25% at 28% 68%, rgba(16, 185, 129, 0.92) 0%, rgba(20, 184, 166, 0.5) 28%, transparent 65%),
+            radial-gradient(circle 40% at 48% 48%, rgba(14, 165, 233, 0.75) 0%, rgba(56, 189, 248, 0.35) 38%, transparent 78%),
+            radial-gradient(circle 22% at 85% 55%, rgba(6, 182, 212, 0.95) 0%, rgba(20, 184, 166, 0.52) 26%, transparent 62%),
+            radial-gradient(circle 28% at 35% 15%, rgba(20, 184, 166, 0.82) 0%, rgba(16, 185, 129, 0.42) 32%, transparent 68%)
+          `,
+          filter: "blur(55px) contrast(1.4) saturate(1.3)",
+          opacity: 1,
+        }}
+      ></div>
+
+      {/* Medium spray particles - brighter */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle 10% at 15% 38%, rgba(56, 189, 248, 1) 0%, rgba(14, 165, 233, 0.5) 38%, transparent 68%),
+            radial-gradient(circle 8% at 58% 28%, rgba(103, 232, 249, 0.95) 0%, rgba(56, 189, 248, 0.45) 36%, transparent 65%),
+            radial-gradient(circle 12% at 72% 58%, rgba(34, 211, 238, 0.92) 0%, rgba(6, 182, 212, 0.48) 40%, transparent 70%),
+            radial-gradient(circle 9% at 22% 75%, rgba(56, 189, 248, 1) 0%, rgba(14, 165, 233, 0.42) 38%, transparent 66%),
+            radial-gradient(circle 11% at 88% 35%, rgba(103, 232, 249, 0.88) 0%, rgba(56, 189, 248, 0.4) 38%, transparent 68%),
+            radial-gradient(circle 7% at 42% 52%, rgba(34, 211, 238, 0.96) 0%, rgba(6, 182, 212, 0.46) 36%, transparent 62%),
+            radial-gradient(circle 9% at 65% 15%, rgba(56, 189, 248, 0.9) 0%, rgba(103, 232, 249, 0.44) 38%, transparent 64%)
+          `,
+          filter: "blur(18px) saturate(1.2)",
+          opacity: 1,
+        }}
+      ></div>
+
+      {/* Fine spray mist - vivid dots */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle 2.5% at 20% 15%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.6) 35%, transparent 55%),
+            radial-gradient(circle 2% at 48% 38%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.55) 32%, transparent 52%),
+            radial-gradient(circle 3% at 75% 25%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.6) 38%, transparent 58%),
+            radial-gradient(circle 2.5% at 35% 65%, rgba(103, 232, 249, 0.98) 0%, rgba(56, 189, 248, 0.58) 34%, transparent 54%),
+            radial-gradient(circle 2% at 85% 48%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.56) 33%, transparent 53%),
+            radial-gradient(circle 3% at 15% 72%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.62) 36%, transparent 56%),
+            radial-gradient(circle 2.5% at 62% 55%, rgba(103, 232, 249, 0.96) 0%, rgba(34, 211, 238, 0.54) 35%, transparent 55%),
+            radial-gradient(circle 2% at 52% 82%, rgba(56, 189, 248, 1) 0%, rgba(103, 232, 249, 0.58) 34%, transparent 54%),
+            radial-gradient(circle 3% at 90% 68%, rgba(34, 211, 238, 0.98) 0%, rgba(6, 182, 212, 0.56) 36%, transparent 56%),
+            radial-gradient(circle 2.5% at 12% 45%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.6) 35%, transparent 55%),
+            radial-gradient(circle 2% at 68% 22%, rgba(56, 189, 248, 0.98) 0%, rgba(103, 232, 249, 0.54) 33%, transparent 53%),
+            radial-gradient(circle 3% at 42% 12%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.58) 37%, transparent 57%),
+            radial-gradient(circle 2.5% at 78% 78%, rgba(103, 232, 249, 1) 0%, rgba(56, 189, 248, 0.62) 36%, transparent 56%),
+            radial-gradient(circle 2% at 25% 28%, rgba(56, 189, 248, 0.96) 0%, rgba(103, 232, 249, 0.56) 34%, transparent 54%),
+            radial-gradient(circle 3% at 55% 88%, rgba(34, 211, 238, 1) 0%, rgba(6, 182, 212, 0.6) 38%, transparent 58%)
+          `,
+          filter: "blur(1.5px) saturate(1.3)",
+          opacity: 0.9,
+        }}
+      ></div>
+
+      {/* Heavy noise grain for spray texture */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
-          opacity: 0.2,
+          opacity: 0.35,
+        }}
+      ></div>
+
+      {/* Vibrant lighter spots - adds brightness and color */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle 25% at 22% 32%, rgba(56, 189, 248, 0.45) 0%, rgba(103, 232, 249, 0.25) 45%, transparent 75%),
+            radial-gradient(circle 30% at 72% 58%, rgba(34, 211, 238, 0.4) 0%, rgba(6, 182, 212, 0.22) 48%, transparent 78%),
+            radial-gradient(circle 22% at 48% 78%, rgba(103, 232, 249, 0.42) 0%, rgba(56, 189, 248, 0.24) 46%, transparent 76%),
+            radial-gradient(circle 28% at 85% 25%, rgba(56, 189, 248, 0.38) 0%, rgba(103, 232, 249, 0.2) 50%, transparent 80%)
+          `,
+          filter: "blur(65px) saturate(1.4)",
+          mixBlendMode: "screen",
         }}
       ></div>
 
@@ -289,38 +281,6 @@ const TechStack = () => {
           background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
         }}
       ></div>
-
-      {/* Geometric pattern overlay */}
-      <div className="absolute inset-0 opacity-10 md:opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern
-              id="geometric-pattern-tech"
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M0,0 L50,50 L100,0 L100,100 L50,50 L0,100 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.5"
-                className="text-geometric-primary"
-              />
-              <path
-                d="M25,25 L75,25 L50,75 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.3"
-                className="text-geometric-secondary"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#geometric-pattern-tech)" />
-        </svg>
-      </div>
 
       {/* Radial gradients */}
       <div
