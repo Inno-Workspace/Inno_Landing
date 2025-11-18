@@ -1,8 +1,47 @@
 "use client";
 
+import { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/language-context";
+
+const panelStyle: CSSProperties = {
+  background:
+    "linear-gradient(160deg, rgba(10, 52, 63, 0.9), rgba(16, 93, 108, 0.85))",
+  border: "1px solid rgba(146, 243, 255, 0.25)",
+  boxShadow: "0 25px 60px rgba(5, 25, 32, 0.35)",
+  backdropFilter: "blur(16px)",
+};
+
+const frostedCardStyle: CSSProperties = {
+  background:
+    "linear-gradient(140deg, rgba(18, 74, 88, 0.9), rgba(11, 113, 129, 0.85))",
+  border: "1px solid rgba(146, 243, 255, 0.28)",
+  boxShadow: "0 15px 32px rgba(6, 22, 28, 0.3)",
+  backdropFilter: "blur(14px)",
+};
+
+const techCardStyle: CSSProperties = {
+  background:
+    "linear-gradient(145deg, rgba(15, 82, 95, 0.92), rgba(13, 129, 143, 0.85))",
+  border: "1px solid rgba(146, 243, 255, 0.3)",
+  boxShadow: "0 12px 24px rgba(7, 25, 30, 0.28)",
+  backdropFilter: "blur(16px)",
+};
+
+const fadeGradient = (direction: "left" | "right" | "top" | "bottom") => {
+  const base = "rgba(10, 52, 63, 0.92)";
+  const gradientDirection =
+    direction === "left"
+      ? "to right"
+      : direction === "right"
+      ? "to left"
+      : direction === "top"
+      ? "to bottom"
+      : "to top";
+
+  return `linear-gradient(${gradientDirection}, ${base}, transparent)`;
+};
 
 const TechStack = () => {
   const { language } = useLanguage();
@@ -71,8 +110,15 @@ const TechStack = () => {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(13, 148, 136, 0.3) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 60% 50% at 58% 40%, rgba(31, 122, 140, 0.45) 0%, transparent 70%)`,
           filter: "blur(60px)",
+        }}
+      ></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 48% 38% at 24% 68%, rgba(21, 90, 104, 0.35) 0%, transparent 65%)`,
+          filter: "blur(70px)",
         }}
       ></div>
 
@@ -82,13 +128,7 @@ const TechStack = () => {
           {/* LEFT SIDE - CLIENTS MARQUEE */}
           <div className="flex flex-col h-full">
             {/* Clients Container with Background */}
-            <div
-              className="rounded-2xl p-8 md:p-10"
-              style={{
-                background: "rgba(15, 118, 110, 0.3)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-              }}
-            >
+            <div className="rounded-2xl p-8 md:p-10" style={panelStyle}>
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -117,18 +157,12 @@ const TechStack = () => {
                 {/* Left Fade */}
                 <div
                   className="absolute left-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to right, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("left") }}
                 ></div>
                 {/* Right Fade */}
                 <div
                   className="absolute right-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to left, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("right") }}
                 ></div>
                 <motion.div
                   className="flex gap-4 h-full"
@@ -144,13 +178,9 @@ const TechStack = () => {
                   {duplicatedClients.map((client, index) => (
                     <div
                       key={`mobile-client-${index}`}
-                      className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center shrink-0"
+                      className="rounded-xl p-3 flex items-center justify-center shrink-0"
                       style={{
-                        background:
-                          "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
-                        border: "1px solid rgba(255, 255, 255, 0.25)",
-                        boxShadow:
-                          "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                        ...frostedCardStyle,
                         width: "100px",
                         height: "100px",
                       }}
@@ -174,19 +204,13 @@ const TechStack = () => {
                 {/* Top Fade - Makes logos disappear at top */}
                 <div
                   className="absolute top-0 left-0 right-0 h-32 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("top") }}
                 ></div>
 
                 {/* Bottom Fade - Makes logos disappear at bottom */}
                 <div
                   className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("bottom") }}
                 ></div>
 
                 {/* Two Column Marquee - Opposite Directions */}
@@ -208,14 +232,8 @@ const TechStack = () => {
                       .map((client, index) => (
                         <div
                           key={`left-${index}`}
-                          className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
-                            border: "1px solid rgba(255, 255, 255, 0.25)",
-                            boxShadow:
-                              "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
-                          }}
+                          className="rounded-xl p-3 flex items-center justify-center"
+                          style={frostedCardStyle}
                         >
                           <div className="relative w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32">
                             <Image
@@ -247,14 +265,8 @@ const TechStack = () => {
                       .map((client, index) => (
                         <div
                           key={`right-${index}`}
-                          className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
-                            border: "1px solid rgba(255, 255, 255, 0.25)",
-                            boxShadow:
-                              "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
-                          }}
+                          className="rounded-xl p-3 flex items-center justify-center"
+                          style={frostedCardStyle}
                         >
                           <div className="relative w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32">
                             <Image
@@ -276,13 +288,7 @@ const TechStack = () => {
           {/* RIGHT SIDE - TECH STACK GRID */}
           <div className="flex flex-col h-full">
             {/* Tech Stack Container with Background */}
-            <div
-              className="rounded-2xl p-8 md:p-10"
-              style={{
-                background: "rgba(15, 118, 110, 0.3)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-              }}
-            >
+            <div className="rounded-2xl p-8 md:p-10" style={panelStyle}>
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -311,18 +317,12 @@ const TechStack = () => {
                 {/* Left Fade */}
                 <div
                   className="absolute left-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to right, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("left") }}
                 ></div>
                 {/* Right Fade */}
                 <div
                   className="absolute right-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to left, rgba(15, 118, 110, 0.3), transparent)",
-                  }}
+                  style={{ background: fadeGradient("right") }}
                 ></div>
                 <motion.div
                   className="flex gap-4 h-full"
@@ -340,9 +340,7 @@ const TechStack = () => {
                       key={`mobile-tech-${index}`}
                       className="relative rounded-xl p-4 flex items-center justify-center shrink-0"
                       style={{
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
-                        backdropFilter: "blur(10px)",
+                        ...techCardStyle,
                         width: "100px",
                         height: "100px",
                       }}
@@ -375,11 +373,7 @@ const TechStack = () => {
                   >
                     <div
                       className="relative rounded-xl p-4 md:p-5 flex items-center justify-center"
-                      style={{
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
-                        backdropFilter: "blur(10px)",
-                      }}
+                      style={techCardStyle}
                     >
                       <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
                         <Image
