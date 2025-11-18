@@ -137,10 +137,10 @@ const Footer = () => {
           <div className="flex flex-col">
             <div className="mb-4">
               <Image
-                src="/images/inno.jpeg"
+                src="/images/logo.png"
                 alt="INNO Logo"
-                width={120}
-                height={120}
+                width={140}
+                height={140}
                 className="w-16 h-16 rounded-lg mb-4"
               />
             </div>

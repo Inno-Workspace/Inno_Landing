@@ -4,19 +4,11 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/language-context";
 import LanguageSwitch from "@/components/language-switch";
 import Image from "next/image";
-
-interface LenisInstance {
-  on: (event: string, callback: () => void) => void;
-  off: (event: string, callback: () => void) => void;
-  scrollTo: (
-    target: number,
-    options?: { duration?: number; easing?: (t: number) => number }
-  ) => void;
-}
+import Lenis from "lenis";
 
 declare global {
   interface Window {
-    lenis?: LenisInstance;
+    lenis?: Lenis;
   }
 }
 
