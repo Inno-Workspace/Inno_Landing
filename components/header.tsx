@@ -14,7 +14,7 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { labelKey: "menu.home", href: "#", id: "home" },
   { labelKey: "menu.about", href: "#about", id: "about" },
-  { labelKey: "menu.services", href: "#services", id: "services" },
+  { labelKey: "menu.works", href: "#works", id: "works" },
   { labelKey: "menu.contact", href: "#contact", id: "contact" },
 ];
 
@@ -120,23 +120,34 @@ const Header = () => {
   return (
     <header
       dir="ltr"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-overlay backdrop-blur-lg ${
-        isScrolled ? "shadow-lg" : "shadow-sm"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-2 px-4 md:px-6"
     >
-      <div className="w-full py-4 md:py-6 relative">
-        <div className="flex items-center justify-between">
-          <div className="shrink-0 pl-6 md:pl-8">
+      {/* Main Navigation Bar Container */}
+      <div
+        className={`w-full max-w-7xl mx-auto rounded-2xl transition-all duration-300 backdrop-blur-lg ${
+          isScrolled ? "bg-overlay shadow-2xl" : "bg-overlay shadow-lg"
+        }`}
+      >
+        <div className="flex items-center justify-between px-4 md:px-6 py-2">
+          {/* Logo Section */}
+          <div className="flex items-center gap-2 shrink-0">
             <Image
-              src="/images/inno.jpeg"
+              src="/images/logo.png"
               alt="Logo"
-              width={300}
-              height={300}
-              className="w-14 h-14 rounded-lg"
+              width={48}
+              height={48}
+              className="w-12 h-12 md:w-14 md:h-14 object-contain"
             />
+            <span
+              className="text-primary font-bold text-base md:text-lg mt-1"
+              style={{ fontFamily: "var(--font-devil-breeze)" }}
+            >
+              {t("header.logo")}
+            </span>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop Navigation Links - Centered */}
+          <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {menuItems.map((item, index) => {
               const isActive = activeSection === item.id;
               return (
@@ -144,60 +155,58 @@ const Header = () => {
                   key={index}
                   href={item.href}
                   onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`text-sm font-medium relative group px-3 py-2 rounded-lg transition-all duration-300 ${
+                  className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "text-hover-primary scale-105"
-                      : "text-text-primary hover:text-hover-primary hover:scale-105"
+                      ? "text-hover-primary"
+                      : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
                   }`}
+                  style={{ fontFamily: "var(--font-devil-breeze)" }}
                 >
-                  <span className="relative z-10">{t(item.labelKey)}</span>
-                  {isActive && (
-                    <span className="absolute inset-0 bg-white/10 rounded-lg blur-sm" />
-                  )}
-                  <span
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-hover-primary transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                  <span className="absolute inset-0 bg-hover-primary/0 group-hover:bg-hover-primary/5 rounded-lg transition-all duration-300" />
+                  {t(item.labelKey)}
                 </a>
               );
             })}
           </nav>
 
-          <div className="hidden md:flex items-center shrink-0 pr-6 md:pr-8">
-            <LanguageSwitch />
-          </div>
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Language Switch - Desktop */}
+            <div className="hidden md:flex items-center">
+              <LanguageSwitch />
+            </div>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-2 z-50 pr-6 md:pr-8"
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`w-6 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                isMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
+              aria-label="Toggle menu"
+            >
+              <span
+                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
+                  isMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                }`}
+              />
+              <span
+                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
 
+        {/* Mobile Menu */}
         <nav
-          className={`md:hidden absolute top-full left-0 right-0 bg-overlay backdrop-blur-lg border-t border-white/10 transition-all duration-300 overflow-hidden ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
             isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-6 py-6 space-y-4">
+          <div className="px-4 pb-4 pt-2 space-y-2 border-t border-text-primary/10 mt-2">
             {menuItems.map((item, index) => {
               const isActive = activeSection === item.id;
               return (
@@ -205,21 +214,21 @@ const Header = () => {
                   key={index}
                   href={item.href}
                   onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`block text-base font-medium transition-all duration-300 py-2 px-3 rounded-lg relative ${
+                  className={`block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg ${
                     isActive
-                      ? "text-hover-primary bg-white/10 scale-105"
-                      : "text-text-primary hover:text-hover-primary hover:bg-white/5 hover:scale-105"
+                      ? "text-hover-primary bg-text-accent/10"
+                      : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
                   }`}
+                  style={{ fontFamily: "var(--font-devil-breeze)" }}
                 >
-                  <span className="relative z-10">{t(item.labelKey)}</span>
-                  {isActive && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-hover-primary rounded-r-full" />
-                  )}
+                  {t(item.labelKey)}
                 </a>
               );
             })}
-            <div className="pt-4 border-t border-white/10">
-              <LanguageSwitch />
+            <div className="pt-2 border-t border-text-primary/10">
+              <div className="px-4">
+                <LanguageSwitch />
+              </div>
             </div>
           </div>
         </nav>

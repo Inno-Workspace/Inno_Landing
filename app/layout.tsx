@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { LanguageProvider } from "@/contexts/language-context";
 import TransitionOverlay from "@/components/transition-overlay";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 
 export const metadata: Metadata = {
   title: "INNO - Your Best Technical Partner",
@@ -27,9 +28,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <LanguageProvider>
+          <SmoothScrollProvider>
           <TransitionOverlay />
           <Header />
           <div className="page-content">{children}</div>
+          </SmoothScrollProvider>
         </LanguageProvider>
       </body>
     </html>
