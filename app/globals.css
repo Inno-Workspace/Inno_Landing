@@ -2,7 +2,8 @@
 
 @font-face {
   font-family: "Kufam";
-  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-VariableFont_wght.ttf") format("truetype");
+  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -10,7 +11,8 @@
 
 @font-face {
   font-family: "Kufam";
-  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-Italic-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;

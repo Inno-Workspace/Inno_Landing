@@ -1,0 +1,413 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useLanguage } from "@/contexts/language-context";
+
+const TechStack = () => {
+  const { language } = useLanguage();
+
+  const clients = [
+    { name: "Next.js", image: "/tech/nextjs-icon.png" },
+    { name: "Python", image: "/tech/python-logo.avif" },
+    { name: "Node.js", image: "/tech/nod.png" },
+    { name: "GitHub", image: "/tech/github-logo.png" },
+    { name: "WordPress", image: "/tech/wp.png" },
+    { name: "Sitecore", image: "/tech/Sitecore-LOGO.png" },
+    { name: "Umbraco", image: "/tech/umbraco.avif" },
+    { name: "Wagtail", image: "/tech/Wagtail-2.png" },
+    { name: "Cloudflare", image: "/tech/cloudflare-logo.avif" },
+    { name: "OpenAI", image: "/tech/open-ai.png" },
+    { name: "Bard AI", image: "/tech/bard-ai.avif" },
+  ];
+
+  const technologies = [
+    { name: "Next.js", image: "/tech/nextjs-icon.png" },
+    { name: "Python", image: "/tech/python-logo.avif" },
+    { name: "Node.js", image: "/tech/nod.png" },
+    { name: "GitHub", image: "/tech/github-logo.png" },
+    { name: "WordPress", image: "/tech/wp.png" },
+    { name: "Sitecore", image: "/tech/Sitecore-LOGO.png" },
+    { name: "Umbraco", image: "/tech/umbraco.avif" },
+    { name: "Wagtail", image: "/tech/Wagtail-2.png" },
+    { name: "Cloudflare", image: "/tech/cloudflare-logo.avif" },
+    { name: "OpenAI", image: "/tech/open-ai.png" },
+    { name: "Bard AI", image: "/tech/bard-ai.avif" },
+  ];
+
+  // Duplicate clients for seamless loop
+  const duplicatedClients = [...clients, ...clients];
+
+  return (
+    <div className="relative w-full overflow-hidden py-20 md:py-32">
+      {/* Dark Background */}
+      <div className="absolute inset-0 bg-gradient-primary"></div>
+
+      {/* Wireframe Pattern Overlay */}
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="tech-pattern"
+              x="0"
+              y="0"
+              width="60"
+              height="60"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0,0 L60,0 M0,0 L0,60"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth="0.5"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#tech-pattern)" />
+        </svg>
+      </div>
+
+      {/* Gradient Overlays */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(13, 148, 136, 0.3) 0%, transparent 70%)`,
+          filter: "blur(60px)",
+        }}
+      ></div>
+
+      <div className="relative z-10 container mx-auto px-6">
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* LEFT SIDE - CLIENTS MARQUEE */}
+          <div className="flex flex-col h-full">
+            {/* Clients Container with Background */}
+            <div
+              className="rounded-2xl p-8 md:p-10"
+              style={{
+                background: "rgba(15, 118, 110, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-12"
+              >
+                <h2
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-4"
+                  style={{ fontFamily: "var(--font-devil-breeze)" }}
+                >
+                  {language === "ar" ? "عملاؤنا" : "Our Clients"}
+                </h2>
+                <p
+                  className="text-lg md:text-xl text-secondary"
+                  style={{ fontFamily: "var(--font-poppins)" }}
+                >
+                  {language === "ar"
+                    ? "نفخر بالشراكة مع قادة الصناعة العالميين"
+                    : "Trusted by industry leaders worldwide"}
+                </p>
+              </motion.div>
+
+              {/* Horizontal Marquee for Small Screens */}
+              <div className="relative overflow-hidden rounded-xl p-4 h-32 lg:hidden">
+                {/* Left Fade */}
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+                {/* Right Fade */}
+                <div
+                  className="absolute right-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to left, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+                <motion.div
+                  className="flex gap-4 h-full"
+                  animate={{
+                    x: language === "ar" ? [0, "50%"] : ["0%", "-50%"],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  {duplicatedClients.map((client, index) => (
+                    <div
+                      key={`mobile-client-${index}`}
+                      className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center shrink-0"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
+                        border: "1px solid rgba(255, 255, 255, 0.25)",
+                        boxShadow:
+                          "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                        width: "100px",
+                        height: "100px",
+                      }}
+                    >
+                      <div className="relative w-16 h-16">
+                        <Image
+                          src={client.image}
+                          alt={client.name}
+                          fill
+                          className="object-contain"
+                          sizes="64px"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Vertical Marquee Container - Shows ~5 cards - Desktop Only */}
+              <div className="relative overflow-hidden rounded-xl p-6 h-[550px] hidden lg:block">
+                {/* Top Fade - Makes logos disappear at top */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-32 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+
+                {/* Bottom Fade - Makes logos disappear at bottom */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+
+                {/* Two Column Marquee - Opposite Directions */}
+                <div className="grid grid-cols-2 gap-4 h-full">
+                  {/* LEFT COLUMN - Scrolls UP */}
+                  <motion.div
+                    className="flex flex-col gap-4"
+                    animate={{
+                      y: ["0%", "-50%"],
+                    }}
+                    transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
+                    {[...duplicatedClients, ...duplicatedClients]
+                      .filter((_, i) => i % 2 === 0)
+                      .map((client, index) => (
+                        <div
+                          key={`left-${index}`}
+                          className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
+                            border: "1px solid rgba(255, 255, 255, 0.25)",
+                            boxShadow:
+                              "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                          }}
+                        >
+                          <div className="relative w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32">
+                            <Image
+                              src={client.image}
+                              alt={client.name}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 80px, (max-width: 1024px) 112px, 128px"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                  </motion.div>
+
+                  {/* RIGHT COLUMN - Scrolls DOWN */}
+                  <motion.div
+                    className="flex flex-col gap-4"
+                    animate={{
+                      y: ["-50%", "0%"],
+                    }}
+                    transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
+                    {[...duplicatedClients, ...duplicatedClients]
+                      .filter((_, i) => i % 2 === 1)
+                      .map((client, index) => (
+                        <div
+                          key={`right-${index}`}
+                          className="backdrop-blur-sm rounded-xl p-3 flex items-center justify-center"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))",
+                            border: "1px solid rgba(255, 255, 255, 0.25)",
+                            boxShadow:
+                              "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                          }}
+                        >
+                          <div className="relative w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32">
+                            <Image
+                              src={client.image}
+                              alt={client.name}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 80px, (max-width: 1024px) 112px, 128px"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE - TECH STACK GRID */}
+          <div className="flex flex-col h-full">
+            {/* Tech Stack Container with Background */}
+            <div
+              className="rounded-2xl p-8 md:p-10"
+              style={{
+                background: "rgba(15, 118, 110, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-12"
+              >
+                <h2
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-4"
+                  style={{ fontFamily: "var(--font-devil-breeze)" }}
+                >
+                  {language === "ar" ? "تقنياتنا" : "Our Tech Stack"}
+                </h2>
+                <p
+                  className="text-lg md:text-xl text-secondary"
+                  style={{ fontFamily: "var(--font-poppins)" }}
+                >
+                  {language === "ar"
+                    ? "نستخدم أحدث التقنيات لبناء حلول مبتكرة"
+                    : "Powered by cutting-edge technologies"}
+                </p>
+              </motion.div>
+
+              {/* Horizontal Marquee for Small Screens */}
+              <div className="relative overflow-hidden rounded-xl p-4 h-32 lg:hidden">
+                {/* Left Fade */}
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+                {/* Right Fade */}
+                <div
+                  className="absolute right-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to left, rgba(15, 118, 110, 0.3), transparent)",
+                  }}
+                ></div>
+                <motion.div
+                  className="flex gap-4 h-full"
+                  animate={{
+                    x: language === "ar" ? [0, "50%"] : ["0%", "-50%"],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  {[...technologies, ...technologies].map((tech, index) => (
+                    <div
+                      key={`mobile-tech-${index}`}
+                      className="relative rounded-xl p-4 flex items-center justify-center shrink-0"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        backdropFilter: "blur(10px)",
+                        width: "100px",
+                        height: "100px",
+                      }}
+                    >
+                      <div className="relative w-16 h-16">
+                        <Image
+                          src={tech.image}
+                          alt={tech.name}
+                          fill
+                          className="object-contain"
+                          sizes="64px"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Tech Grid - Desktop Only */}
+              <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 lg:gap-6 xl:gap-8">
+                {technologies.map((tech, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center justify-center"
+                  >
+                    <div
+                      className="relative rounded-xl p-4 md:p-5 flex items-center justify-center"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        backdropFilter: "blur(10px)",
+                      }}
+                    >
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                        <Image
+                          src={tech.image}
+                          alt={tech.name}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-20"
+        style={{
+          background: `linear-gradient(to top, rgba(4, 47, 46, 0.5), transparent)`,
+        }}
+      ></div>
+    </div>
+  );
+};
+
+export default TechStack;
