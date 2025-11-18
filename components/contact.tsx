@@ -360,9 +360,6 @@ const Contact = () => {
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = "";
                     }}
-                    style={{
-                      fontFamily: "var(--font-poppins)",
-                    }}
                   >
                     +1 (234) 567-890
                   </a>
