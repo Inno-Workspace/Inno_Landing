@@ -5,17 +5,21 @@ import { useLanguage } from "@/contexts/language-context";
 
 const Marquee = () => {
   const { language } = useLanguage();
-  const text = language === "ar" ? "شريكك التقني الأمثل" : "YOUR BEST TECHNICAL PARTNER";
+  const text =
+    language === "ar" ? "شريكك التقني الأمثل" : "YOUR BEST TECHNICAL PARTNER";
   const repetitions = 7; // Number of times to repeat the text
 
   // Create duplicated content for seamless loop
   const marqueeContent = Array.from({ length: repetitions }).map((_, index) => (
     <h4
       key={index}
-      className={`inline-block pl-[3rem] text-[2.2rem] font-medium leading-[125%] ${language === "ar" ? "" : "uppercase tracking-[-0.04em]"} flex-shrink-0`}
-      style={{ 
-        fontFamily: language === "ar" ? "var(--font-cairo)" : "var(--font-poppins)",
-        color: "#0f766e"
+      className={`inline-block pl-12 text-[2.2rem] font-medium leading-[125%] ${
+        language === "ar" ? "" : "uppercase tracking-[-0.04em]"
+      } shrink-0`}
+      style={{
+        fontFamily:
+          language === "ar" ? "var(--font-cairo)" : "var(--font-poppins)",
+        color: "#0f766e",
       }}
     >
       {text}
@@ -23,7 +27,7 @@ const Marquee = () => {
   ));
 
   return (
-    <section 
+    <section
       className="relative w-full overflow-hidden"
       style={{ backgroundColor: "#f0fdfa" }}
     >
@@ -50,4 +54,3 @@ const Marquee = () => {
 };
 
 export default Marquee;
-
