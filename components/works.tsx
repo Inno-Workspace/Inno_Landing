@@ -317,58 +317,286 @@ const Works = () => {
     <div
       id="works"
       ref={sectionRef}
-      className="section2 relative w-full overflow-hidden py-20 md:py-32"
+      className="section2 relative w-full overflow-hidden py-12 md:py-16"
       style={{ perspective: "1000px" }}
     >
-      {/* Dark Background - matching TechStack exactly */}
+      {/* SVG Filters for texture effects */}
+      <svg className="absolute w-0 h-0">
+        <defs>
+          <filter id="brush-texture-works">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.9"
+              numOctaves="4"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="8"
+              result="displacement"
+            />
+          </filter>
+          <filter id="spray-texture-works">
+            <feTurbulence
+              type="turbulence"
+              baseFrequency="0.95"
+              numOctaves="3"
+              result="turbulence"
+            />
+            <feGaussianBlur in="turbulence" stdDeviation="2" result="blur" />
+            <feColorMatrix
+              in="blur"
+              type="saturate"
+              values="0"
+              result="desaturated"
+            />
+          </filter>
+          <filter id="noise-filter-works">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.8"
+              numOctaves="3"
+              stitchTiles="stitch"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Base gradient background */}
       <div className="absolute inset-0 bg-gradient-primary"></div>
 
-      {/* Wireframe Pattern Overlay - matching TechStack */}
-      <div className="absolute inset-0 opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Wireframe Gradient Effect */}
+      <div className="absolute inset-0 overflow-hidden opacity-70">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+        >
           <defs>
+            <linearGradient
+              id="wireframeGradient-works"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="var(--effect-wireframe-start)" />
+              <stop offset="50%" stopColor="var(--effect-wireframe-mid)" />
+              <stop offset="100%" stopColor="var(--effect-wireframe-end)" />
+            </linearGradient>
+            <radialGradient id="cornerFade-works" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stopColor="white" stopOpacity="1" />
+              <stop offset="70%" stopColor="white" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="white" stopOpacity="0.2" />
+            </radialGradient>
+            <mask id="wireframeMask-works">
+              <rect width="100%" height="100%" fill="url(#cornerFade-works)" />
+            </mask>
             <pattern
-              id="works-pattern"
+              id="wireframePattern-works"
               x="0"
               y="0"
-              width="60"
-              height="60"
+              width="100"
+              height="100"
               patternUnits="userSpaceOnUse"
             >
               <path
-                d="M0,0 L60,0 M0,0 L0,60"
+                d="M0,0 L100,0 M0,0 L0,100 M0,50 L100,50 M50,0 L50,100"
+                stroke="rgba(255, 255, 255, 0.3)"
+                strokeWidth="1"
                 fill="none"
-                stroke="rgba(255, 255, 255, 0.1)"
-                strokeWidth="0.5"
               />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#works-pattern)" />
+          <g
+            stroke="rgba(255, 255, 255, 0.4)"
+            strokeWidth="1"
+            fill="none"
+            mask="url(#wireframeMask-works)"
+          >
+            <path d="M0,100 Q200,80 400,100 T800,100 T1200,100" />
+            <path d="M0,150 Q200,130 400,150 T800,150 T1200,150" />
+            <path d="M0,200 Q200,180 400,200 T800,200 T1200,200" />
+            <path d="M0,250 Q200,230 400,250 T800,250 T1200,250" />
+            <path d="M0,300 Q200,280 400,300 T800,300 T1200,300" />
+            <path d="M0,350 Q200,330 400,350 T800,350 T1200,350" />
+            <path d="M0,400 Q200,380 400,400 T800,400 T1200,400" />
+            <path d="M0,450 Q200,430 400,450 T800,450 T1200,450" />
+            <path d="M0,500 Q200,480 400,500 T800,500 T1200,500" />
+            <path d="M0,550 Q200,530 400,550 T800,550 T1200,550" />
+            <path d="M0,600 Q200,580 400,600 T800,600 T1200,600" />
+            <path d="M0,650 Q200,630 400,650 T800,650 T1200,650" />
+            <path d="M0,700 Q200,680 400,700 T800,700 T1200,700" />
+
+            <path d="M100,0 Q120,200 100,400 T100,800" />
+            <path d="M200,0 Q220,200 200,400 T200,800" />
+            <path d="M300,0 Q320,200 300,400 T300,800" />
+            <path d="M400,0 Q420,200 400,400 T400,800" />
+            <path d="M500,0 Q520,200 500,400 T500,800" />
+            <path d="M600,0 Q620,200 600,400 T600,800" />
+            <path d="M700,0 Q720,200 700,400 T700,800" />
+            <path d="M800,0 Q820,200 800,400 T800,800" />
+            <path d="M900,0 Q920,200 900,400 T900,800" />
+            <path d="M1000,0 Q1020,200 1000,400 T1000,800" />
+            <path d="M1100,0 Q1120,200 1100,400 T1100,800" />
+          </g>
+          <rect
+            width="100%"
+            height="100%"
+            fill="url(#wireframeGradient-works)"
+            opacity="0.5"
+            mask="url(#wireframeMask-works)"
+          />
         </svg>
       </div>
 
-      {/* Gradient Overlays - matching TechStack exactly */}
+      {/* Radial gradient overlays with brush texture */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 60% 50% at 58% 40%, rgba(31, 122, 140, 0.45) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 60% 40% at 15% 25%, var(--effect-brush) 0%, transparent 60%)`,
           filter: "blur(60px)",
+          mixBlendMode: "multiply",
+        }}
+      ></div>
+
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 70% 50% at 85% 75%, var(--effect-brush) 0%, transparent 65%)`,
+          filter: "blur(70px)",
+          mixBlendMode: "screen",
+        }}
+      ></div>
+
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 50% 60% at 50% 50%, var(--effect-brush) 0%, transparent 70%)`,
+          filter: "blur(50px)",
+          mixBlendMode: "multiply",
+        }}
+      ></div>
+
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 40% 30% at 80% 20%, var(--effect-brush) 0%, transparent 55%)`,
+          filter: "blur(45px)",
+          mixBlendMode: "overlay",
+        }}
+      ></div>
+
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 45% 35% at 20% 80%, var(--effect-brush) 0%, transparent 60%)`,
+          filter: "blur(55px)",
+          mixBlendMode: "screen",
+        }}
+      ></div>
+
+      {/* Spray texture overlays */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
+            radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
+            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%)
+          `,
+          filter: "blur(25px)",
+          mixBlendMode: "overlay",
+        }}
+      ></div>
+
+      {/* Noise texture overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          mixBlendMode: "overlay",
+          opacity: 0.2,
+        }}
+      ></div>
+
+      {/* Overlay gradients */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
+        }}
+      ></div>
+
+      {/* Geometric pattern overlay */}
+      <div className="absolute inset-0 opacity-10 md:opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="geometric-pattern-works"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0,0 L50,50 L100,0 L100,100 L50,50 L0,100 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                className="text-geometric-primary"
+              />
+              <path
+                d="M25,25 L75,25 L50,75 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.3"
+                className="text-geometric-secondary"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#geometric-pattern-works)" />
+        </svg>
+      </div>
+
+      {/* Radial gradients */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(circle, transparent, transparent, var(--effect-radial-end))`,
+        }}
+      ></div>
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          background: `radial-gradient(circle, var(--effect-radial-start), transparent, transparent)`,
+        }}
+      ></div>
+
+      {/* Linear gradients */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to right, transparent, var(--effect-linear), transparent)`,
         }}
       ></div>
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 48% 38% at 24% 68%, rgba(21, 90, 104, 0.35) 0%, transparent 65%)`,
-          filter: "blur(70px)",
+          background: `linear-gradient(to left, transparent, var(--effect-linear), transparent)`,
         }}
       ></div>
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Title and Subtitle */}
-        <div className="section3 mb-16 md:mb-24">
+        <div className="section3 mb-6 md:mb-8">
           <h2
             ref={titleRef}
-            className="title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-primary"
+            className="title text-5xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-4 text-primary"
             style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
             {t("works.title")}
@@ -385,7 +613,7 @@ const Works = () => {
         {/* Text Content */}
         <div
           ref={textContentRef}
-          className="text-content mb-16 md:mb-20 max-w-4xl"
+          className="text-content mb-8 md:mb-12 max-w-4xl"
         >
           <p
             className="text text-lg md:text-xl leading-relaxed text-secondary"
