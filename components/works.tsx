@@ -172,11 +172,12 @@ const Works = () => {
               className="group cursor-pointer"
             >
               {/* Card */}
-              <div 
-                className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.07] hover:-translate-y-2"
+              <div
+                className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-cyan-400/50 hover:bg-white/[0.08] hover:-translate-y-3 glass-card-hover group-hover:shadow-2xl"
                 style={{
                   backdropFilter: "blur(10px)",
                   willChange: "transform",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                 }}
               >
                 {/* Image Container */}
@@ -190,15 +191,16 @@ const Works = () => {
                     loading="lazy"
                   />
                   {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span 
-                      className="inline-block px-3 py-1 text-xs font-semibold rounded-full"
+                  <div className="absolute top-4 left-4 z-10">
+                    <span
+                      className="inline-block px-4 py-1.5 text-xs font-bold rounded-full backdrop-blur-md transition-all duration-300 group-hover:scale-105"
                       style={{
-                        background: "rgba(255, 255, 255, 0.15)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255, 255, 255, 0.2)",
+                        background:
+                          "linear-gradient(135deg, rgba(103, 232, 249, 0.2), rgba(20, 184, 166, 0.25))",
+                        border: "1px solid rgba(103, 232, 249, 0.4)",
                         color: "#ffffff",
                         fontFamily: "var(--font-poppins)",
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
                       }}
                     >
                       {work.category}
@@ -216,24 +218,37 @@ const Works = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 relative">
                   <h3
-                    className="text-2xl font-bold text-primary mb-3 transition-colors duration-200"
+                    className="text-2xl font-bold text-primary mb-3 transition-all duration-300 group-hover:text-accent"
                     style={{ fontFamily: "var(--font-devil-breeze)" }}
                   >
                     {work.title}
                   </h3>
                   <p
-                    className="text-secondary/70 text-sm leading-relaxed line-clamp-2"
+                    className="text-secondary/70 text-sm leading-relaxed line-clamp-2 group-hover:text-secondary/90 transition-colors duration-300"
                     style={{ fontFamily: "var(--font-poppins)" }}
                   >
                     {work.description}
                   </p>
+
+                  {/* View More Indicator */}
+                  <div className="mt-4 flex items-center gap-2 text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    <span className="text-sm font-semibold" style={{ fontFamily: "var(--font-poppins)" }}>
+                      View Project
+                    </span>
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
 
                 {/* Bottom border accent */}
-                <div 
-                  className="h-1 w-full transition-all duration-300 bg-gradient-to-r from-cyan-400 to-sky-500 opacity-0 group-hover:opacity-100"
+                <div
+                  className="h-1 w-full transition-all duration-500 bg-gradient-to-r from-cyan-400 via-sky-400 to-sky-500 opacity-0 group-hover:opacity-100 group-hover:shadow-lg"
+                  style={{
+                    boxShadow: "0 0 20px rgba(103, 232, 249, 0.5)",
+                  }}
                 ></div>
               </div>
             </div>

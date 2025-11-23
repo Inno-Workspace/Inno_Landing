@@ -203,18 +203,26 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-[1.02] active:scale-95 relative overflow-hidden group text-primary cursor-pointer"
+                className="w-full px-8 py-5 rounded-xl font-bold text-lg transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group text-primary cursor-pointer shimmer"
                 style={{
                   fontFamily: "var(--font-poppins)",
-                  background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+                  background:
+                    "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
+                  boxShadow:
+                    "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(103, 232, 249, 0.2)",
                 }}
               >
-                <span className="relative z-10">{t("contact.form.submit")}</span>
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {t("contact.form.submit")}
+                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
-                    background: "linear-gradient(135deg, #0e7490 0%, #0f766e 50%, #155e75 100%)",
+                    background:
+                      "linear-gradient(135deg, #0e7490 0%, #14b8a6 50%, #06b6d4 100%)",
                   }}
                 ></div>
               </button>
@@ -243,23 +251,32 @@ const Contact = () => {
 
             <div className="space-y-6 relative">
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
+                className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                 }}
                 onMouseEnter={(e) => {
                   const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                  e.currentTarget.style.transform = isRTL
+                    ? "translateX(-10px)"
+                    : "translateX(10px)";
+                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateX(0)";
+                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
+                    background:
+                      "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
                     boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >
@@ -305,23 +322,32 @@ const Contact = () => {
               </div>
 
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
+                className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                 }}
                 onMouseEnter={(e) => {
                   const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                  e.currentTarget.style.transform = isRTL
+                    ? "translateX(-10px)"
+                    : "translateX(10px)";
+                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateX(0)";
+                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
+                    background:
+                      "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
                     boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >
@@ -367,23 +393,32 @@ const Contact = () => {
               </div>
 
               <div
-                className="flex items-start gap-5 p-4 rounded-xl transition-all duration-300"
+                className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                 }}
                 onMouseEnter={(e) => {
                   const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL ? "translateX(-8px)" : "translateX(8px)";
+                  e.currentTarget.style.transform = isRTL
+                    ? "translateX(-10px)"
+                    : "translateX(10px)";
+                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateX(0)";
+                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
+                    background:
+                      "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
                     boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >

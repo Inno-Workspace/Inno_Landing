@@ -179,8 +179,15 @@ const Header = () => {
       {/* Main Navigation Bar Container */}
       <div
         className={`w-full max-w-7xl mx-auto rounded-2xl transition-all duration-300 backdrop-blur-lg ${
-          isScrolled ? "bg-overlay shadow-2xl" : "bg-overlay shadow-lg"
+          isScrolled
+            ? "bg-overlay shadow-2xl"
+            : "bg-overlay/80 shadow-lg"
         }`}
+        style={{
+          boxShadow: isScrolled
+            ? "0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.1)"
+            : "0 4px 16px rgba(0, 0, 0, 0.15)",
+        }}
       >
         <div className="flex items-center justify-between px-4 md:px-6 py-2">
           {/* Logo Section */}
@@ -210,12 +217,17 @@ const Header = () => {
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 ${
+                    className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-300 relative ${
                       isActive
                         ? "text-hover-primary"
-                        : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
+                        : "text-primary/80 hover:text-primary hover:bg-text-primary/10"
                     }`}
-                    style={{ fontFamily: "var(--font-devil-breeze)" }}
+                    style={{
+                      fontFamily: "var(--font-devil-breeze)",
+                      textShadow: isActive
+                        ? "0 0 10px rgba(103, 232, 249, 0.5)"
+                        : "none",
+                    }}
                   >
                     {t(item.labelKey)}
                   </a>
@@ -262,7 +274,7 @@ const Header = () => {
             isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-4 pb-4 pt-2 space-y-2 border-t border-text-primary/10 mt-2">
+          <div className="px-4 pb-4 pt-2 space-y-2 mt-2">
             {(language === "ar" ? [...menuItems].reverse() : menuItems).map(
               (item, index) => {
                 const isActive = activeSection === item.id;
@@ -283,7 +295,7 @@ const Header = () => {
                 );
               }
             )}
-            <div className="pt-2 border-t border-text-primary/10">
+            <div className="pt-2">
               <div className="px-4">
                 <LanguageSwitch />
               </div>

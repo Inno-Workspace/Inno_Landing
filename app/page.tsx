@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <main className="w-full h-full">
+    <main className="w-full min-h-screen">
       <Hero />
       <About />
       <TechStack />

@@ -139,11 +139,24 @@ const translations = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("ar"); // Default to Arabic
   const [isTransitioning] = useState(false);
 
+  // Load saved language preference on mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language") as Language | null;
+    if (savedLanguage && (savedLanguage === "en" || savedLanguage === "ar")) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
   const toggleLanguage = useCallback(() => {
-    setLanguage((prev) => (prev === "en" ? "ar" : "en"));
+    setLanguage((prev) => {
+      const newLang = prev === "en" ? "ar" : "en";
+      // Save to localStorage
+      localStorage.setItem("language", newLang);
+      return newLang;
+    });
   }, []);
 
   const t = useCallback(

@@ -17,16 +17,20 @@ const frostedCardStyle: CSSProperties = {
   background:
     "linear-gradient(140deg, rgba(18, 74, 88, 0.9), rgba(11, 113, 129, 0.85))",
   border: "1px solid rgba(146, 243, 255, 0.28)",
-  boxShadow: "0 15px 32px rgba(6, 22, 28, 0.3)",
+  boxShadow:
+    "0 15px 32px rgba(6, 22, 28, 0.3), 0 0 20px rgba(103, 232, 249, 0.1)",
   backdropFilter: "blur(14px)",
+  transition: "all 0.3s ease",
 };
 
 const techCardStyle: CSSProperties = {
   background:
     "linear-gradient(145deg, rgba(15, 82, 95, 0.92), rgba(13, 129, 143, 0.85))",
   border: "1px solid rgba(146, 243, 255, 0.3)",
-  boxShadow: "0 12px 24px rgba(7, 25, 30, 0.28)",
+  boxShadow:
+    "0 12px 24px rgba(7, 25, 30, 0.28), 0 0 15px rgba(103, 232, 249, 0.15)",
   backdropFilter: "blur(16px)",
+  transition: "all 0.3s ease",
 };
 
 const fadeGradient = (direction: "left" | "right" | "top" | "bottom") => {
