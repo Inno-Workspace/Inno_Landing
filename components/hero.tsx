@@ -139,8 +139,8 @@ const Hero = () => {
             style={{ fontFamily: fontBody }}
           >
             {isAr
-              ? "نحول الأفكار لتطبيقات رقمية متطورة تدفع نمو الشركات"
-              : "We transform ideas into advanced applications that drive growth."}
+              ? "فريق شغوف بتطوير التجربة الرقمية لدفع نمو الشركات"
+              : "A team passionate about developing digital experiences to drive business growth."}
           </motion.p>
 
           {/* CTAs */}
