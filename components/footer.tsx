@@ -159,7 +159,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <h4
               className="text-lg md:text-xl font-semibold mb-6 text-primary"
-              style={{ fontFamily: "var(--font-poppins)" }}
+              style={{ fontFamily: "var(--font-moshreq)" }}
             >
               {t("footer.social.title")}
             </h4>
@@ -183,7 +183,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <h4
               className="text-lg md:text-xl font-semibold mb-6 text-primary"
-              style={{ fontFamily: "var(--font-poppins)" }}
+              style={{ fontFamily: "var(--font-moshreq)" }}
             >
               {t("footer.contact.title")}
             </h4>
@@ -191,7 +191,7 @@ const Footer = () => {
               <a
                 href={`mailto:${t("footer.contact.email")}`}
                 className="flex items-center gap-3 text-base text-secondary hover:text-primary transition-colors duration-300"
-                style={{ fontFamily: "var(--font-poppins)" }}
+                style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
                   className="w-5 h-5 shrink-0"
@@ -211,7 +211,7 @@ const Footer = () => {
               <a
                 href={`tel:${t("footer.contact.phone").replace(/\s/g, "")}`}
                 className="flex items-center gap-3 text-base text-secondary hover:text-primary transition-colors duration-300"
-                style={{ fontFamily: "var(--font-poppins)" }}
+                style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
                   className="w-5 h-5 shrink-0"
@@ -230,7 +230,7 @@ const Footer = () => {
               </a>
               <div
                 className="flex items-start gap-3 text-base text-secondary"
-                style={{ fontFamily: "var(--font-poppins)" }}
+                style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
                   className="w-5 h-5 shrink-0 mt-0.5"
@@ -260,7 +260,7 @@ const Footer = () => {
         {/* Copyright */}
         <div
           className="mt-12 pt-8 border-t border-text-primary/10 text-center text-sm text-secondary"
-          style={{ fontFamily: "var(--font-poppins)" }}
+          style={{ fontFamily: "var(--font-moshreq)" }}
         >
           <p>
             © {new Date().getFullYear()} INNO. {t("footer.copyright")}

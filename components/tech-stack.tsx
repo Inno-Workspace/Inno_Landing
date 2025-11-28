@@ -231,7 +231,7 @@ const TechStack = () => {
                 </h2>
                 <p
                   className="text-lg md:text-xl text-secondary"
-                  style={{ fontFamily: "var(--font-poppins)" }}
+                  style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {language === "ar"
                     ? "نفخر بالشراكة مع قادة الصناعة العالميين"
@@ -396,7 +396,7 @@ const TechStack = () => {
                 </h2>
                 <p
                   className="text-lg md:text-xl text-secondary"
-                  style={{ fontFamily: "var(--font-poppins)" }}
+                  style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {language === "ar"
                     ? "نستخدم أحدث التقنيات لبناء حلول مبتكرة"

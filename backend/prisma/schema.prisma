@@ -1,0 +1,273 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USERS & AUTH ====================
+
+enum UserRole {
+  SUPER_ADMIN  // Agency owner
+  ADMIN        // Agency staff
+  CLIENT       // Client user
+}
+
+enum SubscriptionTier {
+  GOLD
+  PLATINUM
+  DIAMOND
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PENDING
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  phone         String?
+  avatar        String?
+  role          UserRole  @default(CLIENT)
+  isActive      Boolean   @default(true)
+  emailVerified Boolean   @default(false)
+
+  // Online status
+  isOnline      Boolean   @default(false)
+  lastActivity  DateTime?
+  lastLogin     DateTime?
+
+  // If user is a client, link to client record
+  clientId      String?   @unique
+  client        Client?   @relation(fields: [clientId], references: [id])
+
+  // Activity logs
+  activityLogs  ActivityLog[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("users")
+}
+
+// ==================== CLIENTS ====================
+
+model Client {
+  id              String   @id @default(cuid())
+  companyName     String
+  companyNameAr   String?
+  email           String   @unique
+  phone           String?
+  website         String?
+  logo            String?
+  address         String?
+  description     String?
+
+  // Subscription info
+  subscriptionTier   SubscriptionTier @default(GOLD)
+  subscriptionStatus SubscriptionStatus @default(PENDING)
+  subscriptionStart  DateTime?
+  subscriptionEnd    DateTime?
+
+  // Relations
+  user            User?
+  files           File[]
+  services        ClientService[]
+  statistics      ClientStatistics?
+
+  // Notes from agency
+  notes           String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("clients")
+}
+
+// ==================== FILES & LIBRARY ====================
+
+model File {
+  id          String   @id @default(cuid())
+  name        String
+  originalName String
+  path        String
+  url         String
+  mimeType    String
+  size        Int
+  qrCode      String?  // QR code URL for the file
+
+  // Owner
+  clientId    String?
+  client      Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // If it's a library file (agency-wide)
+  isLibrary   Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("files")
+}
+
+// ==================== SERVICES ====================
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String?
+  description String?
+  descriptionAr String?
+  price       Float?
+  icon        String?
+  isActive    Boolean  @default(true)
+
+  // Which tiers can access this service
+  availableFor SubscriptionTier[]
+
+  clients     ClientService[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+model ClientService {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  isActive  Boolean  @default(true)
+  startDate DateTime @default(now())
+  endDate   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([clientId, serviceId])
+  @@map("client_services")
+}
+
+// ==================== STATISTICS ====================
+
+model ClientStatistics {
+  id              String   @id @default(cuid())
+  clientId        String   @unique
+  client          Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Website stats
+  totalVisits     Int      @default(0)
+  uniqueVisitors  Int      @default(0)
+  pageViews       Int      @default(0)
+  avgSessionTime  Int      @default(0) // in seconds
+  bounceRate      Float    @default(0)
+
+  // File stats
+  totalFiles      Int      @default(0)
+  totalStorage    BigInt   @default(0) // in bytes
+
+  lastUpdated     DateTime @default(now())
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("client_statistics")
+}
+
+// ==================== ACTIVITY LOGS ====================
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  action      String   // e.g., "LOGIN", "CREATE_CLIENT", "UPLOAD_FILE"
+  description String?
+  metadata    Json?    // Additional data
+  ipAddress   String?
+  userAgent   String?
+
+  createdAt   DateTime @default(now())
+
+  @@map("activity_logs")
+}
+
+// ==================== MESSAGES / LIVE CHAT ====================
+
+model Conversation {
+  id          String    @id @default(cuid())
+  subject     String?
+
+  // Participants (could be client-agency or client-client)
+  participants String[] // Array of user IDs
+
+  messages    Message[]
+
+  isArchived  Boolean   @default(false)
+  lastMessageAt DateTime?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId       String
+  content        String
+
+  // Attachments
+  attachments    String[]     // Array of file URLs
+
+  isRead         Boolean      @default(false)
+  readAt         DateTime?
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@map("messages")
+}
+
+// ==================== EMAIL INBOX ====================
+
+model Email {
+  id          String   @id @default(cuid())
+
+  // Owner (client)
+  ownerId     String
+
+  // Email details
+  from        String
+  to          String[]
+  cc          String[]
+  subject     String
+  body        String
+  htmlBody    String?
+
+  // Attachments
+  attachments String[]
+
+  isRead      Boolean  @default(false)
+  isStarred   Boolean  @default(false)
+  isArchived  Boolean  @default(false)
+  folder      String   @default("inbox") // inbox, sent, drafts, trash
+
+  receivedAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("emails")
+}

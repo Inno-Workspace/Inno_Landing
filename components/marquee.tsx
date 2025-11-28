@@ -18,7 +18,7 @@ const Marquee = () => {
       } shrink-0`}
       style={{
         fontFamily:
-          language === "ar" ? "var(--font-cairo)" : "var(--font-poppins)",
+          language === "ar" ? "var(--font-cairo)" : "var(--font-moshreq)",
         color: "#0f766e",
       }}
     >

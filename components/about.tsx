@@ -99,7 +99,7 @@ const About = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-4xl space-y-6 text-lg md:text-xl leading-relaxed text-dark"
           style={{
-            fontFamily: "var(--font-poppins)",
+            fontFamily: "var(--font-moshreq)",
             fontWeight: 400,
           }}
         >

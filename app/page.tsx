@@ -5,17 +5,26 @@ import Marquee from "@/components/marquee";
 import Works from "@/components/works";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
+import Header from "@/components/header";
+import TransitionOverlay from "@/components/transition-overlay";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 
 export default function Home() {
   return (
-    <main className="w-full min-h-screen">
-      <Hero />
-      <About />
-      <TechStack />
-      <Marquee />
-      <Works />
-      <Contact />
-      <Footer />
-    </main>
+    <SmoothScrollProvider>
+      <TransitionOverlay />
+      <Header />
+      <div className="page-content">
+        <main className="w-full min-h-screen">
+          <Hero />
+          <About />
+          <TechStack />
+          <Marquee />
+          <Works />
+          <Contact />
+          <Footer />
+        </main>
+      </div>
+    </SmoothScrollProvider>
   );
 }

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header";
 import { LanguageProvider } from "@/contexts/language-context";
-import TransitionOverlay from "@/components/transition-overlay";
-import SmoothScrollProvider from "@/components/smooth-scroll-provider";
+import { AuthProvider } from "@/contexts/auth-context";
 
 export const metadata: Metadata = {
   title: "INNO - Your Best Technical Partner",
@@ -20,20 +18,24 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
+          rel="preload"
+          href="/fonts/HT_Moshreq_Pro_Black.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
           href="https://fonts.cdnfonts.com/css/devil-breeze"
           rel="stylesheet"
         />
-        <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
         <link href="https://fonts.cdnfonts.com/css/bimbo" rel="stylesheet" />
       </head>
       <body className="antialiased">
-        <LanguageProvider>
-          <SmoothScrollProvider>
-          <TransitionOverlay />
-          <Header />
-          <div className="page-content">{children}</div>
-          </SmoothScrollProvider>
-        </LanguageProvider>
+        <AuthProvider>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );

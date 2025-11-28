@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import React from "react";
 import { useLanguage } from "@/contexts/language-context";
-import { motion, AnimatePresence } from "framer-motion";
+
 
 interface Point {
   x: number;
@@ -50,6 +50,7 @@ const AnimatedDrawingCanvas = () => {
     if (!ctx) return;
 
     let elements: DrawingElement[] = [];
+    let currentElementIndex = 0; // Track which element is currently being drawn
     const isArabic = language === "ar";
 
     // User drawing state
@@ -79,7 +80,7 @@ const AnimatedDrawingCanvas = () => {
       return paths;
     };
 
-    // Get stroke paths for each character with natural variation
+    // Get stroke paths for each character - architectural lettering style
     const getCharacterPaths = (
       char: string,
       x: number,
@@ -87,9 +88,9 @@ const AnimatedDrawingCanvas = () => {
       style: { size: number; slant: number; weight: number; spacing: number }
     ): HandwritingPath[] => {
       const { size, slant } = style;
-      // Natural variation - each letter slightly different
-      const variation = (Math.random() - 0.5) * size * 0.12;
-      const yVariation = (Math.random() - 0.5) * size * 0.08;
+      // Minimal variation - architects have steady, controlled hands
+      const variation = (Math.random() - 0.5) * size * 0.02;
+      const yVariation = (Math.random() - 0.5) * size * 0.015;
 
       const paths: HandwritingPath[] = [];
       const baseY = y + yVariation;
@@ -470,22 +471,42 @@ const AnimatedDrawingCanvas = () => {
       if (points.length === 0) return { points: [], totalLength: 0 };
       if (points.length === 1) return { points, totalLength: 0 };
 
-      // Add natural curves with slight imperfections
+      // Architectural style - clean, confident strokes with minimal imperfection
       const smoothPoints: Point[] = [];
+
       for (let i = 0; i < points.length; i++) {
-        // Add subtle position variation to each point for natural handwriting
-        const jitterX = (Math.random() - 0.5) * 0.5;
-        const jitterY = (Math.random() - 0.5) * 0.5;
+        // Very subtle jitter - controlled hand, not shaky
+        const isEndpoint = i === 0 || i === points.length - 1;
+        const jitterX = (Math.random() - 0.5) * 0.3;
+        const jitterY = (Math.random() - 0.5) * 0.25;
+
         smoothPoints.push({
           x: points[i].x + jitterX,
           y: points[i].y + jitterY,
         });
 
         if (i < points.length - 1) {
-          // Add midpoint with natural variation
-          const midX = (points[i].x + points[i + 1].x) / 2 + (Math.random() - 0.5) * 1.2;
-          const midY = (points[i].y + points[i + 1].y) / 2 + (Math.random() - 0.5) * 1.2;
-          smoothPoints.push({ x: midX, y: midY });
+          // Calculate segment length for adaptive subdivision
+          const segmentLength = Math.hypot(
+            points[i + 1].x - points[i].x,
+            points[i + 1].y - points[i].y
+          );
+
+          // Fewer subdivisions for cleaner lines
+          const subdivisions = Math.max(1, Math.floor(segmentLength / 12));
+
+          for (let j = 1; j <= subdivisions; j++) {
+            const t = j / (subdivisions + 1);
+            // Very subtle perpendicular offset - slight natural flow without wobble
+            const perpX = -(points[i + 1].y - points[i].y) / (segmentLength || 1);
+            const perpY = (points[i + 1].x - points[i].x) / (segmentLength || 1);
+            // Minimal wave - architectural precision
+            const waveOffset = Math.sin(t * Math.PI) * (Math.random() - 0.5) * 0.4;
+
+            const midX = points[i].x + (points[i + 1].x - points[i].x) * t + perpX * waveOffset + (Math.random() - 0.5) * 0.2;
+            const midY = points[i].y + (points[i + 1].y - points[i].y) * t + perpY * waveOffset + (Math.random() - 0.5) * 0.2;
+            smoothPoints.push({ x: midX, y: midY });
+          }
         }
       }
 
@@ -497,14 +518,24 @@ const AnimatedDrawingCanvas = () => {
 
     const createCurve = (cx: number, cy: number, radius: number): HandwritingPath => {
       const points: Point[] = [];
-      const segments = 20; // More segments for smoother circles
+      const segments = 32; // More segments for smoother ellipses
+
+      // Architectural ellipse - slightly imperfect but controlled
+      const squashX = 0.98 + Math.random() * 0.04; // 0.98 to 1.02 - very subtle
+      const squashY = 0.98 + Math.random() * 0.04;
+      const rotationOffset = (Math.random() - 0.5) * 0.08; // Very slight rotation
+
       for (let i = 0; i <= segments; i++) {
-        const angle = (i / segments) * Math.PI * 2;
-        // Vary radius slightly for each point to create imperfect circles
-        const radiusVariation = radius + (Math.random() - 0.5) * 0.8;
+        const angle = (i / segments) * Math.PI * 2 + rotationOffset;
+
+        // Subtle, smooth radius variation - like drawing with a steady hand and compass
+        const wobble1 = Math.sin(angle * 2) * 0.3;
+        const wobble2 = Math.cos(angle * 3) * 0.15;
+        const radiusVariation = radius + wobble1 + wobble2 + (Math.random() - 0.5) * 0.2;
+
         points.push({
-          x: cx + Math.cos(angle) * radiusVariation + (Math.random() - 0.5) * 0.6,
-          y: cy + Math.sin(angle) * radiusVariation + (Math.random() - 0.5) * 0.6,
+          x: cx + Math.cos(angle) * radiusVariation * squashX + (Math.random() - 0.5) * 0.15,
+          y: cy + Math.sin(angle) * radiusVariation * squashY + (Math.random() - 0.5) * 0.15,
         });
       }
       return {
@@ -524,22 +555,25 @@ const AnimatedDrawingCanvas = () => {
       return length;
     };
 
-    // Create architectural shapes
+    // Create architectural shapes - clean, precise, professional
     const createArrowShape = (x: number, y: number, width: number): HandwritingPath[] => {
       const paths: HandwritingPath[] = [];
-      const headSize = Math.min(15, width * 0.15);
+      const headSize = Math.min(12, width * 0.12);
 
-      // Main arrow line
+      // Main arrow line - clean and straight
       paths.push(createPath([
         { x, y },
         { x: x + width, y },
       ]));
 
-      // Arrow head
+      // Arrow head - sharp, architectural angle
       paths.push(createPath([
-        { x: x + width - headSize, y: y - headSize * 0.6 },
+        { x: x + width - headSize, y: y - headSize * 0.5 },
         { x: x + width, y },
-        { x: x + width - headSize, y: y + headSize * 0.6 },
+      ]));
+      paths.push(createPath([
+        { x: x + width - headSize, y: y + headSize * 0.5 },
+        { x: x + width, y },
       ]));
 
       return paths;
@@ -547,12 +581,18 @@ const AnimatedDrawingCanvas = () => {
 
     const createBracketShape = (x: number, y: number, width: number, height: number): HandwritingPath[] => {
       const paths: HandwritingPath[] = [];
-      const depth = Math.min(12, width * 0.3);
+      const depth = Math.min(10, width * 0.25);
 
-      // Left bracket
+      // Left bracket - clean corners
       paths.push(createPath([
         { x: x + depth, y },
         { x, y },
+      ]));
+      paths.push(createPath([
+        { x, y },
+        { x, y: y + height },
+      ]));
+      paths.push(createPath([
         { x, y: y + height },
         { x: x + depth, y: y + height },
       ]));
@@ -563,11 +603,24 @@ const AnimatedDrawingCanvas = () => {
     const createBoxShape = (x: number, y: number, width: number, height: number): HandwritingPath[] => {
       const paths: HandwritingPath[] = [];
 
-      // Draw rectangle as one continuous path
+      // Draw rectangle as separate strokes for architectural feel
+      // Top
       paths.push(createPath([
         { x, y },
         { x: x + width, y },
+      ]));
+      // Right
+      paths.push(createPath([
+        { x: x + width, y },
         { x: x + width, y: y + height },
+      ]));
+      // Bottom
+      paths.push(createPath([
+        { x: x + width, y: y + height },
+        { x, y: y + height },
+      ]));
+      // Left
+      paths.push(createPath([
         { x, y: y + height },
         { x, y },
       ]));
@@ -582,13 +635,183 @@ const AnimatedDrawingCanvas = () => {
     const createUnderlineShape = (x: number, y: number, width: number): HandwritingPath[] => {
       const paths: HandwritingPath[] = [];
 
-      // Single underline
+      // Clean single underline with slight taper
       paths.push(createPath([
         { x, y },
         { x: x + width, y },
       ]));
 
       return paths;
+    };
+
+    // Get current pen tip position for an element based on progress
+    const getCurrentPenPosition = (element: DrawingElement): Point | null => {
+      if (element.progress >= 1 || element.progress <= 0) return null;
+
+      const totalLength = element.paths.reduce((sum, path) => sum + path.totalLength, 0);
+      const currentLength = totalLength * element.progress;
+
+      let accumulatedLength = 0;
+
+      for (const path of element.paths) {
+        if (path.points.length < 2) {
+          continue;
+        }
+
+        const pathEndLength = accumulatedLength + path.totalLength;
+
+        if (currentLength <= pathEndLength && currentLength > accumulatedLength) {
+          // Current position is within this path
+          const pathProgress = (currentLength - accumulatedLength) / path.totalLength;
+          let pathLength = 0;
+          const targetLength = path.totalLength * pathProgress;
+
+          for (let i = 1; i < path.points.length; i++) {
+            const segmentLength = Math.hypot(
+              path.points[i].x - path.points[i - 1].x,
+              path.points[i].y - path.points[i - 1].y
+            );
+
+            if (pathLength + segmentLength >= targetLength) {
+              // Current position is in this segment
+              const ratio = (targetLength - pathLength) / segmentLength;
+              return {
+                x: path.points[i - 1].x + (path.points[i].x - path.points[i - 1].x) * ratio,
+                y: path.points[i - 1].y + (path.points[i].y - path.points[i - 1].y) * ratio,
+              };
+            }
+            pathLength += segmentLength;
+          }
+        }
+
+        accumulatedLength = pathEndLength;
+      }
+
+      return null;
+    };
+
+    // Draw pen icon on canvas at given position
+    const drawPen = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+      ctx.save();
+
+      const scale = 0.5; // Smaller, more delicate pen
+
+      // Offset to align pen tip exactly with drawing point
+      const tipOffsetX = 0;
+      const tipOffsetY = -18 * scale;
+
+      // Position pen with tip at drawing point, angled like writing
+      ctx.translate(x + tipOffsetX, y + tipOffsetY);
+      ctx.rotate(-Math.PI / 5); // Natural writing angle
+      ctx.scale(scale, scale);
+
+      // Subtle shadow for depth
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+
+      // Pen body (elegant fountain pen barrel) - Dark blue/black lacquer
+      const bodyGradient = ctx.createLinearGradient(-3, -50, 4, -50);
+      bodyGradient.addColorStop(0, '#1a1a2e');
+      bodyGradient.addColorStop(0.3, '#16213e');
+      bodyGradient.addColorStop(0.6, '#1a1a2e');
+      bodyGradient.addColorStop(1, '#0f0f1a');
+      ctx.fillStyle = bodyGradient;
+
+      ctx.beginPath();
+      ctx.moveTo(-3, -50);
+      ctx.lineTo(3, -50);
+      ctx.lineTo(3.5, -12);
+      ctx.lineTo(-3.5, -12);
+      ctx.closePath();
+      ctx.fill();
+
+      // Reset shadow
+      ctx.shadowColor = 'transparent';
+
+      // Subtle shine on barrel
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.beginPath();
+      ctx.moveTo(-2, -48);
+      ctx.lineTo(-1, -48);
+      ctx.lineTo(-0.5, -14);
+      ctx.lineTo(-2.5, -14);
+      ctx.closePath();
+      ctx.fill();
+
+      // Gold ring accent at top
+      const ringGradient = ctx.createLinearGradient(-3.5, -50, 3.5, -50);
+      ringGradient.addColorStop(0, '#b8860b');
+      ringGradient.addColorStop(0.5, '#ffd700');
+      ringGradient.addColorStop(1, '#b8860b');
+      ctx.fillStyle = ringGradient;
+      ctx.fillRect(-3.5, -52, 7, 3);
+
+      // Gold ring at grip
+      ctx.fillStyle = ringGradient;
+      ctx.fillRect(-4, -14, 8, 2);
+
+      // Section/grip (tapered part before nib)
+      const sectionGradient = ctx.createLinearGradient(-3.5, -12, 3.5, -12);
+      sectionGradient.addColorStop(0, '#2d2d44');
+      sectionGradient.addColorStop(0.5, '#3d3d5c');
+      sectionGradient.addColorStop(1, '#2d2d44');
+      ctx.fillStyle = sectionGradient;
+
+      ctx.beginPath();
+      ctx.moveTo(-3.5, -12);
+      ctx.lineTo(3.5, -12);
+      ctx.lineTo(2, 0);
+      ctx.lineTo(-2, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      // Nib (golden fountain pen nib)
+      const nibGradient = ctx.createLinearGradient(-2, 0, 2, 0);
+      nibGradient.addColorStop(0, '#b8860b');
+      nibGradient.addColorStop(0.3, '#ffd700');
+      nibGradient.addColorStop(0.7, '#ffd700');
+      nibGradient.addColorStop(1, '#b8860b');
+      ctx.fillStyle = nibGradient;
+
+      ctx.beginPath();
+      ctx.moveTo(-2, 0);
+      ctx.quadraticCurveTo(-1.5, 10, 0, 18);
+      ctx.quadraticCurveTo(1.5, 10, 2, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      // Nib slit (center line)
+      ctx.strokeStyle = '#8b6914';
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      ctx.moveTo(0, 2);
+      ctx.lineTo(0, 16);
+      ctx.stroke();
+
+      // Nib breather hole
+      ctx.fillStyle = '#1a1a2e';
+      ctx.beginPath();
+      ctx.ellipse(0, 4, 0.8, 1.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Nib highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.beginPath();
+      ctx.moveTo(-1, 1);
+      ctx.quadraticCurveTo(-0.5, 6, 0, 10);
+      ctx.lineTo(0, 1);
+      ctx.closePath();
+      ctx.fill();
+
+      // Clip on cap (subtle detail)
+      ctx.fillStyle = '#c0c0c0';
+      ctx.beginPath();
+      ctx.roundRect(3.5, -48, 1.5, 20, 0.5);
+      ctx.fill();
+
+      ctx.restore();
     };
 
     const initializeElements = () => {
@@ -600,39 +823,39 @@ const AnimatedDrawingCanvas = () => {
         return Math.round(value / gridSize) * gridSize;
       };
 
-      // Text elements with their annotations
+      // Text elements with their annotations - order matters for sequential drawing
       const textElements = [
-        { text: "Innovation", x: 0.08, y: 0.12, size: 32, delay: 0, hasShape: "circle" as const },
-        { text: "Digital", x: 0.75, y: 0.15, size: 28, delay: 2500, hasShape: "underline" as const },
-        { text: "Creative", x: 0.12, y: 0.35, size: 26, delay: 5000, hasShape: "box" as const },
-        { text: "Technology", x: 0.72, y: 0.42, size: 30, delay: 7500, hasShape: "arrow" as const },
-        { text: "Design", x: 0.15, y: 0.58, size: 28, delay: 10000, hasShape: "underline" as const },
-        { text: "Development", x: 0.68, y: 0.65, size: 26, delay: 12500, hasShape: "bracket" as const },
-        { text: "Experience", x: 0.1, y: 0.78, size: 29, delay: 15000, hasShape: "box" as const },
-        { text: "Future", x: 0.75, y: 0.85, size: 27, delay: 17500, hasShape: "circle" as const },
-        { text: "Ideas", x: 0.85, y: 0.25, size: 24, delay: 3500 },
-        { text: "Build", x: 0.05, y: 0.48, size: 25, delay: 8500, hasShape: "arrow" as const },
-        { text: "Strategy", x: 0.82, y: 0.08, size: 27, delay: 1500 },
-        { text: "Vision", x: 0.42, y: 0.22, size: 25, delay: 6000, hasShape: "circle" as const },
+        { text: "Innovation", x: 0.08, y: 0.12, size: 32, hasShape: "circle" as const },
+        { text: "Strategy", x: 0.82, y: 0.08, size: 27 },
+        { text: "Digital", x: 0.75, y: 0.15, size: 28, hasShape: "underline" as const },
+        { text: "Vision", x: 0.42, y: 0.22, size: 25, hasShape: "circle" as const },
+        { text: "Ideas", x: 0.85, y: 0.25, size: 24 },
+        { text: "Creative", x: 0.12, y: 0.35, size: 26, hasShape: "box" as const },
+        { text: "Technology", x: 0.72, y: 0.42, size: 30, hasShape: "arrow" as const },
+        { text: "Build", x: 0.05, y: 0.48, size: 25, hasShape: "arrow" as const },
+        { text: "Design", x: 0.15, y: 0.58, size: 28, hasShape: "underline" as const },
+        { text: "Development", x: 0.68, y: 0.65, size: 26, hasShape: "bracket" as const },
+        { text: "Experience", x: 0.1, y: 0.78, size: 29, hasShape: "box" as const },
+        { text: "Future", x: 0.75, y: 0.85, size: 27, hasShape: "circle" as const },
       ];
 
       const allElements: DrawingElement[] = [];
 
-      // Create text elements with optional shapes
+      // Create text elements with optional shapes - sequential order
       textElements.forEach((item) => {
         const style = {
-          size: item.size + (Math.random() - 0.5) * 3, // More size variation
-          slant: 0.08 + (Math.random() - 0.5) * 0.05, // More slant variation
-          weight: 1.8 + (Math.random() - 0.5) * 0.5, // More weight variation
-          spacing: 1.0 + (Math.random() - 0.5) * 0.15, // More spacing variation
+          size: item.size + (Math.random() - 0.5) * 1, // Very consistent size
+          slant: 0.12 + (Math.random() - 0.5) * 0.02, // Consistent architectural slant
+          weight: 1.6 + (Math.random() - 0.5) * 0.15, // Consistent line weight
+          spacing: 1.05 + (Math.random() - 0.5) * 0.03, // Even letter spacing
         };
 
         const textX = snapToGrid(w * item.x);
         const textY = snapToGrid(h * item.y);
         const textPaths = generateHandwritingPaths(item.text, textX, textY, style);
 
-        // Variable base speed - some words written faster, some slower
-        const baseSpeed = 0.002 + Math.random() * 0.004; // Range: 0.002 to 0.006
+        // Consistent speed for smoother pen movement
+        const baseSpeed = 0.003;
 
         // Add text element
         allElements.push({
@@ -643,16 +866,15 @@ const AnimatedDrawingCanvas = () => {
           progress: 0,
           speed: baseSpeed,
           baseSpeed: baseSpeed,
-          delay: item.delay,
+          delay: 0, // No delay - sequential handled in animation
           type: "text",
           lastSpeedChange: 0,
           style,
         });
 
-        // Add shape annotation if specified
+        // Add shape annotation right after its text
         if (item.hasShape) {
           const textWidth = item.text.length * style.size * 0.6;
-          const shapeDelay = item.delay + 1000; // Shape appears 1s after text starts
           let shapePaths: HandwritingPath[] = [];
           let shapeWidth = 0;
           let shapeHeight = 0;
@@ -702,7 +924,7 @@ const AnimatedDrawingCanvas = () => {
               break;
           }
 
-          const shapeBaseSpeed = 0.003 + Math.random() * 0.004; // Shapes have varied speeds too
+          const shapeBaseSpeed = 0.005; // Shapes draw a bit faster
 
           allElements.push({
             paths: shapePaths,
@@ -712,7 +934,7 @@ const AnimatedDrawingCanvas = () => {
             progress: 0,
             speed: shapeBaseSpeed,
             baseSpeed: shapeBaseSpeed,
-            delay: shapeDelay,
+            delay: 0,
             type: "shape",
             shapeType: item.hasShape,
             width: shapeWidth,
@@ -724,6 +946,7 @@ const AnimatedDrawingCanvas = () => {
       });
 
       elements = allElements;
+      currentElementIndex = 0;
     };
 
     // Draw element with progressive path rendering
@@ -759,9 +982,11 @@ const AnimatedDrawingCanvas = () => {
           // This path should be at least partially drawn
           const pathProgress = Math.min(1, (currentLength - pathStartLength) / path.totalLength);
 
-          // Draw the path up to the current progress with varying pressure
+          // Draw the path up to the current progress - architectural style
           let pathLength = 0;
           const targetLength = path.totalLength * pathProgress;
+
+          const totalSegments = path.points.length - 1;
 
           for (let i = 1; i < path.points.length; i++) {
             const segmentLength = Math.hypot(
@@ -770,12 +995,18 @@ const AnimatedDrawingCanvas = () => {
             );
 
             if (pathLength + segmentLength <= targetLength) {
-              // Vary line weight along the stroke for natural pen pressure
-              const pressureVariation = 0.85 + Math.random() * 0.3; // 85% to 115% of base weight
-              const lineWeight = element.style.weight * pressureVariation;
+              // Architectural pressure - consistent with subtle variation at endpoints
+              const strokeProgress = (i - 1) / totalSegments;
+              // Subtle pressure curve - architects maintain even pressure
+              const pressureCurve = 0.85 + Math.sin(strokeProgress * Math.PI) * 0.15; // Range: 0.85 to 1.0
 
-              // Vary opacity slightly for natural ink flow
-              const opacityVariation = 0.45 + Math.random() * 0.1; // 0.45 to 0.55
+              // Very slight random variation - steady hand
+              const randomVariation = (Math.random() - 0.5) * 0.05;
+              const lineWeight = element.style.weight * (pressureCurve + randomVariation);
+
+              // Consistent opacity - good ink flow
+              const baseOpacity = 0.55 + Math.sin(strokeProgress * Math.PI) * 0.1; // Range: 0.55 to 0.65
+              const opacityVariation = baseOpacity + (Math.random() - 0.5) * 0.03;
 
               ctx.strokeStyle = `rgba(103, 232, 249, ${opacityVariation})`;
               ctx.lineWidth = lineWeight;
@@ -794,9 +1025,11 @@ const AnimatedDrawingCanvas = () => {
               const px = path.points[i - 1].x + (path.points[i].x - path.points[i - 1].x) * ratio;
               const py = path.points[i - 1].y + (path.points[i].y - path.points[i - 1].y) * ratio;
 
-              const pressureVariation = 0.85 + Math.random() * 0.3;
-              const lineWeight = element.style.weight * pressureVariation;
-              const opacityVariation = 0.45 + Math.random() * 0.1;
+              // Consistent pressure for partial segment
+              const strokeProgress = (i - 1) / totalSegments;
+              const pressureCurve = 0.85 + Math.sin(strokeProgress * Math.PI) * 0.15;
+              const lineWeight = element.style.weight * (pressureCurve + (Math.random() - 0.5) * 0.05);
+              const opacityVariation = 0.55 + Math.sin(strokeProgress * Math.PI) * 0.1 + (Math.random() - 0.5) * 0.03;
 
               ctx.strokeStyle = `rgba(103, 232, 249, ${opacityVariation})`;
               ctx.lineWidth = lineWeight;
@@ -932,32 +1165,54 @@ const AnimatedDrawingCanvas = () => {
         ctx.stroke();
       }
 
-      elements.forEach((element) => {
-        if (!element.startTime && currentTime - startTime >= element.delay) {
-          element.startTime = currentTime;
-          element.lastSpeedChange = currentTime;
+      // Track pen position for the current element being drawn
+      let activePenPosition: Point | null = null;
+
+      // Draw all completed elements
+      for (let i = 0; i < currentElementIndex && i < elements.length; i++) {
+        elements[i].progress = 1;
+        drawElement(ctx, elements[i]);
+      }
+
+      // Draw and animate current element (sequential - one at a time)
+      if (currentElementIndex < elements.length) {
+        const currentElement = elements[currentElementIndex];
+
+        // Start timing for current element if not started
+        if (!currentElement.startTime) {
+          currentElement.startTime = currentTime;
+          currentElement.lastSpeedChange = currentTime;
         }
 
-        if (element.startTime) {
-          if (element.progress < 1) {
-            // Dynamically vary speed to mimic real handwriting
-            // Speed changes every 200-600ms randomly
-            const timeSinceLastChange = currentTime - (element.lastSpeedChange || element.startTime);
-            const changeInterval = 200 + Math.random() * 400;
-
-            if (timeSinceLastChange > changeInterval) {
-              // Vary speed: 70% to 150% of base speed
-              const speedMultiplier = 0.7 + Math.random() * 0.8;
-              element.speed = element.baseSpeed * speedMultiplier;
-              element.lastSpeedChange = currentTime;
-            }
-
-            element.progress = Math.min(1, element.progress + element.speed);
+        // Animate progress
+        if (currentElement.progress < 1) {
+          // Slight speed variation for natural feel
+          const timeSinceLastChange = currentTime - (currentElement.lastSpeedChange || currentElement.startTime);
+          if (timeSinceLastChange > 300) {
+            const speedMultiplier = 0.85 + Math.random() * 0.3;
+            currentElement.speed = currentElement.baseSpeed * speedMultiplier;
+            currentElement.lastSpeedChange = currentTime;
           }
 
-          drawElement(ctx, element);
+          currentElement.progress = Math.min(1, currentElement.progress + currentElement.speed);
+
+          // Get pen position for currently drawing element
+          activePenPosition = getCurrentPenPosition(currentElement);
         }
-      });
+
+        // Draw current element
+        drawElement(ctx, currentElement);
+
+        // Move to next element when current is complete
+        if (currentElement.progress >= 1) {
+          currentElementIndex++;
+        }
+      }
+
+      // Draw pen at the active drawing position
+      if (activePenPosition) {
+        drawPen(ctx, activePenPosition.x, activePenPosition.y);
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };

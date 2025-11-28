@@ -158,7 +158,7 @@ const Works = () => {
           </h2>
           <p
             className="text-xl text-secondary/80 leading-relaxed"
-            style={{ fontFamily: "var(--font-poppins)" }}
+            style={{ fontFamily: "var(--font-moshreq)" }}
           >
             {t("works.description")}
           </p>
@@ -199,7 +199,7 @@ const Works = () => {
                           "linear-gradient(135deg, rgba(103, 232, 249, 0.2), rgba(20, 184, 166, 0.25))",
                         border: "1px solid rgba(103, 232, 249, 0.4)",
                         color: "#ffffff",
-                        fontFamily: "var(--font-poppins)",
+                        fontFamily: "var(--font-moshreq)",
                         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
                       }}
                     >
@@ -227,14 +227,14 @@ const Works = () => {
                   </h3>
                   <p
                     className="text-secondary/70 text-sm leading-relaxed line-clamp-2 group-hover:text-secondary/90 transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-poppins)" }}
+                    style={{ fontFamily: "var(--font-moshreq)" }}
                   >
                     {work.description}
                   </p>
 
                   {/* View More Indicator */}
                   <div className="mt-4 flex items-center gap-2 text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <span className="text-sm font-semibold" style={{ fontFamily: "var(--font-poppins)" }}>
+                    <span className="text-sm font-semibold" style={{ fontFamily: "var(--font-moshreq)" }}>
                       View Project
                     </span>
                     <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

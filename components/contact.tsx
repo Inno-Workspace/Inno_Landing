@@ -56,7 +56,7 @@ const Contact = () => {
           <p
             className="text-xl md:text-2xl lg:text-3xl max-w-3xl mb-4"
             style={{
-              fontFamily: "var(--font-poppins)",
+              fontFamily: "var(--font-moshreq)",
               color: "#155e75",
             }}
           >
@@ -65,7 +65,7 @@ const Contact = () => {
           <p
             className="text-lg md:text-xl leading-relaxed max-w-4xl"
             style={{
-              fontFamily: "var(--font-poppins)",
+              fontFamily: "var(--font-moshreq)",
               color: "#0f766e",
             }}
           >
@@ -92,7 +92,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="block text-base font-semibold mb-3 text-primary"
                   style={{
-                    fontFamily: "var(--font-poppins)",
+                    fontFamily: "var(--font-moshreq)",
                   }}
                 >
                   {t("contact.form.name")}
@@ -107,7 +107,7 @@ const Contact = () => {
                     required
                     className="w-full px-5 py-4 rounded-xl border-2 focus:outline-none transition-all text-primary placeholder-secondary/50"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
                       borderColor: "rgba(20, 184, 166, 0.2)",
                       boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
@@ -130,7 +130,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-base font-semibold mb-3 text-primary"
                   style={{
-                    fontFamily: "var(--font-poppins)",
+                    fontFamily: "var(--font-moshreq)",
                   }}
                 >
                   {t("contact.form.email")}
@@ -145,7 +145,7 @@ const Contact = () => {
                     required
                     className="w-full px-5 py-4 rounded-xl border-2 focus:outline-none transition-all text-primary placeholder-secondary/50"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
                       borderColor: "rgba(20, 184, 166, 0.2)",
                       boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
@@ -168,7 +168,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="block text-base font-semibold mb-3 text-primary"
                   style={{
-                    fontFamily: "var(--font-poppins)",
+                    fontFamily: "var(--font-moshreq)",
                   }}
                 >
                   {t("contact.form.message")}
@@ -183,7 +183,7 @@ const Contact = () => {
                     rows={5}
                     className="w-full px-5 py-4 rounded-xl border-2 focus:outline-none transition-all resize-none text-primary placeholder-secondary/50"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
                       borderColor: "rgba(20, 184, 166, 0.2)",
                       boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
@@ -205,7 +205,7 @@ const Contact = () => {
                 type="submit"
                 className="w-full px-8 py-5 rounded-xl font-bold text-lg transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group text-primary cursor-pointer shimmer"
                 style={{
-                  fontFamily: "var(--font-poppins)",
+                  fontFamily: "var(--font-moshreq)",
                   background:
                     "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
                   boxShadow:
@@ -298,7 +298,7 @@ const Contact = () => {
                   <p
                     className="text-sm mb-2 font-semibold text-secondary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                   >
                     {t("contact.info.emailLabel")}
@@ -307,7 +307,7 @@ const Contact = () => {
                     href="mailto:info@inno.com"
                     className="text-lg font-bold transition-colors text-primary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = "#14b8a6";
@@ -369,7 +369,7 @@ const Contact = () => {
                   <p
                     className="text-sm mb-2 font-semibold text-secondary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                   >
                     {t("contact.info.phoneLabel")}
@@ -378,7 +378,7 @@ const Contact = () => {
                     href="tel:+1234567890"
                     className="text-lg font-bold transition-colors text-primary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = "#14b8a6";
@@ -446,7 +446,7 @@ const Contact = () => {
                   <p
                     className="text-sm mb-2 font-semibold text-secondary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                   >
                     {t("contact.info.addressLabel")}
@@ -454,7 +454,7 @@ const Contact = () => {
                   <p
                     className="text-lg font-bold text-primary"
                     style={{
-                      fontFamily: "var(--font-poppins)",
+                      fontFamily: "var(--font-moshreq)",
                     }}
                   >
                     {t("contact.info.address")}

@@ -29,7 +29,7 @@ const Hero = () => {
 
   const isAr = language === "ar";
   const fontHeading = "var(--font-devil-breeze)";
-  const fontBody = "var(--font-poppins)";
+  const fontBody = "var(--font-moshreq)";
 
   return (
     <div
