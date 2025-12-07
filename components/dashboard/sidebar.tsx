@@ -11,7 +11,11 @@ const adminLinks = [
   { href: "/admin", label: "لوحة التحكم", icon: "📊" },
   { href: "/admin/clients", label: "العملاء", icon: "👥" },
   { href: "/admin/subscriptions", label: "الاشتراكات", icon: "📅" },
-  { href: "/admin/files", label: "المكتبة", icon: "📁" },
+  { href: "/admin/files", label: "الملفات", icon: "📁" },
+  { href: "/admin/library", label: "المكتبة", icon: "📚" },
+  { href: "/admin/library/templates", label: "القوالب", icon: "🎨", indent: true },
+  { href: "/admin/library/invoices", label: "الفواتير", icon: "🧾", indent: true },
+  { href: "/admin/library/contracts", label: "العقود", icon: "📝", indent: true },
   { href: "/admin/services", label: "الخدمات", icon: "⚙️" },
   { href: "/admin/messages", label: "الرسائل", icon: "💬" },
   { href: "/admin/managers", label: "المديرين", icon: "👔" },
@@ -49,18 +53,21 @@ export default function DashboardSidebar({ isAdmin }: SidebarProps) {
       <nav className="space-y-1.5 flex-1">
         {links.map((link) => {
           const isActive = isActiveLink(link.href);
+          const isIndented = 'indent' in link && link.indent;
           return (
             <Link
               key={link.href}
               href={link.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                isIndented ? "mr-4 py-2" : ""
+              } ${
                 isActive
                   ? "bg-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-accent)]/20"
                   : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-primary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              <span className="text-xl w-6 text-center">{link.icon}</span>
-              <span className="font-medium">{link.label}</span>
+              <span className={`${isIndented ? "text-lg w-5" : "text-xl w-6"} text-center`}>{link.icon}</span>
+              <span className={`${isIndented ? "text-sm" : ""} font-medium`}>{link.label}</span>
             </Link>
           );
         })}

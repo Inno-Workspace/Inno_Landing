@@ -81,16 +81,16 @@ const translations = {
     "footer.copyright": "All rights reserved.",
   },
   ar: {
-    "header.logo": "إينو",
+    "header.logo": "اينو",
     "menu.home": "الرئيسية",
     "menu.about": "من نحن",
     "menu.works": "أعمالنا",
     "menu.contact": "تواصل معنا",
-    "hero.innovation": "إينو",
+    "hero.innovation": "اينو",
     "hero.title": "شريكك التقني الأمثل",
     "about.title": "كيف نسهل عليك عملك؟",
     "about.paragraph1":
-      "إينو هي شركة تقنية متخصصة في تمكين الأعمال من خلال بناء حلول رقمية متطورة. نعمل كشريك تقني يقدم الرؤية والتنفيذ والتشغيل لأنظمة تساعد الشركات على النمو وتطوير طريقة عملها وتحسين تجربة عملائها.",
+      "اينو هي شركة تقنية متخصصة في تمكين الأعمال من خلال بناء حلول رقمية متطورة. نعمل كشريك تقني يقدم الرؤية والتنفيذ والتشغيل لأنظمة تساعد الشركات على النمو وتطوير طريقة عملها وتحسين تجربة عملائها.",
     "about.paragraph2":
       "نطوّر منصات رقمية ونقدّم حلول أتمتة وذكاء اصطناعي، ونعمل على تحويل العمليات التقليدية إلى مسارات عمل مرنة تعمل بكفاءة أعلى ونتائج أوضح. تركيزنا على بناء حلول قابلة للتطوير ومفهومة وسهلة الاستخدام، مع بنية تقنية ثابتة تدوم لسنوات.",
     "works.title": "أعمالنا",
@@ -141,14 +141,21 @@ const translations = {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("ar"); // Default to Arabic
   const [isTransitioning] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Mark as mounted on client
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Load saved language preference on mount
   useEffect(() => {
+    if (!isMounted) return;
     const savedLanguage = localStorage.getItem("language") as Language | null;
     if (savedLanguage && (savedLanguage === "en" || savedLanguage === "ar")) {
       setLanguage(savedLanguage);
     }
-  }, []);
+  }, [isMounted]);
 
   const toggleLanguage = useCallback(() => {
     setLanguage((prev) => {
@@ -167,8 +174,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    }
   }, [language]);
 
   const contextValue = useMemo(

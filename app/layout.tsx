@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LanguageProvider } from "@/contexts/language-context";
-import { AuthProvider } from "@/contexts/auth-context";
+import { Providers } from "@/components/providers";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "INNO - Your Best Technical Partner",
   description:
     "Inno is a technology company specialized in empowering businesses through building advanced digital solutions.",
+  icons: {
+    icon: "/inno_logo.png",
+    shortcut: "/inno_logo.png",
+    apple: "/inno_logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -15,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         <link
           rel="preload"
@@ -25,17 +36,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.cdnfonts.com/css/devil-breeze"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <link href="https://fonts.cdnfonts.com/css/bimbo" rel="stylesheet" />
       </head>
-      <body className="antialiased">
-        <AuthProvider>
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
-        </AuthProvider>
+      <body className="antialiased" suppressHydrationWarning>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -38,7 +38,7 @@ const Marquee = () => {
             x: language === "ar" ? [0, "50%"] : [0, -50 + "%"],
           }}
           transition={{
-            duration: 16,
+            duration: 35,
             repeat: Infinity,
             ease: "linear",
           }}

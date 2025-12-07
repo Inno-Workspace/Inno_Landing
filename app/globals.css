@@ -97,11 +97,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-devil-breeze: "Devil Breeze", sans-serif;
-  --font-poppins: "Poppins", sans-serif;
-  --font-bimbo: "Bimbo", sans-serif;
-  --font-cairo: "Kufam", sans-serif;
-  --font-moshreq: "HT Moshreq Pro", sans-serif;
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-devil-breeze: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-poppins: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-bimbo: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cairo: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-moshreq: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -193,16 +194,16 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-moshreq), sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-display: swap;
 }
 
-/* Apply Moshreq font to all common elements */
+/* Apply Inter font to all common elements */
 h1, h2, h3, h4, h5, h6,
 p, span, div, a, button,
 input, textarea, label,
 li, ul, ol {
-  font-family: var(--font-moshreq), sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 /* Performance optimizations */
@@ -238,7 +239,7 @@ li, ul, ol {
 [dir="rtl"],
 [dir="rtl"] body,
 [dir="rtl"] html {
-  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 [dir="rtl"] html,
@@ -273,12 +274,12 @@ li, ul, ol {
 [dir="rtl"] li,
 [dir="rtl"] ul,
 [dir="rtl"] ol {
-  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 [dir="rtl"] [style*="font-family: var(--font-moshreq)"],
 [dir="rtl"] [style*="font-family: var(--font-devil-breeze)"] {
-  font-family: var(--font-cairo), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .bg-gradient-radial {

@@ -18,8 +18,8 @@ export default function NewClientPage() {
     website: "",
     address: "",
     description: "",
-    subscriptionTier: "GOLD",
-    subscriptionStart: new Date().toISOString().split("T")[0],
+    subscriptionTier: "NONE",
+    subscriptionStart: "",
     subscriptionEnd: "",
     notes: "",
     userName: "",
@@ -177,10 +177,13 @@ export default function NewClientPage() {
           <h2 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">
             معلومات الاشتراك
           </h2>
+          <p className="text-sm text-[var(--color-text-muted)] mb-4">
+            اختر &quot;بدون اشتراك&quot; للعملاء الذين يريدون خدمة واحدة فقط (مثل موقع عادي)
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
-                نوع الباقة *
+                نوع الباقة
               </label>
               <select
                 name="subscriptionTier"
@@ -188,35 +191,40 @@ export default function NewClientPage() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
               >
+                <option value="NONE">بدون اشتراك (خدمة واحدة)</option>
                 <option value="GOLD">ذهبي (Gold)</option>
                 <option value="PLATINUM">بلاتيني (Platinum)</option>
                 <option value="DIAMOND">ماسي (Diamond)</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
-                تاريخ البداية
-              </label>
-              <input
-                type="date"
-                name="subscriptionStart"
-                value={formData.subscriptionStart}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
-                تاريخ الانتهاء
-              </label>
-              <input
-                type="date"
-                name="subscriptionEnd"
-                value={formData.subscriptionEnd}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-              />
-            </div>
+            {formData.subscriptionTier !== "NONE" && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+                    تاريخ البداية
+                  </label>
+                  <input
+                    type="date"
+                    name="subscriptionStart"
+                    value={formData.subscriptionStart}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+                    تاريخ الانتهاء
+                  </label>
+                  <input
+                    type="date"
+                    name="subscriptionEnd"
+                    value={formData.subscriptionEnd}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
 

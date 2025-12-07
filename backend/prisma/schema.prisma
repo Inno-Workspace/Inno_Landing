@@ -16,6 +16,7 @@ enum UserRole {
 }
 
 enum SubscriptionTier {
+  NONE       // No subscription - one-time service client
   GOLD
   PLATINUM
   DIAMOND
@@ -70,8 +71,8 @@ model Client {
   address         String?
   description     String?
 
-  // Subscription info
-  subscriptionTier   SubscriptionTier @default(GOLD)
+  // Subscription info (optional - NONE for one-time service clients)
+  subscriptionTier   SubscriptionTier @default(NONE)
   subscriptionStatus SubscriptionStatus @default(PENDING)
   subscriptionStart  DateTime?
   subscriptionEnd    DateTime?
@@ -114,6 +115,43 @@ model File {
   updatedAt   DateTime @updatedAt
 
   @@map("files")
+}
+
+// Library item types
+enum LibraryItemType {
+  TEMPLATE    // Design/code templates
+  INVOICE     // Invoice templates
+  CONTRACT    // Contract templates
+}
+
+model LibraryItem {
+  id          String          @id @default(cuid())
+  name        String
+  nameAr      String?
+  description String?
+  descriptionAr String?
+  type        LibraryItemType
+
+  // File info
+  fileUrl     String?         // URL to the file
+  filePath    String?         // Path to the file
+  fileSize    Int?            // Size in bytes
+  mimeType    String?
+
+  // Template content (for text-based templates)
+  content     String?         // Raw content/HTML
+
+  // Metadata
+  category    String?         // Sub-category (e.g., "Web Design", "Mobile App" for templates)
+  tags        String[]        // Tags for searching
+
+  // Status
+  isActive    Boolean         @default(true)
+
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@map("library_items")
 }
 
 // ==================== SERVICES ====================

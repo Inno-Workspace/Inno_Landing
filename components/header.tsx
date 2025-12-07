@@ -193,8 +193,8 @@ const Header = () => {
           {/* Logo Section */}
           <div className="flex items-center gap-2 shrink-0">
             <Image
-              src="/images/logo.png"
-              alt="Logo"
+              src="/inno_logo.png"
+              alt="INNO Logo"
               width={48}
               height={48}
               className="w-12 h-12 md:w-14 md:h-14 object-contain"
