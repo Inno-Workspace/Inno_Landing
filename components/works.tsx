@@ -9,54 +9,37 @@ interface WorkItem {
   description: string;
   image: string;
   category: string;
+  link?: string;
 }
 
 const Works = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Work items
   const works: WorkItem[] = [
     {
       id: 1,
-      title: t("works.item1.title"),
-      description: t("works.item1.description"),
-      image: "/images/projects/AdminDash.png",
-      category: t("works.category.web"),
+      title: language === "ar" ? "موقع الكتروني لعمدة" : "Omdah Website",
+      description: language === "ar" ? "موقع الكتروني يظهر تعريف وخدمات شركة إنتاجية مميزة" : "A website showcasing the identity and services of a distinguished production company",
+      image: "/projcets-images/theimage.png",
+      category: language === "ar" ? "موقع الكتروني" : "Website",
+      link: "https://omdah.sa",
     },
     {
       id: 2,
-      title: t("works.item2.title"),
-      description: t("works.item2.description"),
-      image: "/images/projects/AIChatBot.png",
-      category: t("works.category.mobile"),
+      title: language === "ar" ? "iedar العقارية" : "IEDAR Real Estate",
+      description: language === "ar" ? "طورنا موقع شركة iedar العقارية بشكل مناسب لهويتهم الترويجية" : "We developed IEDAR real estate website to match their promotional identity",
+      image: "/projcets-images/animage.png",
+      category: language === "ar" ? "موقع الكتروني" : "Website",
+      link: "https://iedar.sa",
     },
     {
       id: 3,
-      title: t("works.item3.title"),
-      description: t("works.item3.description"),
-      image: "/images/projects/IphoneShowCase.png",
-      category: t("works.category.ai"),
-    },
-    {
-      id: 4,
-      title: t("works.item4.title"),
-      description: t("works.item4.description"),
-      image: "/images/projects/LandingPage.png",
-      category: t("works.category.web"),
-    },
-    {
-      id: 5,
-      title: t("works.item1.title"),
-      description: t("works.item1.description"),
-      image: "/images/projects/SaasLandingPage.png",
-      category: t("works.category.web"),
-    },
-    {
-      id: 6,
-      title: t("works.item2.title"),
-      description: t("works.item2.description"),
-      image: "/images/projects/AdminDash.png",
-      category: t("works.category.mobile"),
+      title: language === "ar" ? "وكالة الصناعية" : "Al-Sinaiya Agency",
+      description: language === "ar" ? "طورنا منصة الصناعية بشكل عصري يتماشى مع توجههم الإعلامي" : "We developed Al-Sinaiya platform in a modern style aligned with their media direction",
+      image: "/projcets-images/image.png",
+      category: language === "ar" ? "موقع الكتروني" : "Website",
+      link: "https://www.snaya.sa",
     },
   ];
 
@@ -167,8 +150,11 @@ const Works = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {works.map((work) => (
-            <div
+            <a
               key={work.id}
+              href={work.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group cursor-pointer"
             >
               {/* Card */}
@@ -235,9 +221,9 @@ const Works = () => {
                   {/* View More Indicator */}
                   <div className="mt-4 flex items-center gap-2 text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <span className="text-sm font-semibold" style={{ fontFamily: "var(--font-moshreq)" }}>
-                      View Project
+                      {language === "ar" ? "عرض المشروع" : "View Project"}
                     </span>
-                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 transition-transform ${language === "ar" ? "group-hover:-translate-x-1 rotate-180" : "group-hover:translate-x-1"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
@@ -251,7 +237,7 @@ const Works = () => {
                   }}
                 ></div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

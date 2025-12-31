@@ -51,17 +51,12 @@ const TechStack = () => {
   const { language } = useLanguage();
 
   const clients = [
-    { name: "Next.js", image: "/tech/nextjs-icon.png" },
-    { name: "Python", image: "/tech/python-logo.avif" },
-    { name: "Node.js", image: "/tech/nod.png" },
-    { name: "GitHub", image: "/tech/github-logo.png" },
-    { name: "WordPress", image: "/tech/wp.png" },
-    { name: "Sitecore", image: "/tech/Sitecore-LOGO.png" },
-    { name: "Umbraco", image: "/tech/umbraco.avif" },
-    { name: "Wagtail", image: "/tech/Wagtail-2.png" },
-    { name: "Cloudflare", image: "/tech/cloudflare-logo.avif" },
-    { name: "OpenAI", image: "/tech/open-ai.png" },
-    { name: "Bard AI", image: "/tech/bard-ai.avif" },
+    { name: "Coarzm", image: "/works/Coarzm_.PNG" },
+    { name: "IEDAR", image: "/works/IEDAR_LOGO.png" },
+    { name: "Client", image: "/works/IMG_6752.PNG" },
+    { name: "Logo 2", image: "/works/Logo_2.png" },
+    { name: "Logo 5", image: "/works/Logo_5.png" },
+    { name: "Client", image: "/works/5ed7c3be-eb49-45d0-a6b2-2e5ca62c56ab_removalai_preview.png" },
   ];
 
   const technologies = [
@@ -69,7 +64,6 @@ const TechStack = () => {
     { name: "Python", image: "/tech/python-logo.avif" },
     { name: "Node.js", image: "/tech/nod.png" },
     { name: "GitHub", image: "/tech/github-logo.png" },
-    { name: "WordPress", image: "/tech/wp.png" },
     { name: "Sitecore", image: "/tech/Sitecore-LOGO.png" },
     { name: "Umbraco", image: "/tech/umbraco.avif" },
     { name: "Wagtail", image: "/tech/Wagtail-2.png" },
