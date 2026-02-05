@@ -76,7 +76,7 @@ const translations = {
     "footer.social.title": "Resources",
     "footer.contact.title": "Contact",
     "footer.contact.email": "contact@inno.sa",
-    "footer.contact.phone": "+966 55 555 5555",
+    "footer.contact.phone": "+966 55 562 5068",
     "footer.contact.address": "Riyadh, Saudi Arabia",
     "footer.copyright": "All rights reserved.",
   },

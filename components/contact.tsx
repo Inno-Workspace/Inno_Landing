@@ -287,7 +287,7 @@ const Contact = () => {
                     className="text-lg font-bold transition-colors text-primary"
                     style={{ fontFamily: "var(--font-moshreq)" }}
                   >
-                    info@inno.sa
+                    contact@inno.sa
                   </a>
                 </div>
               </div>
