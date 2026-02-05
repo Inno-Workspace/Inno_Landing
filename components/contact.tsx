@@ -32,14 +32,12 @@ const Contact = () => {
       id="contact"
       className="relative w-full overflow-hidden py-20 md:py-32"
     >
-      {/* Light cyan background - matching About section */}
       <div
         className="absolute inset-0"
         style={{ backgroundColor: "#f0fdfa" }}
       ></div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Title and Subtitle */}
         <div className="mb-6 md:mb-8">
           <h2
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-4"
@@ -73,9 +71,7 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Contact Form and Info */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          {/* Contact Form */}
           <div
             className="rounded-2xl p-8 md:p-10 relative overflow-hidden"
             style={{
@@ -87,13 +83,12 @@ const Contact = () => {
             }}
           >
             <form onSubmit={handleSubmit} className="space-y-6 relative">
+              {/* Name Input */}
               <div>
                 <label
                   htmlFor="name"
                   className="block text-base font-semibold mb-3 text-primary"
-                  style={{
-                    fontFamily: "var(--font-moshreq)",
-                  }}
+                  style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {t("contact.form.name")}
                 </label>
@@ -125,13 +120,12 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* Email Input */}
               <div>
                 <label
                   htmlFor="email"
                   className="block text-base font-semibold mb-3 text-primary"
-                  style={{
-                    fontFamily: "var(--font-moshreq)",
-                  }}
+                  style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {t("contact.form.email")}
                 </label>
@@ -163,13 +157,12 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* Message Input */}
               <div>
                 <label
                   htmlFor="message"
                   className="block text-base font-semibold mb-3 text-primary"
-                  style={{
-                    fontFamily: "var(--font-moshreq)",
-                  }}
+                  style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {t("contact.form.message")}
                 </label>
@@ -250,26 +243,13 @@ const Contact = () => {
             </h3>
 
             <div className="space-y-6 relative">
+              {/* Email Card */}
               <div
                 className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                }}
-                onMouseEnter={(e) => {
-                  const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL
-                    ? "translateX(-10px)"
-                    : "translateX(10px)";
-                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateX(0)";
-                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
@@ -304,43 +284,21 @@ const Contact = () => {
                     {t("contact.info.emailLabel")}
                   </p>
                   <a
-                    href="mailto:info@inno.com"
                     className="text-lg font-bold transition-colors text-primary"
-                    style={{
-                      fontFamily: "var(--font-moshreq)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#14b8a6";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "";
-                    }}
+                    style={{ fontFamily: "var(--font-moshreq)" }}
                   >
-                    info@inno.com
+                    info@inno.sa
                   </a>
                 </div>
               </div>
 
+              {/* Phone Card */}
               <div
                 className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                }}
-                onMouseEnter={(e) => {
-                  const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL
-                    ? "translateX(-10px)"
-                    : "translateX(10px)";
-                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateX(0)";
-                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
@@ -368,50 +326,30 @@ const Contact = () => {
                 <div>
                   <p
                     className="text-sm mb-2 font-semibold text-secondary"
-                    style={{
-                      fontFamily: "var(--font-moshreq)",
-                    }}
+                    style={{ fontFamily: "var(--font-moshreq)" }}
                   >
                     {t("contact.info.phoneLabel")}
                   </p>
                   <a
-                    href="tel:+1234567890"
                     className="text-lg font-bold transition-colors text-primary"
                     style={{
                       fontFamily: "var(--font-moshreq)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#14b8a6";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "";
+                      direction: "ltr",
+                      unicodeBidi: "plaintext",
                     }}
                   >
-                    +1 (234) 567-890
+                    +966 55 562 5068
                   </a>
                 </div>
               </div>
 
+              {/* Address Card */}
               <div
                 className="flex items-start gap-5 p-5 rounded-xl transition-all duration-300 cursor-pointer group glass-card-hover"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20, 184, 166, 0.2)",
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                }}
-                onMouseEnter={(e) => {
-                  const isRTL = document.documentElement.dir === "rtl";
-                  e.currentTarget.style.transform = isRTL
-                    ? "translateX(-10px)"
-                    : "translateX(10px)";
-                  e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.4)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateX(0)";
-                  e.currentTarget.style.borderColor = "rgba(20, 184, 166, 0.2)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
                 <div
@@ -445,17 +383,13 @@ const Contact = () => {
                 <div>
                   <p
                     className="text-sm mb-2 font-semibold text-secondary"
-                    style={{
-                      fontFamily: "var(--font-moshreq)",
-                    }}
+                    style={{ fontFamily: "var(--font-moshreq)" }}
                   >
                     {t("contact.info.addressLabel")}
                   </p>
                   <p
                     className="text-lg font-bold text-primary"
-                    style={{
-                      fontFamily: "var(--font-moshreq)",
-                    }}
+                    style={{ fontFamily: "var(--font-moshreq)" }}
                   >
                     {t("contact.info.address")}
                   </p>
