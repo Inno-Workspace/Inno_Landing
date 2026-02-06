@@ -28,6 +28,9 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+  ascent-override: 85%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -36,6 +39,9 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+  ascent-override: 85%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 :root {
