@@ -14,14 +14,14 @@ const About = () => {
   const bubbleCount = language === "ar" ? 6 : 8;
 
   return (
-    <div id="about" className="relative min-h-screen w-full overflow-hidden">
+    <div id="about" className="relative w-full overflow-hidden">
       <div
         className="absolute inset-0"
         style={{ backgroundColor: "#f0fdfa" }}
       ></div>
 
       <motion.div
-        className={`absolute top-[17%] sm:top-auto sm:bottom-[10%] md:bottom-[10%] ${
+        className={`absolute top-[17%] sm:top-auto sm:bottom-0 md:bottom-0 ${
           language === "ar"
             ? "left-[-10%] sm:left-[3%]"
             : "right-[-0%] sm:right-[3%]"
