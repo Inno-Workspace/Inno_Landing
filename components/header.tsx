@@ -216,7 +216,7 @@ const Header = () => {
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className="relative text-[15px] font-bold px-5 py-2 rounded-lg transition-all duration-300"
+                    className="relative text-[15px] font-bold px-5 h-9 flex items-center rounded-lg transition-all duration-300 leading-none"
                     style={{
                       fontFamily: navFont,
                       color: isActive
@@ -296,7 +296,7 @@ const Header = () => {
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className="block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg"
+                    className="flex items-center text-base font-bold transition-all duration-200 h-11 px-4 rounded-lg leading-none"
                     style={{
                       fontFamily: navFont,
                       color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.55)",
