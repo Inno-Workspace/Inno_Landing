@@ -4,7 +4,10 @@
       "Bash(npm install:*)",
       "Bash(find:*)",
       "Bash(npm run build:*)",
-      "Bash(pm2 reload:*)"
+      "Bash(pm2 reload:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

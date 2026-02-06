@@ -244,13 +244,8 @@ li, ul, ol {
 
 [dir="rtl"] html,
 [dir="rtl"] body {
-  height: auto;
   min-height: 100%;
   overflow-x: hidden;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 [dir="rtl"] * {
@@ -417,19 +412,8 @@ header * {
 /* RTL Performance Optimizations */
 [dir="rtl"] [class*="motion"] {
   will-change: transform;
-  transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-
-/* Fix RTL scroll performance */
-[dir="rtl"] #home,
-[dir="rtl"] #about,
-[dir="rtl"] #works,
-[dir="rtl"] #contact {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  will-change: scroll-position;
 }
 
 /* Custom Scrollbar for Works Section */

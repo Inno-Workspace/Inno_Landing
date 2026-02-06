@@ -48,31 +48,8 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
 
     gsap.ticker.lagSmoothing(0);
 
-    // Ensure body can scroll properly in RTL
-    const updateScroll = () => {
-      const isRTL = document.documentElement.dir === "rtl";
-      if (isRTL) {
-        document.body.style.height = "auto";
-        document.documentElement.style.height = "auto";
-        // Force reflow for RTL
-        document.body.style.direction = "rtl";
-        document.documentElement.style.direction = "rtl";
-      } else {
-        document.body.style.direction = "ltr";
-        document.documentElement.style.direction = "ltr";
-      }
-    };
-
-    updateScroll();
-    const observer = new MutationObserver(updateScroll);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["dir"],
-    });
-
     return () => {
       lenis.destroy();
-      observer.disconnect();
       delete window.lenis;
     };
   }, []);
