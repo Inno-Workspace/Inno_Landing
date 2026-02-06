@@ -1,19 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
 
 const Marquee = () => {
   const { language } = useLanguage();
   const text =
     language === "ar" ? "شريكك التقني" : "YOUR BEST TECHNICAL PARTNER";
-  const repetitions = 7; // Number of times to repeat the text
+  const repetitions = 10;
 
-  // Create duplicated content for seamless loop
   const marqueeContent = Array.from({ length: repetitions }).map((_, index) => (
     <h4
       key={index}
-      className={`inline-block pl-12 text-[2.2rem] font-medium leading-[125%] ${
+      className={`inline-block px-8 text-[2.2rem] font-medium leading-[125%] ${
         language === "ar" ? "" : "uppercase tracking-[-0.04em]"
       } shrink-0`}
       style={{
@@ -31,23 +29,18 @@ const Marquee = () => {
       className="relative w-full overflow-hidden"
       style={{ backgroundColor: "#f0fdfa" }}
     >
-      <div className="flex items-center h-[61px]">
-        <motion.div
+      <div className="flex items-center py-5" dir="ltr">
+        <div
           className="flex items-center whitespace-nowrap"
-          animate={{
-            x: language === "ar" ? [0, "50%"] : [0, -50 + "%"],
-          }}
-          transition={{
-            duration: 35,
-            repeat: Infinity,
-            ease: "linear",
+          style={{
+            animation: language === "ar"
+              ? "marquee-scroll-rtl 35s linear infinite"
+              : "marquee-scroll 35s linear infinite",
           }}
         >
-          {/* First set of content */}
           {marqueeContent}
-          {/* Duplicate for seamless loop */}
           {marqueeContent}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
