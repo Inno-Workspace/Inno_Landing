@@ -99,20 +99,23 @@ const Footer = () => {
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
           {/* Logo and Tagline */}
-          <div className="flex flex-col">
-            <div className="mb-4">
+          <div className="flex items-center gap-4">
+            <div
+              className="w-16 h-16 rounded-lg flex-shrink-0 p-2 flex items-center justify-center"
+              style={{ background: "linear-gradient(135deg, #134e5e, #0f766e)", border: "1px solid rgba(103, 232, 249, 0.2)", boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(103, 232, 249, 0.1)" }}
+            >
               <Image
                 src="/inno_logo.png"
                 alt="INNO Logo"
                 width={140}
                 height={140}
-                className="w-16 h-16 rounded-lg mb-4"
+                className="w-full h-full object-contain brightness-0 invert"
               />
             </div>
             <h3
-              className="text-2xl md:text-3xl font-bold mb-4 text-white"
+              className="text-2xl md:text-3xl font-bold text-white"
               style={{ fontFamily: "var(--font-devil-breeze)" }}
             >
               {t("footer.tagline")}
