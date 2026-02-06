@@ -3,27 +3,16 @@
 }@import "tailwindcss";
 
 @font-face {
-  font-family: "Kufam";
-  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-VariableFont_wght.ttf")
-    format("truetype");
+  font-family: "Cadillac";
+  src: url("/fonts/Cadillac-Sans-Arabic-Bold.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Kufam";
-  src: url("/fonts/arabic/BBH_Sans_Hegarty,Kufam,Momo_Trust_Display,Readex_Pro/Kufam/Kufam-Italic-VariableFont_wght.ttf")
-    format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "HT Moshreq Pro";
-  src: url("/fonts/HT_Moshreq_Pro_Black.woff2") format("woff2"),
-       url("/fonts/HT_Moshreq_Pro_Black.ttf") format("truetype");
+  font-family: "Fatimah Arabic";
+  src: url("/fonts/Fatimah-Arabic-Bold.otf") format("opentype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -97,12 +86,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-devil-breeze: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-poppins: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-bimbo: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-cairo: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-moshreq: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-inter: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-devil-breeze: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-poppins: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-bimbo: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cairo: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-moshreq: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -194,16 +183,16 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
   font-display: swap;
 }
 
-/* Apply Inter font to all common elements */
+/* Apply Cadillac font to all common elements */
 h1, h2, h3, h4, h5, h6,
 p, span, div, a, button,
 input, textarea, label,
 li, ul, ol {
-  font-family: var(--font-inter), sans-serif;
+  font-family: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Performance optimizations */
@@ -236,10 +225,19 @@ li, ul, ol {
   }
 }
 
+[dir="rtl"] {
+  --font-inter: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-devil-breeze: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-moshreq: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-poppins: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-bimbo: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cairo: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 [dir="rtl"],
 [dir="rtl"] body,
 [dir="rtl"] html {
-  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 [dir="rtl"] html,
@@ -249,32 +247,7 @@ li, ul, ol {
 }
 
 [dir="rtl"] * {
-  font-family: inherit;
-}
-
-[dir="rtl"] h1,
-[dir="rtl"] h2,
-[dir="rtl"] h3,
-[dir="rtl"] h4,
-[dir="rtl"] h5,
-[dir="rtl"] h6,
-[dir="rtl"] p,
-[dir="rtl"] span,
-[dir="rtl"] div,
-[dir="rtl"] a,
-[dir="rtl"] button,
-[dir="rtl"] input,
-[dir="rtl"] textarea,
-[dir="rtl"] label,
-[dir="rtl"] li,
-[dir="rtl"] ul,
-[dir="rtl"] ol {
-  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
-}
-
-[dir="rtl"] [style*="font-family: var(--font-moshreq)"],
-[dir="rtl"] [style*="font-family: var(--font-devil-breeze)"] {
-  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .bg-gradient-radial {
