@@ -221,6 +221,25 @@ li, ul, ol {
   font-family: "Cadillac", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Global scrollbar */
+*::-webkit-scrollbar {
+  width: 14px;
+}
+*::-webkit-scrollbar-track {
+  background: #0a1a23;
+}
+*::-webkit-scrollbar-thumb {
+  background: #22d3ee;
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #67e8f9;
+}
+*, html, body {
+  scrollbar-width: auto;
+  scrollbar-color: #22d3ee #0a1a23;
+}
+
 /* Performance optimizations */
 * {
   -webkit-font-smoothing: antialiased;
