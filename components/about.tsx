@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useLanguage } from "@/contexts/language-context";
+import { useState, useEffect } from "react";
 
 const ThreeDCircle = dynamic(() => import("./3d-circle"), {
   ssr: false,
@@ -12,6 +13,14 @@ const ThreeDCircle = dynamic(() => import("./3d-circle"), {
 const About = () => {
   const { t, language } = useLanguage();
   const bubbleCount = language === "ar" ? 6 : 8;
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
     <div id="about" className="relative w-full overflow-hidden">
@@ -20,55 +29,59 @@ const About = () => {
         style={{ backgroundColor: "#f0fdfa" }}
       ></div>
 
-      <motion.div
-        className={`absolute top-[17%] sm:top-auto sm:bottom-0 md:bottom-0 ${
-          language === "ar"
-            ? "left-[-10%] sm:left-[3%]"
-            : "right-[-0%] sm:right-[3%]"
-        } w-[200px] h-[200px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[520px] lg:h-[520px] z-5`}
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <ThreeDCircle speed={0.5} scale={2} rotationAxis={[1, 0, 0]} />
-      </motion.div>
+      {isDesktop && (
+        <>
+          <motion.div
+            className={`absolute sm:top-auto sm:bottom-0 md:bottom-0 ${
+              language === "ar"
+                ? "left-[-10%] sm:left-[3%]"
+                : "right-[-0%] sm:right-[3%]"
+            } md:w-[420px] md:h-[420px] lg:w-[520px] lg:h-[520px] z-5`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <ThreeDCircle speed={0.5} scale={2} rotationAxis={[1, 0, 0]} />
+          </motion.div>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: bubbleCount }).map((_, i) => {
-          const size = 50 + ((i * 10) % 80);
-          const left = (i * 15) % 100;
-          const delay = (i * 1.2) % 6;
-          const duration = 20 + (i % 8);
-          const opacity = 0.12 + (i % 4) * 0.04;
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {Array.from({ length: bubbleCount }).map((_, i) => {
+              const size = 50 + ((i * 10) % 80);
+              const left = (i * 15) % 100;
+              const delay = (i * 1.2) % 6;
+              const duration = 20 + (i % 8);
+              const opacity = 0.12 + (i % 4) * 0.04;
 
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: size,
-                height: size,
-                left: `${left}%`,
-                bottom: "-150px",
-                background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), rgba(20, 184, 166, 0.3) 50%, rgba(14, 116, 144, 0.15))`,
-                border: "1px solid rgba(255, 255, 255, 0.25)",
-                willChange: "transform",
-              }}
-              animate={{
-                y: [0, -1200],
-                opacity: [0, opacity, opacity, 0],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: delay,
-                ease: "linear",
-              }}
-            />
-          );
-        })}
-      </div>
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full"
+                  style={{
+                    width: size,
+                    height: size,
+                    left: `${left}%`,
+                    bottom: "-150px",
+                    background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), rgba(20, 184, 166, 0.3) 50%, rgba(14, 116, 144, 0.15))`,
+                    border: "1px solid rgba(255, 255, 255, 0.25)",
+                    willChange: "transform",
+                  }}
+                  animate={{
+                    y: [0, -1200],
+                    opacity: [0, opacity, opacity, 0],
+                  }}
+                  transition={{
+                    duration: duration,
+                    repeat: Infinity,
+                    delay: delay,
+                    ease: "linear",
+                  }}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
 
       <div className="relative z-10 container mx-auto px-6 py-24 md:py-40">
         <motion.div
