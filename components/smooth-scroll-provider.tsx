@@ -23,6 +23,10 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Skip Lenis on mobile/tablet — native scroll is smoother and lighter
+    const isMobile = window.innerWidth < 768 || "ontouchstart" in window;
+    if (isMobile) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

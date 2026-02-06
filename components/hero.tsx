@@ -55,9 +55,9 @@ const Hero = () => {
         }}
       />
 
-      {/* 3. Ambient Glow Orbs (Softened & Optimized) */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full mix-blend-screen" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full mix-blend-screen" />
+      {/* 3. Ambient Glow Orbs — desktop only (blur-[120px] is GPU-heavy on mobile) */}
+      <div className="hidden md:block absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />
+      <div className="hidden md:block absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full" />
 
       {/* 4. Drawing Canvas Layer */}
       <div className="absolute inset-0 z-0">

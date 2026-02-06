@@ -77,9 +77,9 @@ const TechStack = () => {
         }}
       />
 
-      {/* Ambient glow orbs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
+      {/* Ambient glow orbs — desktop only */}
+      <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Two Column Layout */}
@@ -110,7 +110,7 @@ const TechStack = () => {
                 </p>
               </motion.div>
 
-              {/* Horizontal Marquee for Small Screens */}
+              {/* Horizontal Marquee for Small Screens — CSS animation for performance */}
               <div className="relative overflow-hidden rounded-xl p-4 h-32 lg:hidden">
                 <div
                   className="absolute left-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
@@ -120,15 +120,12 @@ const TechStack = () => {
                   className="absolute right-0 top-0 bottom-0 w-16 z-20 pointer-events-none"
                   style={{ background: fadeGradient("right") }}
                 ></div>
-                <motion.div
+                <div
                   className="flex gap-4 h-full"
-                  animate={{
-                    x: language === "ar" ? [0, "50%"] : ["0%", "-50%"],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
+                  style={{
+                    animation: language === "ar"
+                      ? "marquee-scroll-rtl 30s linear infinite"
+                      : "marquee-scroll 30s linear infinite",
                   }}
                 >
                   {duplicatedClients.map((client, index) => (
@@ -153,7 +150,7 @@ const TechStack = () => {
                       </div>
                     </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
 
               {/* Vertical Marquee Container - Desktop Only */}

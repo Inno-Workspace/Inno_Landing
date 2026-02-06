@@ -1056,10 +1056,16 @@ const AnimatedDrawingCanvas = () => {
       ctx.restore();
     };
 
-    // Set canvas size
+    // Set canvas size — use half resolution on mobile for performance
+    const isMobile = window.innerWidth < 768;
+    const scale = isMobile ? 0.5 : 1;
+
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth * scale;
+      canvas.height = window.innerHeight * scale;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.scale(scale, scale);
       initializeElements();
     };
 
@@ -1214,10 +1220,21 @@ const AnimatedDrawingCanvas = () => {
         drawPen(ctx, activePenPosition.x, activePenPosition.y);
       }
 
-      animationFrameId = requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(isMobile ? throttledAnimate : animate);
     };
 
-    animate();
+    // Throttle to ~30fps on mobile
+    let lastFrameTime = 0;
+    const throttledAnimate = (time?: number) => {
+      if (time && time - lastFrameTime < 33) {
+        animationFrameId = requestAnimationFrame(throttledAnimate);
+        return;
+      }
+      lastFrameTime = time || 0;
+      animate();
+    };
+
+    isMobile ? throttledAnimate() : animate();
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize);
