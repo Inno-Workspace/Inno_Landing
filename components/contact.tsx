@@ -2,7 +2,7 @@
 
 import { useLanguage } from "@/contexts/language-context";
 
-const WHATSAPP_NUMBER = "966555625068";
+const WHATSAPP_NUMBER = "966552658605";
 
 const Contact = () => {
   const { t } = useLanguage();
