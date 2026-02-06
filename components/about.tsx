@@ -55,7 +55,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-tight"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background:
