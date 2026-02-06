@@ -8,7 +8,7 @@ interface WorkItem {
   title: string;
   description: string;
   image: string;
-  category: string;
+
   link?: string;
 }
 
@@ -22,7 +22,7 @@ const Works = () => {
       title: language === "ar" ? "موقع الكتروني لعمدة" : "Omdah Website",
       description: language === "ar" ? "موقع الكتروني يظهر تعريف وخدمات شركة إنتاجية مميزة" : "A website showcasing the identity and services of a distinguished production company",
       image: "/projcets-images/theimage.png",
-      category: language === "ar" ? "موقع الكتروني" : "Website",
+
       link: "https://omdah.sa",
     },
     {
@@ -30,7 +30,7 @@ const Works = () => {
       title: language === "ar" ? "iedar العقارية" : "IEDAR Real Estate",
       description: language === "ar" ? "طورنا موقع شركة iedar العقارية بشكل مناسب لهويتهم الترويجية" : "We developed IEDAR real estate website to match their promotional identity",
       image: "/projcets-images/animage.png",
-      category: language === "ar" ? "موقع الكتروني" : "Website",
+
       link: "https://iedar.sa",
     },
     {
@@ -38,7 +38,7 @@ const Works = () => {
       title: language === "ar" ? "وكالة الصناعية" : "Al-Sinaiya Agency",
       description: language === "ar" ? "طورنا منصة الصناعية بشكل عصري يتماشى مع توجههم الإعلامي" : "We developed Al-Sinaiya platform in a modern style aligned with their media direction",
       image: "/projcets-images/image.png",
-      category: language === "ar" ? "موقع الكتروني" : "Website",
+
       link: "https://www.snaya.sa",
     },
   ];
@@ -48,85 +48,36 @@ const Works = () => {
       id="works"
       className="relative w-full overflow-hidden py-20 md:py-32"
     >
-      {/* Base gradient background */}
-      <div className="absolute inset-0 bg-gradient-primary"></div>
+      {/* Deep dark background matching hero */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#001e2b] to-slate-950" />
 
-      {/* Gradient overlays - combined layers */}
+      {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          background: `
-            radial-gradient(ellipse 60% 40% at 15% 25%, rgba(13, 148, 136, 0.3) 0%, transparent 60%),
-            radial-gradient(ellipse 70% 50% at 85% 75%, rgba(13, 148, 136, 0.25) 0%, transparent 65%),
-            radial-gradient(ellipse 50% 60% at 50% 50%, rgba(13, 148, 136, 0.28) 0%, transparent 70%)
+          backgroundImage: `
+            linear-gradient(rgba(103, 232, 249, 0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(103, 232, 249, 0.3) 1px, transparent 1px)
           `,
+          backgroundSize: "40px 40px",
         }}
-      ></div>
+      />
 
-      {/* Spray texture - combined layers */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle 28% at 15% 20%, rgba(20, 184, 166, 0.7) 0%, transparent 70%),
-            radial-gradient(circle 32% at 80% 15%, rgba(14, 116, 144, 0.65) 0%, transparent 75%),
-            radial-gradient(circle 30% at 65% 75%, rgba(20, 184, 166, 0.68) 0%, transparent 72%),
-            radial-gradient(circle 35% at 45% 45%, rgba(14, 116, 144, 0.55) 0%, transparent 80%),
-            radial-gradient(circle 8% at 12% 35%, rgba(146, 243, 255, 0.85) 0%, transparent 65%),
-            radial-gradient(circle 10% at 75% 60%, rgba(146, 243, 255, 0.75) 0%, transparent 68%),
-            radial-gradient(circle 7% at 25% 80%, rgba(146, 243, 255, 0.8) 0%, transparent 64%)
-          `,
-        }}
-      ></div>
-
-      {/* Fine spray dots */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle 2% at 18% 12%, rgba(146, 243, 255, 0.95) 0%, transparent 50%),
-            radial-gradient(circle 2% at 78% 22%, rgba(146, 243, 255, 0.9) 0%, transparent 52%),
-            radial-gradient(circle 2% at 32% 68%, rgba(146, 243, 255, 0.88) 0%, transparent 50%),
-            radial-gradient(circle 2% at 88% 45%, rgba(146, 243, 255, 0.92) 0%, transparent 45%),
-            radial-gradient(circle 2% at 65% 58%, rgba(146, 243, 255, 0.85) 0%, transparent 50%)
-          `,
-          opacity: 0.7,
-        }}
-      ></div>
-
-      {/* Noise texture */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          mixBlendMode: "overlay",
-          opacity: 0.25,
-        }}
-      ></div>
-
-      {/* Lighter spots */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle 22% at 20% 30%, rgba(146, 243, 255, 0.28) 0%, transparent 70%),
-            radial-gradient(circle 25% at 75% 60%, rgba(103, 232, 249, 0.24) 0%, transparent 75%)
-          `,
-          mixBlendMode: "screen",
-        }}
-      ></div>
+      {/* Ambient glow orbs */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <h2
-            className="text-5xl md:text-7xl font-bold mb-6 text-primary"
+            className="text-5xl md:text-7xl font-bold mb-6 text-white"
             style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
             {t("works.title")}
           </h2>
           <p
-            className="text-xl text-secondary/80 leading-relaxed"
+            className="text-xl text-slate-300/80 leading-relaxed"
             style={{ fontFamily: "var(--font-moshreq)" }}
           >
             {t("works.description")}
@@ -145,13 +96,17 @@ const Works = () => {
             >
               {/* Card */}
               <div
-                className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-cyan-400/50 hover:bg-white/[0.08] hover:-translate-y-3 group-hover:shadow-2xl"
+                className="relative rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-3"
                 style={{
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                  background: "rgba(0, 20, 30, 0.6)",
+                  borderColor: "rgba(103, 232, 249, 0.12)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
                 }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.35)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.12)"; }}
               >
                 {/* Image Container */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-cyan-900/20 to-sky-800/20">
+                <div className="relative h-64 overflow-hidden">
                   <Image
                     src={work.image}
                     alt={work.title}
@@ -160,28 +115,11 @@ const Works = () => {
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="lazy"
                   />
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span
-                      className="inline-block px-4 py-1.5 text-xs font-bold rounded-full transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(103, 232, 249, 0.2), rgba(20, 184, 166, 0.25))",
-                        border: "1px solid rgba(103, 232, 249, 0.4)",
-                        color: "#ffffff",
-                        fontFamily: "var(--font-moshreq)",
-                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-                      }}
-                    >
-                      {work.category}
-                    </span>
-                  </div>
-
                   {/* Gradient overlay on hover */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
-                      background: "linear-gradient(180deg, transparent 0%, rgba(4, 47, 46, 0.8) 100%)",
+                      background: "linear-gradient(180deg, transparent 0%, rgba(2, 6, 23, 0.85) 100%)",
                     }}
                   ></div>
                 </div>
@@ -189,20 +127,20 @@ const Works = () => {
                 {/* Content */}
                 <div className="p-6 relative">
                   <h3
-                    className="text-2xl font-bold text-primary mb-3 transition-all duration-300 group-hover:text-accent"
+                    className="text-2xl font-bold text-white mb-3 transition-all duration-300 group-hover:text-cyan-400"
                     style={{ fontFamily: "var(--font-devil-breeze)" }}
                   >
                     {work.title}
                   </h3>
                   <p
-                    className="text-secondary/70 text-sm leading-relaxed line-clamp-2 group-hover:text-secondary/90 transition-colors duration-300"
+                    className="text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:text-slate-300 transition-colors duration-300"
                     style={{ fontFamily: "var(--font-moshreq)" }}
                   >
                     {work.description}
                   </p>
 
                   {/* View More Indicator */}
-                  <div className="mt-4 flex items-center gap-2 text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="mt-4 flex items-center gap-2 text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <span className="text-sm font-semibold" style={{ fontFamily: "var(--font-moshreq)" }}>
                       {language === "ar" ? "عرض المشروع" : "View Project"}
                     </span>
@@ -213,12 +151,7 @@ const Works = () => {
                 </div>
 
                 {/* Bottom border accent */}
-                <div
-                  className="h-1 w-full transition-all duration-500 bg-gradient-to-r from-cyan-400 via-sky-400 to-sky-500 opacity-0 group-hover:opacity-100 group-hover:shadow-lg"
-                  style={{
-                    boxShadow: "0 0 20px rgba(103, 232, 249, 0.5)",
-                  }}
-                ></div>
+                <div className="h-1 w-full bg-gradient-to-r from-cyan-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             </a>
           ))}
