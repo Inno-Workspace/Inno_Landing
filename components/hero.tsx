@@ -118,7 +118,6 @@ const Hero = () => {
                   {isAr ? (
                     <>
                       شريكك التقني
-    
                     </>
                   ) : (
                     <>
@@ -139,7 +138,7 @@ const Hero = () => {
             style={{ fontFamily: fontBody }}
           >
             {isAr
-              ? "فريق شغوف بتطوير التجربة الرقمية لدفع نمو الشركات"
+              ? "لا تشيل هم التقنية أبد ، اينو بيسهّل عليك التقنية"
               : "A team passionate about developing digital experiences to drive business growth."}
           </motion.p>
 

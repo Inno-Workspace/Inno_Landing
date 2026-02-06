@@ -105,7 +105,7 @@ const TechStack = () => {
                   style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {language === "ar"
-                    ? "نفخر بالشراكة مع قادة الصناعة العالميين"
+                    ? "عملاء طوّرنا لهم أنظمتهم وسهّلنا عليهم التقنيات"
                     : "Trusted by industry leaders worldwide"}
                 </p>
               </motion.div>

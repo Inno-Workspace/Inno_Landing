@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/language-context";
 const Marquee = () => {
   const { language } = useLanguage();
   const text =
-    language === "ar" ? "شريكك التقني الأمثل" : "YOUR BEST TECHNICAL PARTNER";
+    language === "ar" ? "شريكك التقني" : "YOUR BEST TECHNICAL PARTNER";
   const repetitions = 7; // Number of times to repeat the text
 
   // Create duplicated content for seamless loop

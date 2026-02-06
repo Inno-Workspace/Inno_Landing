@@ -70,12 +70,6 @@ const Contact = () => {
           >
             {t("contact.subtitle")}
           </p>
-          <p
-            className="text-lg md:text-xl leading-relaxed max-w-4xl"
-            style={{ fontFamily: "var(--font-moshreq)", color: "#0f766e" }}
-          >
-            {t("contact.description")}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
