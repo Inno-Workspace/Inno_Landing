@@ -15,15 +15,15 @@ const Contact = () => {
   };
 
   const panelStyle = {
-    background: "rgba(224, 251, 252, 0.5)",
-    border: "1px solid rgba(14, 116, 144, 0.2)",
-    boxShadow: "0 25px 60px rgba(14, 116, 144, 0.08)",
+    background: "linear-gradient(160deg, #0a1e2b, #0c2a3a)",
+    border: "1px solid rgba(103, 232, 249, 0.15)",
+    boxShadow: "0 25px 60px rgba(0, 0, 0, 0.3)",
   };
 
   const infoCardStyle = {
-    background: "rgba(207, 250, 254, 0.5)",
-    border: "1px solid rgba(14, 116, 144, 0.12)",
-    boxShadow: "0 4px 12px rgba(14, 116, 144, 0.06)",
+    background: "rgba(0, 30, 43, 0.7)",
+    border: "1px solid rgba(103, 232, 249, 0.12)",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
   };
 
   return (
@@ -96,8 +96,8 @@ const Contact = () => {
                 <div
                   className="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e, #0e7490)",
-                    boxShadow: "0 8px 24px rgba(15, 118, 110, 0.3)",
+                    background: "linear-gradient(135deg, #0891b2, #0d9488)",
+                    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   <svg className="w-12 h-12 md:w-14 md:h-14 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -111,13 +111,13 @@ const Contact = () => {
             <div className="text-center">
               <h3
                 className="text-3xl md:text-4xl font-bold mb-3"
-                style={{ fontFamily: "var(--font-devil-breeze)", color: "#155e75" }}
+                style={{ fontFamily: "var(--font-devil-breeze)", color: "#ffffff" }}
               >
                 {t("contact.whatsapp.title")}
               </h3>
               <p
                 className="text-sm md:text-base leading-relaxed mb-8"
-                style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}
+                style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}
               >
                 {t("contact.whatsapp.description")}
               </p>
@@ -127,8 +127,8 @@ const Contact = () => {
                 className="w-full px-8 py-5 rounded-xl font-bold text-lg transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group text-white cursor-pointer"
                 style={{
                   fontFamily: "var(--font-moshreq)",
-                  background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
-                  boxShadow: "0 10px 30px rgba(15, 118, 110, 0.3)",
+                  background: "linear-gradient(135deg, #0891b2, #0d9488)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(103, 232, 249, 0.15)",
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
@@ -152,7 +152,7 @@ const Contact = () => {
           >
             <h3
               className="text-3xl md:text-4xl font-bold mb-8"
-              style={{ fontFamily: "var(--font-devil-breeze)", color: "#155e75" }}
+              style={{ fontFamily: "var(--font-devil-breeze)", color: "#ffffff" }}
             >
               {t("contact.info.title")}
             </h3>
@@ -166,8 +166,8 @@ const Contact = () => {
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e, #0e7490)",
-                    boxShadow: "0 8px 20px rgba(15, 118, 110, 0.25)",
+                    background: "linear-gradient(135deg, #0891b2, #0d9488)",
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,10 +175,10 @@ const Contact = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}>
+                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}>
                     {t("contact.info.emailLabel")}
                   </p>
-                  <a className="text-lg font-bold" style={{ fontFamily: "var(--font-moshreq)", color: "#155e75" }}>
+                  <a className="text-lg font-bold" style={{ fontFamily: "var(--font-moshreq)", color: "#ffffff" }}>
                     contact@inno.sa
                   </a>
                 </div>
@@ -192,8 +192,8 @@ const Contact = () => {
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e, #0e7490)",
-                    boxShadow: "0 8px 20px rgba(15, 118, 110, 0.25)",
+                    background: "linear-gradient(135deg, #0891b2, #0d9488)",
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,12 +201,12 @@ const Contact = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}>
+                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}>
                     {t("contact.info.phoneLabel")}
                   </p>
                   <a
                     className="text-lg font-bold"
-                    style={{ fontFamily: "var(--font-moshreq)", color: "#155e75", direction: "ltr", unicodeBidi: "plaintext" }}
+                    style={{ fontFamily: "var(--font-moshreq)", color: "#ffffff", direction: "ltr", unicodeBidi: "plaintext" }}
                   >
                     +966 55 265 8605
                   </a>
@@ -221,8 +221,8 @@ const Contact = () => {
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                   style={{
-                    background: "linear-gradient(135deg, #0f766e, #0e7490)",
-                    boxShadow: "0 8px 20px rgba(15, 118, 110, 0.25)",
+                    background: "linear-gradient(135deg, #0891b2, #0d9488)",
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,10 +231,10 @@ const Contact = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}>
+                  <p className="text-sm mb-2 font-semibold" style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}>
                     {t("contact.info.addressLabel")}
                   </p>
-                  <p className="text-lg font-bold" style={{ fontFamily: "var(--font-moshreq)", color: "#155e75" }}>
+                  <p className="text-lg font-bold" style={{ fontFamily: "var(--font-moshreq)", color: "#ffffff" }}>
                     {t("contact.info.address")}
                   </p>
                 </div>
