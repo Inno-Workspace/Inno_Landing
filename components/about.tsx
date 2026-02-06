@@ -12,7 +12,6 @@ const ThreeDCircle = dynamic(() => import("./3d-circle"), {
 
 const About = () => {
   const { t, language } = useLanguage();
-  const bubbleCount = language === "ar" ? 6 : 8;
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -45,41 +44,6 @@ const About = () => {
             <ThreeDCircle speed={0.5} scale={2} rotationAxis={[1, 0, 0]} />
           </motion.div>
 
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {Array.from({ length: bubbleCount }).map((_, i) => {
-              const size = 50 + ((i * 10) % 80);
-              const left = (i * 15) % 100;
-              const delay = (i * 1.2) % 6;
-              const duration = 20 + (i % 8);
-              const opacity = 0.12 + (i % 4) * 0.04;
-
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute rounded-full"
-                  style={{
-                    width: size,
-                    height: size,
-                    left: `${left}%`,
-                    bottom: "-150px",
-                    background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), rgba(20, 184, 166, 0.3) 50%, rgba(14, 116, 144, 0.15))`,
-                    border: "1px solid rgba(255, 255, 255, 0.25)",
-                    willChange: "transform",
-                  }}
-                  animate={{
-                    y: [0, -1200],
-                    opacity: [0, opacity, opacity, 0],
-                  }}
-                  transition={{
-                    duration: duration,
-                    repeat: Infinity,
-                    delay: delay,
-                    ease: "linear",
-                  }}
-                />
-              );
-            })}
-          </div>
         </>
       )}
 
