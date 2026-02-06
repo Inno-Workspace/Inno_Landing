@@ -171,40 +171,39 @@ const Header = () => {
     }
   };
 
+  const navFont =
+    language === "ar"
+      ? '"Fatimah Arabic", sans-serif'
+      : '"Cadillac", sans-serif';
+
   return (
     <header
       dir="ltr"
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-2 px-4 md:px-6"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-3 px-4 md:px-6"
     >
       {/* Main Navigation Bar Container */}
       <div
-        className={`w-full max-w-7xl mx-auto rounded-2xl transition-all duration-300 backdrop-blur-lg ${
-          isScrolled
-            ? "bg-overlay shadow-2xl"
-            : "bg-overlay/80 shadow-lg"
-        }`}
+        className="w-full max-w-7xl mx-auto rounded-2xl transition-all duration-500 ease-out backdrop-blur-xl"
         style={{
+          backgroundColor: isScrolled
+            ? "rgba(0, 30, 43, 0.9)"
+            : "rgba(0, 30, 43, 0.55)",
+          borderBottom: "1px solid rgba(103, 232, 249, 0.1)",
           boxShadow: isScrolled
-            ? "0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(103, 232, 249, 0.1)"
-            : "0 4px 16px rgba(0, 0, 0, 0.15)",
+            ? "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(103, 232, 249, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04)"
+            : "0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04)",
         }}
       >
-        <div className="flex items-center justify-between px-4 md:px-6 py-2">
-          {/* Logo Section */}
-          <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center justify-between h-12 md:h-14 px-4 md:px-6">
+          {/* Logo */}
+          <div className="flex items-center shrink-0">
             <Image
-              src="/inno_logo.png"
-              alt="INNO Logo"
-              width={48}
-              height={48}
-              className="w-12 h-12 md:w-14 md:h-14 object-contain"
+              src="/images/inno_text_logo.PNG"
+              alt="INNO"
+              width={65}
+              height={20}
+              className=" w-auto object-contain"
             />
-            <span
-              className="text-primary font-bold text-base md:text-lg mt-1"
-              style={{ fontFamily: "var(--font-devil-breeze)" }}
-            >
-              {t("header.logo")}
-            </span>
           </div>
 
           {/* Desktop Navigation Links - Centered */}
@@ -217,16 +216,30 @@ const Header = () => {
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className={`text-sm font-bold px-4 py-2 rounded-lg transition-all duration-300 relative ${
-                      isActive
-                        ? "text-hover-primary"
-                        : "text-primary/80 hover:text-primary hover:bg-text-primary/10"
-                    }`}
+                    className="relative text-[15px] font-bold px-5 py-2 rounded-lg transition-all duration-300"
                     style={{
-                      fontFamily: "var(--font-devil-breeze)",
-                      textShadow: isActive
-                        ? "0 0 10px rgba(103, 232, 249, 0.5)"
-                        : "none",
+                      fontFamily: navFont,
+                      color: isActive
+                        ? "#ffffff"
+                        : "rgba(255, 255, 255, 0.55)",
+                      backgroundColor: isActive
+                        ? "rgba(103, 232, 249, 0.08)"
+                        : undefined,
+                      borderBottom: isActive
+                        ? "2px solid rgba(103, 232, 249, 0.5)"
+                        : "2px solid transparent",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = "#ffffff";
+                        e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.06)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = "rgba(255, 255, 255, 0.55)";
+                        e.currentTarget.style.backgroundColor = "transparent";
+                      }
                     }}
                   >
                     {t(item.labelKey)}
@@ -283,12 +296,13 @@ const Header = () => {
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className={`block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg ${
-                      isActive
-                        ? "text-hover-primary bg-text-accent/10"
-                        : "text-primary/80 hover:text-primary hover:bg-text-primary/5"
-                    }`}
-                    style={{ fontFamily: "var(--font-devil-breeze)" }}
+                    className="block text-base font-bold transition-all duration-200 py-2.5 px-4 rounded-lg"
+                    style={{
+                      fontFamily: navFont,
+                      color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.55)",
+                      backgroundColor: isActive ? "rgba(103, 232, 249, 0.08)" : undefined,
+                      borderLeft: isActive ? "2px solid rgba(103, 232, 249, 0.5)" : "2px solid transparent",
+                    }}
                   >
                     {t(item.labelKey)}
                   </a>

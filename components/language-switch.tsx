@@ -5,57 +5,65 @@ import { motion } from "framer-motion";
 
 const LanguageSwitch = () => {
   const { language, toggleLanguage, isTransitioning } = useLanguage();
+  const isArabic = language === "ar";
 
   return (
     <button
       onClick={toggleLanguage}
       disabled={isTransitioning}
-      className="relative group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 overflow-hidden cursor-pointer"
+      className="relative flex items-center h-9 rounded-lg cursor-pointer overflow-hidden"
       aria-label="Switch language"
       style={{
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        backgroundColor: "rgba(0, 30, 43, 0.6)",
+        border: "1px solid rgba(103, 232, 249, 0.15)",
       }}
     >
-      <motion.div
-        className="absolute inset-0 bg-linear-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        initial={false}
-      />
-
-      <div className="relative w-full h-full flex items-center justify-center">
-        <motion.div
-          key={language}
-          initial={{ rotateY: -90, opacity: 0 }}
-          animate={{ rotateY: 0, opacity: 1 }}
-          exit={{ rotateY: 90, opacity: 0 }}
-          transition={{
-            duration: 0.3,
-            ease: "easeInOut",
+      {/* EN side */}
+      <div
+        className="relative z-10 h-full flex items-center justify-center px-4"
+      >
+        <span
+          className="text-xs font-bold tracking-wide transition-colors duration-300"
+          style={{
+            color: !isArabic ? "#ffffff" : "rgba(255, 255, 255, 0.35)",
           }}
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ transformStyle: "preserve-3d" }}
         >
-          <span className="text-white font-bold text-sm tracking-wider">
-            {language === "en" ? "AR" : "EN"}
-          </span>
-        </motion.div>
+          EN
+        </span>
       </div>
 
-      {isTransitioning && (
-        <motion.div
-          className="absolute inset-0 rounded-full border-2 border-white"
-          initial={{ scale: 1, opacity: 1 }}
-          animate={{ scale: 1.5, opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        />
-      )}
-
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-        <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-md shadow-lg">
-          <span className="text-xs font-medium text-gray-800">
-            {language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-          </span>
-        </div>
+      {/* AR side */}
+      <div
+        className="relative z-10 h-full flex items-center justify-center px-4"
+      >
+        <span
+          className="text-xs font-bold tracking-wide transition-colors duration-300"
+          style={{
+            color: isArabic ? "#ffffff" : "rgba(255, 255, 255, 0.35)",
+          }}
+        >
+          AR
+        </span>
       </div>
+
+      {/* Sliding highlight */}
+      <motion.div
+        className="absolute top-0.5 bottom-0.5 rounded-md"
+        style={{
+          width: "calc(50% - 2px)",
+          background: "linear-gradient(135deg, rgba(103, 232, 249, 0.25), rgba(103, 232, 249, 0.12))",
+          border: "1px solid rgba(103, 232, 249, 0.3)",
+          boxShadow: "0 0 12px rgba(103, 232, 249, 0.15)",
+        }}
+        animate={{
+          left: isArabic ? "calc(50% + 1px)" : "2px",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 350,
+          damping: 28,
+        }}
+      />
     </button>
   );
 };
