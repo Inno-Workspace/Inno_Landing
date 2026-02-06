@@ -250,6 +250,10 @@ li, ul, ol {
   font-family: "Fatimah Arabic", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
+.font-system {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }

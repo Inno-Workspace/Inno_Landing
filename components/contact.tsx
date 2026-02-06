@@ -199,7 +199,7 @@ const Contact = () => {
                     {t("contact.info.phoneLabel")}
                   </p>
                   <a
-                    className="text-lg font-bold"
+                    className="text-lg font-bold font-system"
                     style={{ fontFamily: "var(--font-moshreq)", color: "#ffffff", direction: "ltr", unicodeBidi: "plaintext" }}
                   >
                     +966 55 265 8605
