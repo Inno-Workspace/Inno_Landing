@@ -79,69 +79,24 @@ const Footer = () => {
 
   return (
     <footer className="relative w-full overflow-hidden">
-      {/* Base gradient background - same as hero */}
-      <div className="absolute inset-0 bg-gradient-primary"></div>
+      {/* Deep dark background matching hero */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#001e2b] to-slate-950" />
 
-      {/* Brush texture effects - same as hero */}
+      {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          background: `radial-gradient(ellipse 60% 40% at 15% 25%, var(--effect-brush) 0%, transparent 60%)`,
-          filter: "blur(60px)",
-          mixBlendMode: "multiply",
-        }}
-      ></div>
-
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 70% 50% at 85% 75%, var(--effect-brush) 0%, transparent 65%)`,
-          filter: "blur(70px)",
-          mixBlendMode: "screen",
-        }}
-      ></div>
-
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse 50% 60% at 50% 50%, var(--effect-brush) 0%, transparent 70%)`,
-          filter: "blur(50px)",
-          mixBlendMode: "multiply",
-        }}
-      ></div>
-
-      {/* Spray texture effects */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle 8% at 25% 35%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 6% at 65% 15%, var(--effect-spray) 0%, transparent 45%),
-            radial-gradient(circle 7% at 80% 55%, var(--effect-spray) 0%, transparent 50%),
-            radial-gradient(circle 5% at 15% 70%, var(--effect-spray) 0%, transparent 40%)
+          backgroundImage: `
+            linear-gradient(rgba(103, 232, 249, 0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(103, 232, 249, 0.3) 1px, transparent 1px)
           `,
-          filter: "blur(25px)",
-          mixBlendMode: "overlay",
+          backgroundSize: "40px 40px",
         }}
-      ></div>
+      />
 
-      {/* Noise texture overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          mixBlendMode: "overlay",
-          opacity: 0.2,
-        }}
-      ></div>
-
-      {/* Linear gradient overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to top, var(--effect-overlay-top), transparent, var(--effect-overlay-bottom))`,
-        }}
-      ></div>
+      {/* Ambient glow orbs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -157,11 +112,8 @@ const Footer = () => {
               />
             </div>
             <h3
-              className="text-2xl md:text-3xl font-bold mb-4 text-primary"
-              style={{
-                fontFamily: "var(--font-devil-breeze)",
-                textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
-              }}
+              className="text-2xl md:text-3xl font-bold mb-4 text-white"
+              style={{ fontFamily: "var(--font-devil-breeze)" }}
             >
               {t("footer.tagline")}
             </h3>
@@ -170,7 +122,7 @@ const Footer = () => {
           {/* Social Media */}
           <div className="flex flex-col">
             <h4
-              className="text-lg md:text-xl font-semibold mb-6 text-primary"
+              className="text-lg md:text-xl font-semibold mb-6 text-white"
               style={{ fontFamily: "var(--font-moshreq)" }}
             >
               {t("footer.social.title")}
@@ -182,7 +134,11 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-12 h-12 rounded-lg bg-text-primary/10 border border-text-primary/20 text-primary hover:bg-text-primary/20 hover:border-text-primary/30 transition-all duration-300 hover:scale-110"
+                  className="flex items-center justify-center w-12 h-12 rounded-lg text-slate-400 hover:text-cyan-400 transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: "rgba(0, 30, 43, 0.7)",
+                    border: "1px solid rgba(103, 232, 249, 0.12)",
+                  }}
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -194,7 +150,7 @@ const Footer = () => {
           {/* Contact Information */}
           <div className="flex flex-col">
             <h4
-              className="text-lg md:text-xl font-semibold mb-6 text-primary"
+              className="text-lg md:text-xl font-semibold mb-6 text-white"
               style={{ fontFamily: "var(--font-moshreq)" }}
             >
               {t("footer.contact.title")}
@@ -202,7 +158,7 @@ const Footer = () => {
             <div className="space-y-4">
               <a
                 href={`mailto:${t("footer.contact.email")}`}
-                className="flex items-center gap-3 text-base text-secondary hover:text-primary transition-colors duration-300"
+                className="flex items-center gap-3 text-base text-slate-400 hover:text-cyan-400 transition-colors duration-300"
                 style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
@@ -221,8 +177,8 @@ const Footer = () => {
                 <span>{t("footer.contact.email")}</span>
               </a>
               <a
-                href="tel:+966555625068"
-                className="flex items-center gap-3 text-base text-secondary hover:text-primary transition-colors duration-300"
+                href="tel:+966552658605"
+                className="flex items-center gap-3 text-base text-slate-400 hover:text-cyan-400 transition-colors duration-300"
                 style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
@@ -238,10 +194,10 @@ const Footer = () => {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span dir="ltr">+966 55 562 5068</span>
+                <span dir="ltr">+966 55 265 8605</span>
               </a>
               <div
-                className="flex items-start gap-3 text-base text-secondary"
+                className="flex items-start gap-3 text-base text-slate-400"
                 style={{ fontFamily: "var(--font-moshreq)" }}
               >
                 <svg
@@ -271,8 +227,11 @@ const Footer = () => {
 
         {/* Copyright */}
         <div
-          className="mt-12 pt-8 border-t border-text-primary/10 text-center text-sm text-secondary"
-          style={{ fontFamily: "var(--font-moshreq)" }}
+          className="mt-12 pt-8 text-center text-sm text-slate-500"
+          style={{
+            fontFamily: "var(--font-moshreq)",
+            borderTop: "1px solid rgba(103, 232, 249, 0.1)",
+          }}
         >
           <p>
             © {new Date().getFullYear()} INNO. {t("footer.copyright")}
