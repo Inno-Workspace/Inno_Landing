@@ -10,6 +10,7 @@ import statsRoutes from "./routes/stats.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import managerRoutes from "./routes/manager.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import libraryRoutes from "./routes/library.routes.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use("/api/stats", statsRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/managers", managerRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/library", libraryRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {
