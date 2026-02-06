@@ -152,6 +152,19 @@ const Hero = () => {
             {/* Primary Button */}
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById("contact");
+                if (target) {
+                  const offset = target.getBoundingClientRect().top + window.scrollY - 80;
+                  const lenis = (window as unknown as { lenis?: { scrollTo: (target: number, opts: { duration: number; easing: (t: number) => number }) => void } }).lenis;
+                  if (lenis) {
+                    lenis.scrollTo(offset, { duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+                  } else {
+                    window.scrollTo({ top: offset, behavior: "smooth" });
+                  }
+                }
+              }}
               className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-semibold shadow-lg shadow-cyan-900/20 overflow-hidden transition-transform hover:scale-105"
               style={{ fontFamily: fontBody }}
             >
@@ -167,6 +180,19 @@ const Hero = () => {
             {/* Secondary Button */}
             <a
               href="#works"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById("works");
+                if (target) {
+                  const offset = target.getBoundingClientRect().top + window.scrollY - 80;
+                  const lenis = (window as unknown as { lenis?: { scrollTo: (target: number, opts: { duration: number; easing: (t: number) => number }) => void } }).lenis;
+                  if (lenis) {
+                    lenis.scrollTo(offset, { duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+                  } else {
+                    window.scrollTo({ top: offset, behavior: "smooth" });
+                  }
+                }
+              }}
               className="group px-8 py-4 rounded-xl border border-slate-600/50 text-slate-300 font-semibold hover:bg-slate-800/50 hover:text-white hover:border-cyan-500/50 transition-all duration-300"
               style={{ fontFamily: fontBody }}
             >
