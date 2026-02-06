@@ -259,24 +259,25 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center z-50 rounded-xl transition-all duration-300"
               aria-label="Toggle menu"
+              style={{
+                backgroundColor: isMenuOpen ? "rgba(103, 232, 249, 0.08)" : "transparent",
+                border: isMenuOpen ? "1px solid rgba(103, 232, 249, 0.15)" : "1px solid transparent",
+              }}
             >
-              <span
-                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                  isMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                }`}
-              />
-              <span
-                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                  isMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`w-5 h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
-                  isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                }`}
-              />
+              {isMenuOpen ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 6L6 18" />
+                  <path d="M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 7h16" />
+                  <path d="M4 12h12" />
+                  <path d="M4 17h8" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
@@ -288,20 +289,28 @@ const Header = () => {
           }`}
         >
           <div className="px-4 pb-4 pt-2 space-y-2 mt-2">
-            {(language === "ar" ? [...menuItems].reverse() : menuItems).map(
+            {menuItems.map(
               (item, index) => {
                 const isActive = activeSection === item.id;
+                const isAr = language === "ar";
                 return (
                   <a
                     key={index}
                     href={item.href}
                     onClick={(e) => handleLinkClick(e, item.href)}
-                    className="flex items-center text-base font-bold transition-all duration-200 h-11 px-4 rounded-lg leading-none"
+                    className={`flex items-center text-base font-bold transition-all duration-200 h-11 px-4 rounded-lg leading-none ${
+                      isAr ? "justify-end text-right" : "justify-start text-left"
+                    }`}
                     style={{
                       fontFamily: navFont,
                       color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.55)",
                       backgroundColor: isActive ? "rgba(103, 232, 249, 0.08)" : undefined,
-                      borderLeft: isActive ? "2px solid rgba(103, 232, 249, 0.5)" : "2px solid transparent",
+                      borderRight: isAr
+                        ? isActive ? "2px solid rgba(103, 232, 249, 0.5)" : "2px solid transparent"
+                        : undefined,
+                      borderLeft: !isAr
+                        ? isActive ? "2px solid rgba(103, 232, 249, 0.5)" : "2px solid transparent"
+                        : undefined,
                     }}
                   >
                     {t(item.labelKey)}
@@ -309,10 +318,11 @@ const Header = () => {
                 );
               }
             )}
-            <div className="pt-2">
-              <div className="px-4">
-                <LanguageSwitch />
-              </div>
+            <div
+              className="pt-3 mt-2 flex justify-center"
+              style={{ borderTop: "1px solid rgba(103, 232, 249, 0.12)" }}
+            >
+              <LanguageSwitch />
             </div>
           </div>
         </nav>
