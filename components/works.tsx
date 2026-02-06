@@ -48,15 +48,10 @@ const Works = () => {
       id="works"
       className="relative w-full overflow-hidden py-20 md:py-32"
     >
-      {/* Base gradient background - same as hero */}
-      <div 
-        className="absolute inset-0 bg-gradient-primary"
-        style={{
-          transform: "translate3d(0, 0, 0)",
-        }}
-      ></div>
+      {/* Base gradient background */}
+      <div className="absolute inset-0 bg-gradient-primary"></div>
 
-      {/* Optimized gradient overlays - combined layers */}
+      {/* Gradient overlays - combined layers */}
       <div
         className="absolute inset-0"
         style={{
@@ -65,12 +60,10 @@ const Works = () => {
             radial-gradient(ellipse 70% 50% at 85% 75%, rgba(13, 148, 136, 0.25) 0%, transparent 65%),
             radial-gradient(ellipse 50% 60% at 50% 50%, rgba(13, 148, 136, 0.28) 0%, transparent 70%)
           `,
-          filter: "blur(50px)",
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized spray texture - combined layers */}
+      {/* Spray texture - combined layers */}
       <div
         className="absolute inset-0"
         style={{
@@ -83,13 +76,10 @@ const Works = () => {
             radial-gradient(circle 10% at 75% 60%, rgba(146, 243, 255, 0.75) 0%, transparent 68%),
             radial-gradient(circle 7% at 25% 80%, rgba(146, 243, 255, 0.8) 0%, transparent 64%)
           `,
-          filter: "blur(40px)",
-          opacity: 1,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Fine spray dots - reduced count */}
+      {/* Fine spray dots */}
       <div
         className="absolute inset-0"
         style={{
@@ -101,22 +91,20 @@ const Works = () => {
             radial-gradient(circle 2% at 65% 58%, rgba(146, 243, 255, 0.85) 0%, transparent 50%)
           `,
           opacity: 0.7,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized noise texture */}
+      {/* Noise texture */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
           opacity: 0.25,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized lighter spots */}
+      {/* Lighter spots */}
       <div
         className="absolute inset-0"
         style={{
@@ -124,9 +112,7 @@ const Works = () => {
             radial-gradient(circle 22% at 20% 30%, rgba(146, 243, 255, 0.28) 0%, transparent 70%),
             radial-gradient(circle 25% at 75% 60%, rgba(103, 232, 249, 0.24) 0%, transparent 75%)
           `,
-          filter: "blur(50px)",
           mixBlendMode: "screen",
-          willChange: "transform",
         }}
       ></div>
 
@@ -159,10 +145,8 @@ const Works = () => {
             >
               {/* Card */}
               <div
-                className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-cyan-400/50 hover:bg-white/[0.08] hover:-translate-y-3 glass-card-hover group-hover:shadow-2xl"
+                className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-cyan-400/50 hover:bg-white/[0.08] hover:-translate-y-3 group-hover:shadow-2xl"
                 style={{
-                  backdropFilter: "blur(10px)",
-                  willChange: "transform",
                   boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                 }}
               >
@@ -179,7 +163,7 @@ const Works = () => {
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4 z-10">
                     <span
-                      className="inline-block px-4 py-1.5 text-xs font-bold rounded-full backdrop-blur-md transition-all duration-300 group-hover:scale-105"
+                      className="inline-block px-4 py-1.5 text-xs font-bold rounded-full transition-all duration-300 group-hover:scale-105"
                       style={{
                         background:
                           "linear-gradient(135deg, rgba(103, 232, 249, 0.2), rgba(20, 184, 166, 0.25))",
@@ -192,13 +176,12 @@ const Works = () => {
                       {work.category}
                     </span>
                   </div>
-                  
+
                   {/* Gradient overlay on hover */}
-                  <div 
+                  <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
                       background: "linear-gradient(180deg, transparent 0%, rgba(4, 47, 46, 0.8) 100%)",
-                      willChange: "opacity",
                     }}
                   ></div>
                 </div>

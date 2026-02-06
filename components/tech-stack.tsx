@@ -10,7 +10,6 @@ const panelStyle: CSSProperties = {
     "linear-gradient(160deg, rgba(10, 52, 63, 0.9), rgba(16, 93, 108, 0.85))",
   border: "1px solid rgba(146, 243, 255, 0.25)",
   boxShadow: "0 25px 60px rgba(5, 25, 32, 0.35)",
-  backdropFilter: "blur(16px)",
 };
 
 const frostedCardStyle: CSSProperties = {
@@ -19,7 +18,6 @@ const frostedCardStyle: CSSProperties = {
   border: "1px solid rgba(146, 243, 255, 0.28)",
   boxShadow:
     "0 15px 32px rgba(6, 22, 28, 0.3), 0 0 20px rgba(103, 232, 249, 0.1)",
-  backdropFilter: "blur(14px)",
   transition: "all 0.3s ease",
 };
 
@@ -29,7 +27,6 @@ const techCardStyle: CSSProperties = {
   border: "1px solid rgba(146, 243, 255, 0.3)",
   boxShadow:
     "0 12px 24px rgba(7, 25, 30, 0.28), 0 0 15px rgba(103, 232, 249, 0.15)",
-  backdropFilter: "blur(16px)",
   transition: "all 0.3s ease",
 };
 
@@ -77,59 +74,10 @@ const TechStack = () => {
 
   return (
     <div className="relative w-full overflow-hidden py-20 md:py-32">
-      {/* SVG Filters for texture effects */}
-      <svg className="absolute w-0 h-0">
-        <defs>
-          <filter id="brush-texture-tech">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.9"
-              numOctaves="4"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="8"
-              result="displacement"
-            />
-          </filter>
-          <filter id="spray-texture-tech">
-            <feTurbulence
-              type="turbulence"
-              baseFrequency="0.95"
-              numOctaves="3"
-              result="turbulence"
-            />
-            <feGaussianBlur in="turbulence" stdDeviation="2" result="blur" />
-            <feColorMatrix
-              in="blur"
-              type="saturate"
-              values="0"
-              result="desaturated"
-            />
-          </filter>
-          <filter id="noise-filter-tech">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.8"
-              numOctaves="3"
-              stitchTiles="stitch"
-            />
-          </filter>
-        </defs>
-      </svg>
-
       {/* Base gradient background */}
-      <div 
-        className="absolute inset-0 bg-gradient-primary"
-        style={{
-          transform: "translate3d(0, 0, 0)",
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-gradient-primary"></div>
 
-
-      {/* Optimized gradient overlays - combined layers */}
+      {/* Gradient overlays - combined layers */}
       <div
         className="absolute inset-0"
         style={{
@@ -138,12 +86,10 @@ const TechStack = () => {
             radial-gradient(ellipse 70% 50% at 85% 75%, rgba(13, 148, 136, 0.25) 0%, transparent 65%),
             radial-gradient(ellipse 50% 60% at 50% 50%, rgba(13, 148, 136, 0.28) 0%, transparent 70%)
           `,
-          filter: "blur(50px)",
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized spray texture - combined vibrant layers */}
+      {/* Spray texture - combined vibrant layers */}
       <div
         className="absolute inset-0"
         style={{
@@ -156,13 +102,10 @@ const TechStack = () => {
             radial-gradient(circle 12% at 72% 58%, rgba(34, 211, 238, 0.88) 0%, transparent 70%),
             radial-gradient(circle 9% at 88% 35%, rgba(103, 232, 249, 0.85) 0%, transparent 68%)
           `,
-          filter: "blur(42px)",
-          opacity: 1,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Fine spray dots - reduced count */}
+      {/* Fine spray dots */}
       <div
         className="absolute inset-0"
         style={{
@@ -174,22 +117,20 @@ const TechStack = () => {
             radial-gradient(circle 2.5% at 62% 55%, rgba(103, 232, 249, 0.88) 0%, transparent 55%)
           `,
           opacity: 0.75,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized noise texture */}
+      {/* Noise texture */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           mixBlendMode: "overlay",
           opacity: 0.28,
-          willChange: "transform",
         }}
       ></div>
 
-      {/* Optimized lighter spots */}
+      {/* Lighter spots */}
       <div
         className="absolute inset-0"
         style={{
@@ -197,9 +138,7 @@ const TechStack = () => {
             radial-gradient(circle 25% at 22% 32%, rgba(56, 189, 248, 0.4) 0%, transparent 75%),
             radial-gradient(circle 28% at 72% 58%, rgba(34, 211, 238, 0.35) 0%, transparent 78%)
           `,
-          filter: "blur(52px)",
           mixBlendMode: "screen",
-          willChange: "transform",
         }}
       ></div>
 
@@ -454,12 +393,10 @@ const TechStack = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: index * 0.03 }}
-                    whileHover={{ scale: 1.03 }}
                     className="flex items-center justify-center"
-                    style={{ willChange: "transform" }}
                   >
                     <div
-                      className="relative rounded-xl p-4 md:p-5 flex items-center justify-center"
+                      className="relative rounded-xl p-4 md:p-5 flex items-center justify-center hover:scale-[1.03] transition-transform duration-300"
                       style={techCardStyle}
                     >
                       <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
