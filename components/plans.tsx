@@ -316,6 +316,71 @@ const Plans = () => {
             );
           })}
         </div>
+
+        {/* Custom Solutions Card — below the grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="max-w-7xl mx-auto mt-10 lg:mt-14"
+        >
+          <div
+            className="relative rounded-3xl overflow-hidden text-center"
+            style={{
+              background: "linear-gradient(175deg, #0c2633, #0a1e2b)",
+              border: "1px solid rgba(103, 232, 249, 0.06)",
+              boxShadow: "0 20px 50px -15px rgba(0, 0, 0, 0.35)",
+            }}
+          >
+            <div className="px-10 py-14 md:px-16 md:py-18">
+              <h3
+                className="text-3xl md:text-4xl font-bold text-white mb-4"
+                style={{ fontFamily: "var(--font-devil-breeze)" }}
+              >
+                {t("plans.custom.title")}
+              </h3>
+
+              <div className="w-16 h-px mx-auto mb-6" style={{ background: "rgba(103, 232, 249, 0.15)" }} />
+
+              <p
+                className="text-base md:text-xl leading-relaxed max-w-xl mx-auto mb-10"
+                style={{ fontFamily: "var(--font-moshreq)", color: "#7d95a8" }}
+              >
+                {t("plans.custom.desc")}
+              </p>
+
+              <button
+                onClick={() => {
+                  const msg = language === "ar"
+                    ? "مرحباً! أبغى حل تقني مخصص"
+                    : "Hello! I need a custom tech solution.";
+                  window.open(
+                    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
+                    "_blank"
+                  );
+                }}
+                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer group"
+                style={{
+                  fontFamily: "var(--font-moshreq)",
+                  background: "transparent",
+                  color: "#5eead4",
+                  border: "1px solid rgba(103, 232, 249, 0.12)",
+                }}
+              >
+                {t("plans.custom.cta")}
+                <svg
+                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
