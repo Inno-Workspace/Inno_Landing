@@ -9,7 +9,6 @@ const WHATSAPP_NUMBER = "966552658605";
 interface Plan {
   titleKey: string;
   descKey: string;
-  forKey: string;
   featureKeys: string[];
   icon: ReactNode;
   featured?: boolean;
@@ -19,7 +18,6 @@ const plans: Plan[] = [
   {
     titleKey: "plans.plan1.title",
     descKey: "plans.plan1.desc",
-    forKey: "plans.plan1.for",
     featureKeys: [
       "plans.plan1.f1",
       "plans.plan1.f2",
@@ -28,15 +26,14 @@ const plans: Plan[] = [
       "plans.plan1.f5",
     ],
     icon: (
-      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
       </svg>
     ),
   },
   {
     titleKey: "plans.plan2.title",
     descKey: "plans.plan2.desc",
-    forKey: "plans.plan2.for",
     featureKeys: [
       "plans.plan2.f1",
       "plans.plan2.f2",
@@ -46,8 +43,8 @@ const plans: Plan[] = [
       "plans.plan2.f6",
     ],
     icon: (
-      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
       </svg>
     ),
     featured: true,
@@ -55,7 +52,6 @@ const plans: Plan[] = [
   {
     titleKey: "plans.plan3.title",
     descKey: "plans.plan3.desc",
-    forKey: "plans.plan3.for",
     featureKeys: [
       "plans.plan3.f1",
       "plans.plan3.f2",
@@ -64,8 +60,8 @@ const plans: Plan[] = [
       "plans.plan3.f5",
     ],
     icon: (
-      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
       </svg>
     ),
   },
@@ -86,37 +82,23 @@ const Plans = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden py-20 md:py-32">
-      {/* Light cyan-teal background — matching contact */}
+    <section className="relative w-full overflow-hidden py-24 md:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#ecfeff] via-[#f0fdfa] to-[#ecfeff]" />
 
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.3]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(14, 116, 144, 0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(14, 116, 144, 0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      {/* Glow orbs — desktop */}
-      <div className="hidden md:block absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-teal-300/20 rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-300/15 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
+      <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-20"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16 md:mb-24"
         >
           <h2
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-4"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
@@ -128,15 +110,15 @@ const Plans = () => {
             {t("plans.title")}
           </h2>
           <p
-            className="text-xl md:text-2xl lg:text-3xl max-w-3xl"
-            style={{ fontFamily: "var(--font-moshreq)", color: "#155e75" }}
+            className="text-lg md:text-2xl max-w-2xl mx-auto"
+            style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}
           >
             {t("plans.subtitle")}
           </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-5 items-start max-w-7xl mx-auto lg:items-center">
           {plans.map((plan, index) => {
             const title = t(plan.titleKey);
             const isFeatured = plan.featured;
@@ -144,52 +126,48 @@ const Plans = () => {
             return (
               <motion.div
                 key={plan.titleKey}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="relative flex"
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className={`relative ${isFeatured ? "lg:z-10 lg:-my-10" : "lg:z-0"}`}
               >
-                {/* Glow ring behind featured */}
-                {isFeatured && (
-                  <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-teal-400/40 via-cyan-400/20 to-teal-400/40 blur-[2px]" />
-                )}
-
                 <div
-                  className={`relative flex flex-col w-full rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 ${
-                    isFeatured ? "ring-1 ring-teal-400/30" : ""
-                  }`}
+                  className="relative flex flex-col w-full rounded-3xl overflow-hidden"
                   style={{
-                    background: "linear-gradient(160deg, #0a1e2b, #0c2a3a)",
+                    background: isFeatured
+                      ? "linear-gradient(175deg, #0d2d3d, #091c28)"
+                      : "linear-gradient(175deg, #0c2633, #0a1e2b)",
                     border: isFeatured
-                      ? "1px solid rgba(62, 207, 180, 0.35)"
-                      : "1px solid rgba(62, 207, 180, 0.15)",
+                      ? "1px solid rgba(103, 232, 249, 0.2)"
+                      : "1px solid rgba(103, 232, 249, 0.06)",
                     boxShadow: isFeatured
-                      ? "0 25px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(62, 207, 180, 0.08)"
-                      : "0 25px 60px rgba(0, 0, 0, 0.3)",
+                      ? "0 40px 80px -20px rgba(0, 0, 0, 0.5)"
+                      : "0 20px 50px -15px rgba(0, 0, 0, 0.35)",
                   }}
                 >
-                  {/* Top accent line */}
+                  {/* Featured top glow */}
                   {isFeatured && (
                     <div
-                      className="absolute top-0 left-0 right-0 h-[2px]"
+                      className="absolute top-0 left-[15%] right-[15%] h-px"
                       style={{
-                        background: "linear-gradient(90deg, transparent, #14b8a6, #06b6d4, #14b8a6, transparent)",
+                        background: "linear-gradient(90deg, transparent, #22d3ee, transparent)",
                       }}
                     />
                   )}
 
-                  <div className="p-8 md:p-10 flex flex-col flex-1">
+                  <div className={`flex flex-col flex-1 ${isFeatured ? "px-10 py-16 md:px-14 md:py-20" : "px-9 py-14 md:px-12 md:py-18"}`}>
+
                     {/* Icon + Badge */}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-12">
                       <div
-                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                        className="w-16 h-16 rounded-2xl flex items-center justify-center"
                         style={{
+                          color: isFeatured ? "#fff" : "#67e8f9",
                           background: isFeatured
                             ? "linear-gradient(135deg, #0891b2, #0d9488)"
-                            : "rgba(0, 30, 43, 0.9)",
-                          border: isFeatured ? "none" : "1px solid rgba(62, 207, 180, 0.2)",
-                          boxShadow: isFeatured ? "0 8px 24px rgba(0, 0, 0, 0.3)" : "none",
+                            : "rgba(103, 232, 249, 0.06)",
+                          border: isFeatured ? "none" : "1px solid rgba(103, 232, 249, 0.1)",
                         }}
                       >
                         {plan.icon}
@@ -197,12 +175,12 @@ const Plans = () => {
 
                       {isFeatured && (
                         <span
-                          className="px-3 py-1 rounded-full text-xs font-bold"
+                          className="px-4 py-1.5 rounded-full text-xs font-bold"
                           style={{
                             fontFamily: "var(--font-moshreq)",
-                            background: "linear-gradient(135deg, rgba(8, 145, 178, 0.2), rgba(13, 148, 136, 0.2))",
-                            color: "#5eead4",
-                            border: "1px solid rgba(94, 234, 212, 0.25)",
+                            background: "rgba(34, 211, 238, 0.08)",
+                            color: "#22d3ee",
+                            border: "1px solid rgba(34, 211, 238, 0.15)",
                           }}
                         >
                           {t("plans.popular")}
@@ -212,7 +190,7 @@ const Plans = () => {
 
                     {/* Title */}
                     <h3
-                      className="text-2xl md:text-3xl font-bold text-white mb-2"
+                      className={`font-bold text-white ${isFeatured ? "text-4xl md:text-5xl mb-6" : "text-3xl md:text-4xl mb-5"}`}
                       style={{ fontFamily: "var(--font-devil-breeze)" }}
                     >
                       {title}
@@ -220,94 +198,78 @@ const Plans = () => {
 
                     {/* Description */}
                     <p
-                      className="text-sm md:text-base leading-relaxed mb-2"
-                      style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}
+                      className={`leading-relaxed ${isFeatured ? "text-lg md:text-xl mb-14" : "text-base md:text-lg mb-12"}`}
+                      style={{ fontFamily: "var(--font-moshreq)", color: "#7d95a8" }}
                     >
                       {t(plan.descKey)}
                     </p>
 
-                    {/* For who */}
-                    <p
-                      className="text-xs mb-6"
-                      style={{ fontFamily: "var(--font-moshreq)", color: "#64748b" }}
-                    >
-                      {t(plan.forKey)}
-                    </p>
-
-                    {/* Divider */}
-                    <div
-                      className="h-px w-full mb-6"
-                      style={{ background: "linear-gradient(90deg, transparent, rgba(62, 207, 180, 0.2), transparent)" }}
-                    />
-
-                    {/* What's included */}
-                    <p
-                      className="text-sm font-bold mb-4"
-                      style={{ fontFamily: "var(--font-moshreq)", color: "#e2e8f0" }}
-                    >
-                      {t("plans.includes")}
-                    </p>
-
                     {/* Features */}
-                    <ul className="space-y-3 mb-8 flex-1">
-                      {plan.featureKeys.map((key, fIndex) => (
-                        <motion.li
-                          key={key}
-                          initial={{ opacity: 0, x: language === "ar" ? 15 : -15 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: index * 0.15 + fIndex * 0.06 }}
-                          className="flex items-center gap-3"
-                        >
-                          <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none">
-                            <circle cx="8" cy="8" r="8" fill="rgba(13, 148, 136, 0.15)" />
-                            <path d="M5 8l2 2 4-4" stroke="#14b8a6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                    <ul className={`flex-1 ${isFeatured ? "space-y-6 mb-16" : "space-y-5 mb-14"}`}>
+                      {plan.featureKeys.map((key) => (
+                        <li key={key} className="flex items-center gap-4">
+                          <div
+                            className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{
+                              background: isFeatured
+                                ? "rgba(34, 211, 238, 0.12)"
+                                : "rgba(13, 148, 136, 0.1)",
+                            }}
+                          >
+                            <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+                              <path
+                                d="M3 6l2 2 4-4"
+                                stroke={isFeatured ? "#22d3ee" : "#14b8a6"}
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
                           <span
-                            className="text-sm"
-                            style={{ fontFamily: "var(--font-moshreq)", color: "#cbd5e1" }}
+                            className={isFeatured ? "text-lg" : "text-base md:text-lg"}
+                            style={{
+                              fontFamily: "var(--font-moshreq)",
+                              color: isFeatured ? "#cbd5e1" : "#8899a8",
+                            }}
                           >
                             {t(key)}
                           </span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
 
                     {/* CTA */}
                     <button
                       onClick={() => handleWhatsApp(title)}
-                      className="w-full px-6 py-4 rounded-xl font-bold text-base transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group cursor-pointer"
+                      className={`w-full rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer group ${
+                        isFeatured ? "py-6 text-lg" : "py-5 text-base md:text-lg"
+                      }`}
                       style={{
                         fontFamily: "var(--font-moshreq)",
                         background: isFeatured
                           ? "linear-gradient(135deg, #0891b2, #0d9488)"
-                          : "rgba(0, 30, 43, 0.9)",
+                          : "transparent",
                         color: isFeatured ? "#ffffff" : "#5eead4",
-                        border: isFeatured ? "none" : "1px solid rgba(62, 207, 180, 0.2)",
+                        border: isFeatured
+                          ? "none"
+                          : "1px solid rgba(103, 232, 249, 0.12)",
                         boxShadow: isFeatured
-                          ? "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(62, 207, 180, 0.1)"
+                          ? "0 12px 40px -8px rgba(8, 145, 178, 0.4)"
                           : "none",
                       }}
                     >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
+                      <span className="flex items-center justify-center gap-2">
                         {t("plans.cta")}
                         <svg
-                          className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"
+                          className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </span>
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: isFeatured
-                            ? "linear-gradient(135deg, #14b8a6 0%, #06b6d4 50%, #0891b2 100%)"
-                            : "linear-gradient(135deg, rgba(8, 145, 178, 0.15), rgba(13, 148, 136, 0.15))",
-                        }}
-                      />
                     </button>
                   </div>
                 </div>
