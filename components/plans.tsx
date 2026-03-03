@@ -8,7 +8,9 @@ const WHATSAPP_NUMBER = "966552658605";
 
 interface Plan {
   titleKey: string;
+  subtitleKey?: string;
   descKey: string;
+  priceKey: string;
   featureKeys: string[];
   icon: ReactNode;
   featured?: boolean;
@@ -17,13 +19,16 @@ interface Plan {
 const plans: Plan[] = [
   {
     titleKey: "plans.plan1.title",
+    subtitleKey: "plans.plan1.subtitle",
     descKey: "plans.plan1.desc",
+    priceKey: "plans.plan1.price",
     featureKeys: [
       "plans.plan1.f1",
       "plans.plan1.f2",
       "plans.plan1.f3",
       "plans.plan1.f4",
       "plans.plan1.f5",
+      "plans.plan1.f6",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -34,6 +39,7 @@ const plans: Plan[] = [
   {
     titleKey: "plans.plan2.title",
     descKey: "plans.plan2.desc",
+    priceKey: "plans.plan2.price",
     featureKeys: [
       "plans.plan2.f1",
       "plans.plan2.f2",
@@ -41,6 +47,7 @@ const plans: Plan[] = [
       "plans.plan2.f4",
       "plans.plan2.f5",
       "plans.plan2.f6",
+      "plans.plan2.f7",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -52,12 +59,15 @@ const plans: Plan[] = [
   {
     titleKey: "plans.plan3.title",
     descKey: "plans.plan3.desc",
+    priceKey: "plans.plan3.price",
     featureKeys: [
       "plans.plan3.f1",
       "plans.plan3.f2",
       "plans.plan3.f3",
       "plans.plan3.f4",
       "plans.plan3.f5",
+      "plans.plan3.f6",
+      "plans.plan3.f7",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -159,7 +169,7 @@ const Plans = () => {
                   <div className={`flex flex-col flex-1 ${isFeatured ? "px-10 py-16 md:px-14 md:py-20" : "px-9 py-14 md:px-12 md:py-18"}`}>
 
                     {/* Icon + Badge */}
-                    <div className="flex items-center justify-between mb-12">
+                    <div className="flex items-center justify-between mb-10">
                       <div
                         className="w-16 h-16 rounded-2xl flex items-center justify-center"
                         style={{
@@ -190,22 +200,51 @@ const Plans = () => {
 
                     {/* Title */}
                     <h3
-                      className={`font-bold text-white ${isFeatured ? "text-4xl md:text-5xl mb-6" : "text-3xl md:text-4xl mb-5"}`}
+                      className={`font-bold text-white ${isFeatured ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}
                       style={{ fontFamily: "var(--font-devil-breeze)" }}
                     >
                       {title}
                     </h3>
 
+                    {/* Subtitle */}
+                    {plan.subtitleKey && (
+                      <p
+                        className="text-base md:text-lg mt-1"
+                        style={{ fontFamily: "var(--font-moshreq)", color: "#67e8f9" }}
+                      >
+                        {t(plan.subtitleKey)}
+                      </p>
+                    )}
+
                     {/* Description */}
                     <p
-                      className={`leading-relaxed ${isFeatured ? "text-lg md:text-xl mb-14" : "text-base md:text-lg mb-12"}`}
+                      className={`leading-relaxed mt-4 ${isFeatured ? "text-base md:text-lg" : "text-sm md:text-base"}`}
                       style={{ fontFamily: "var(--font-moshreq)", color: "#7d95a8" }}
                     >
                       {t(plan.descKey)}
                     </p>
 
+                    {/* Price */}
+                    <div className="mt-8 mb-10 flex items-baseline gap-2">
+                      <span
+                        className={`font-bold text-white ${isFeatured ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"}`}
+                        style={{ fontFamily: "var(--font-devil-breeze)" }}
+                      >
+                        {t(plan.priceKey)}
+                      </span>
+                      <span
+                        className="text-base md:text-lg"
+                        style={{ fontFamily: "var(--font-moshreq)", color: "#64748b" }}
+                      >
+                        {t("plans.currency")}
+                      </span>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="h-px w-full mb-10" style={{ background: "rgba(103, 232, 249, 0.08)" }} />
+
                     {/* Features */}
-                    <ul className={`flex-1 ${isFeatured ? "space-y-6 mb-16" : "space-y-5 mb-14"}`}>
+                    <ul className={`flex-1 ${isFeatured ? "space-y-5 mb-14" : "space-y-5 mb-12"}`}>
                       {plan.featureKeys.map((key) => (
                         <li key={key} className="flex items-center gap-4">
                           <div
@@ -227,7 +266,7 @@ const Plans = () => {
                             </svg>
                           </div>
                           <span
-                            className={isFeatured ? "text-lg" : "text-base md:text-lg"}
+                            className={isFeatured ? "text-base md:text-lg" : "text-base"}
                             style={{
                               fontFamily: "var(--font-moshreq)",
                               color: isFeatured ? "#cbd5e1" : "#8899a8",
