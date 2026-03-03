@@ -105,7 +105,7 @@ const Plans = () => {
           className="text-center mb-16 md:mb-24"
         >
           <h2
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6"
+            className="text-3xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-6"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
@@ -117,7 +117,7 @@ const Plans = () => {
             {t("plans.title")}
           </h2>
           <p
-            className="text-lg md:text-2xl max-w-2xl mx-auto"
+            className="text-sm md:text-2xl max-w-2xl mx-auto"
             style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}
           >
             {t("plans.subtitle")}
@@ -163,12 +163,12 @@ const Plans = () => {
                     />
                   )}
 
-                  <div className={`flex flex-col flex-1 ${isFeatured ? "px-10 py-16 md:px-14 md:py-20" : "px-9 py-14 md:px-12 md:py-18"}`}>
+                  <div className={`flex flex-col flex-1 ${isFeatured ? "px-6 py-10 md:px-14 md:py-20" : "px-6 py-10 md:px-12 md:py-18"}`}>
 
                     {/* Icon + Badge */}
-                    <div className="flex items-center justify-between mb-10">
+                    <div className="flex items-center justify-between mb-6 md:mb-10">
                       <div
-                        className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                        className="w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center"
                         style={{
                           color: isFeatured ? "#fff" : "#67e8f9",
                           background: isFeatured
@@ -197,7 +197,7 @@ const Plans = () => {
 
                     {/* Title */}
                     <h3
-                      className={`font-bold text-white ${isFeatured ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}
+                      className={`font-bold text-white ${isFeatured ? "text-2xl md:text-5xl" : "text-2xl md:text-4xl"}`}
                       style={{ fontFamily: "var(--font-devil-breeze)" }}
                     >
                       {title}
@@ -206,7 +206,7 @@ const Plans = () => {
                     {/* Subtitle */}
                     {plan.subtitleKey && (
                       <p
-                        className="text-base md:text-lg mt-1"
+                        className="text-sm md:text-lg mt-1"
                         style={{ fontFamily: "var(--font-moshreq)", color: "#67e8f9" }}
                       >
                         {t(plan.subtitleKey)}
@@ -215,22 +215,22 @@ const Plans = () => {
 
                     {/* Description */}
                     <p
-                      className={`leading-relaxed mt-4 ${isFeatured ? "text-base md:text-lg" : "text-sm md:text-base"}`}
+                      className={`leading-relaxed mt-3 md:mt-4 ${isFeatured ? "text-sm md:text-lg" : "text-xs md:text-base"}`}
                       style={{ fontFamily: "var(--font-moshreq)", color: "#7d95a8" }}
                     >
                       {t(plan.descKey)}
                     </p>
 
                     {/* Price */}
-                    <div className="mt-8 mb-10 flex items-baseline gap-2">
+                    <div className="mt-5 md:mt-8 mb-6 md:mb-10 flex items-baseline gap-2">
                       <span
-                        className={`font-bold text-white ${isFeatured ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"}`}
+                        className={`font-bold text-white ${isFeatured ? "text-3xl md:text-6xl" : "text-3xl md:text-5xl"}`}
                         style={{ fontFamily: "var(--font-devil-breeze)" }}
                       >
                         {t(plan.priceKey)}
                       </span>
                       <span
-                        className="text-base md:text-lg"
+                        className="text-sm md:text-lg"
                         style={{ fontFamily: "var(--font-moshreq)", color: "#64748b" }}
                       >
                         {t("plans.currency")}
@@ -238,14 +238,14 @@ const Plans = () => {
                     </div>
 
                     {/* Divider */}
-                    <div className="h-px w-full mb-10" style={{ background: "rgba(103, 232, 249, 0.08)" }} />
+                    <div className="h-px w-full mb-6 md:mb-10" style={{ background: "rgba(103, 232, 249, 0.08)" }} />
 
                     {/* Features */}
-                    <ul className={`flex-1 ${isFeatured ? "space-y-5 mb-14" : "space-y-5 mb-12"}`}>
+                    <ul className={`flex-1 ${isFeatured ? "space-y-3 md:space-y-5 mb-8 md:mb-14" : "space-y-3 md:space-y-5 mb-8 md:mb-12"}`}>
                       {plan.featureKeys.map((key) => (
-                        <li key={key} className="flex items-center gap-4">
+                        <li key={key} className="flex items-center gap-3 md:gap-4">
                           <div
-                            className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                            className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center flex-shrink-0"
                             style={{
                               background: isFeatured
                                 ? "rgba(34, 211, 238, 0.12)"
@@ -263,7 +263,7 @@ const Plans = () => {
                             </svg>
                           </div>
                           <span
-                            className={isFeatured ? "text-base md:text-lg" : "text-base"}
+                            className={isFeatured ? "text-sm md:text-lg" : "text-sm md:text-base"}
                             style={{
                               fontFamily: "var(--font-moshreq)",
                               color: isFeatured ? "#cbd5e1" : "#8899a8",
@@ -279,7 +279,7 @@ const Plans = () => {
                     <button
                       onClick={() => handleBuyPlan(title, t(plan.priceKey), t(plan.descKey))}
                       className={`w-full rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer group ${
-                        isFeatured ? "py-6 text-lg" : "py-5 text-base md:text-lg"
+                        isFeatured ? "py-4 md:py-6 text-base md:text-lg" : "py-3.5 md:py-5 text-sm md:text-lg"
                       }`}
                       style={{
                         fontFamily: "var(--font-moshreq)",
