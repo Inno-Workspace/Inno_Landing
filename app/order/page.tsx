@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
 
@@ -9,9 +9,11 @@ const WHATSAPP_NUMBER = "966552658605";
 
 function OrderForm() {
   const { t, language } = useLanguage();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") || "";
   const price = searchParams.get("price") || "";
+  const desc = searchParams.get("desc") || "";
 
   const [form, setForm] = useState({
     name: "",
@@ -31,7 +33,10 @@ function OrderForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Step 2 (payment) will be added later
+    localStorage.setItem("orderForm", JSON.stringify({ ...form, plan, price, desc }));
+    router.push(
+      `/order/payment?plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&name=${encodeURIComponent(form.name)}&desc=${encodeURIComponent(desc)}`
+    );
   };
 
   const inputStyle = {
@@ -162,7 +167,6 @@ function OrderForm() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder={t("order.namePlaceholder")}
-                  required
                   className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
                   style={inputStyle}
                 />
@@ -179,7 +183,6 @@ function OrderForm() {
                   value={form.phone}
                   onChange={handleChange}
                   placeholder={t("order.phonePlaceholder")}
-                  required
                   dir="ltr"
                   className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
                   style={inputStyle}
@@ -197,7 +200,6 @@ function OrderForm() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder={t("order.emailPlaceholder")}
-                  required
                   dir="ltr"
                   className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
                   style={inputStyle}
@@ -215,7 +217,6 @@ function OrderForm() {
                   value={form.business}
                   onChange={handleChange}
                   placeholder={t("order.businessPlaceholder")}
-                  required
                   className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
                   style={inputStyle}
                 />
@@ -274,7 +275,6 @@ function OrderForm() {
                   value={form.country}
                   onChange={handleChange}
                   placeholder={t("order.countryPlaceholder")}
-                  required
                   className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
                   style={inputStyle}
                 />

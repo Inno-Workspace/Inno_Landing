@@ -82,9 +82,9 @@ const Plans = () => {
   const { t, language } = useLanguage();
   const router = useRouter();
 
-  const handleBuyPlan = (planTitle: string, planPrice: string) => {
+  const handleBuyPlan = (planTitle: string, planPrice: string, planDesc: string) => {
     router.push(
-      `/order?plan=${encodeURIComponent(planTitle)}&price=${encodeURIComponent(planPrice)}`
+      `/order?plan=${encodeURIComponent(planTitle)}&price=${encodeURIComponent(planPrice)}&desc=${encodeURIComponent(planDesc)}`
     );
   };
 
@@ -277,7 +277,7 @@ const Plans = () => {
 
                     {/* CTA */}
                     <button
-                      onClick={() => handleBuyPlan(title, t(plan.priceKey))}
+                      onClick={() => handleBuyPlan(title, t(plan.priceKey), t(plan.descKey))}
                       className={`w-full rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer group ${
                         isFeatured ? "py-6 text-lg" : "py-5 text-base md:text-lg"
                       }`}
