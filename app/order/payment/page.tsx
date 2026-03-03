@@ -1,12 +1,13 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
 
 function PaymentContent() {
   const { t, language } = useLanguage();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") || "";
   const price = searchParams.get("price") || "";
@@ -23,6 +24,35 @@ function PaymentContent() {
       <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
 
       <div className="relative z-10 container mx-auto px-6 py-16 md:py-24">
+        {/* Back Button */}
+        <motion.button
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          onClick={() => router.back()}
+          dir="ltr"
+          className="flex items-center justify-center gap-2 mb-8 px-10 py-4 rounded-2xl text-lg font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          style={{
+            fontFamily: "var(--font-moshreq)",
+            background: "linear-gradient(135deg, #0891b2, #0d9488)",
+            color: "#ffffff",
+            border: "none",
+            boxShadow: "0 12px 40px -8px rgba(8, 145, 178, 0.4)",
+            marginInlineStart: "0",
+            marginInlineEnd: "auto",
+          }}
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          {language === "ar" ? "رجوع" : "Back"}
+        </motion.button>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
