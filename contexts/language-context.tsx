@@ -247,7 +247,7 @@ const translations = {
     "order.descriptionPlaceholder": "قلنا وش تحتاج بكلمات بسيطة...",
     "order.cta": "إنتقل للدفع",
     "order.footer": "تواصل معنا في حال وجود أي استفسار",
-    "payment.greeting": "أهلاً بك يا {name} 👋 , يرجى إختيار طريقة الدفع المناسبة",
+    "payment.greeting": "أهلاً بك {name} , يرجى إختيار طريقة الدفع المناسبة",
     "payment.step": "الخطوة 2 من 2",
     "payment.serviceSummary": "ملخص الخدمة",
     "payment.price": "السعر",
