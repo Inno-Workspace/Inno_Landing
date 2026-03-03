@@ -298,7 +298,7 @@ const Plans = () => {
                       <span className="flex items-center justify-center gap-2">
                         {t("plans.cta")}
                         <svg
-                          className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                          className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
