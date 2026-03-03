@@ -21,6 +21,7 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { labelKey: "menu.home", href: "#", id: "home" },
   { labelKey: "menu.about", href: "#about", id: "about" },
+  { labelKey: "menu.plans", href: "#plans", id: "plans" },
   { labelKey: "menu.works", href: "#works", id: "works" },
   { labelKey: "menu.contact", href: "#contact", id: "contact" },
 ];

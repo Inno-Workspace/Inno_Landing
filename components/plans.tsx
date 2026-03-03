@@ -89,7 +89,7 @@ const Plans = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden py-24 md:py-36">
+    <section id="plans" className="relative w-full overflow-hidden py-24 md:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#ecfeff] via-[#f0fdfa] to-[#ecfeff]" />
 
       <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
