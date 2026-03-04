@@ -76,7 +76,7 @@ const Hero = () => {
             className="inline-flex items-center px-4 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-950/30 backdrop-blur-md"
           >
             <span className="text-cyan-400 text-xs md:text-sm font-medium tracking-wider" style={{ fontFamily: fontBody }}>
-              {isAr ? "ابتكار • تطوير • تحويل رقمي" : "Innovation • Development • Digital Transformation"}
+              {isAr ? "حلول رقمية مخصصة لك" : "Innovation • Development • Digital Transformation"}
             </span>
           </motion.div>
 
@@ -117,7 +117,7 @@ const Hero = () => {
                 >
                   {isAr ? (
                     <>
-                      شريكك التقني
+                      منتجك الإلكتروني جاهز خلال أيام
                     </>
                   ) : (
                     <>

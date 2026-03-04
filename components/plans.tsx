@@ -30,6 +30,8 @@ const plans: Plan[] = [
       "plans.plan1.f4",
       "plans.plan1.f5",
       "plans.plan1.f6",
+      "plans.plan1.f7",
+      "plans.plan1.f8",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -39,6 +41,7 @@ const plans: Plan[] = [
   },
   {
     titleKey: "plans.plan2.title",
+    subtitleKey: "plans.plan2.subtitle",
     descKey: "plans.plan2.desc",
     priceKey: "plans.plan2.price",
     featureKeys: [
@@ -49,6 +52,9 @@ const plans: Plan[] = [
       "plans.plan2.f5",
       "plans.plan2.f6",
       "plans.plan2.f7",
+      "plans.plan2.f8",
+      "plans.plan2.f9",
+      "plans.plan2.f10",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -59,6 +65,7 @@ const plans: Plan[] = [
   },
   {
     titleKey: "plans.plan3.title",
+    subtitleKey: "plans.plan3.subtitle",
     descKey: "plans.plan3.desc",
     priceKey: "plans.plan3.price",
     featureKeys: [
@@ -69,6 +76,7 @@ const plans: Plan[] = [
       "plans.plan3.f5",
       "plans.plan3.f6",
       "plans.plan3.f7",
+      "plans.plan3.f8",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
