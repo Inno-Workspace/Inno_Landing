@@ -37,7 +37,7 @@ const Works = () => {
       id: 3,
       title: language === "ar" ? "وكالة الصناعية" : "Al-Sinaiya Agency",
       description: language === "ar" ? "طورنا منصة الصناعية بشكل عصري يتماشى مع توجههم الإعلامي" : "We developed Al-Sinaiya platform in a modern style aligned with their media direction",
-      image: "/projcets-images/image.png",
+      image: "/images/projects/snaya.png",
 
       link: "https://www.snaya.sa",
     },
