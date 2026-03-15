@@ -65,8 +65,8 @@ const Hero = () => {
       </div>
 
       {/* --- CONTENT LAYER --- */}
-      <div className="relative z-10 w-full max-w-7xl px-4 md:px-8 pointer-events-none">
-        <div className="flex flex-col items-center text-center space-y-8">
+      <div className="relative z-10 w-full max-w-7xl px-5 sm:px-6 md:px-8 pointer-events-none">
+        <div className="flex flex-col items-center text-center space-y-6 md:space-y-8">
           
           {/* Badge */}
           <motion.div
@@ -81,7 +81,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Dynamic Heading Area */}
-          <div className="min-h-[180px] sm:min-h-[240px] flex items-center justify-center">
+          <div className="min-h-[120px] sm:min-h-[180px] md:min-h-[240px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               {showScribblesText ? (
                 <motion.h1

@@ -103,7 +103,7 @@ const Plans = () => {
       <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
       <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -113,7 +113,7 @@ const Plans = () => {
           className="text-center mb-16 md:mb-24"
         >
           <h2
-            className="text-3xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-3 md:mb-6"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
@@ -125,7 +125,7 @@ const Plans = () => {
             {t("plans.title")}
           </h2>
           <p
-            className="text-sm md:text-2xl max-w-2xl mx-auto"
+            className="text-sm sm:text-base md:text-xl lg:text-2xl max-w-2xl mx-auto"
             style={{ fontFamily: "var(--font-moshreq)", color: "#0e7490" }}
           >
             {t("plans.subtitle")}
@@ -171,7 +171,7 @@ const Plans = () => {
                     />
                   )}
 
-                  <div className={`flex flex-col flex-1 ${isFeatured ? "px-6 py-10 md:px-14 md:py-20" : "px-6 py-10 md:px-12 md:py-18"}`}>
+                  <div className={`flex flex-col flex-1 ${isFeatured ? "px-5 py-8 sm:px-6 sm:py-10 md:px-14 md:py-20" : "px-5 py-8 sm:px-6 sm:py-10 md:px-12 md:py-18"}`}>
 
                     {/* Icon + Badge */}
                     <div className="flex items-center justify-between mb-6 md:mb-10">
@@ -338,7 +338,7 @@ const Plans = () => {
               boxShadow: "0 20px 50px -15px rgba(0, 0, 0, 0.35)",
             }}
           >
-            <div className="px-10 py-14 md:px-16 md:py-18">
+            <div className="px-5 py-10 sm:px-10 sm:py-14 md:px-16 md:py-18">
               <h3
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
                 style={{ fontFamily: "var(--font-devil-breeze)" }}

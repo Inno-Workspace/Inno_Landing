@@ -86,8 +86,8 @@ const Footer = () => {
       <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
       <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
-      <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-10 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 items-start">
           {/* Logo and Tagline */}
           <div className="flex items-center gap-4">
             <div

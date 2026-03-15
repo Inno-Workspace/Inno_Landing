@@ -50,10 +50,10 @@ const Contact = () => {
       <div className="hidden md:block absolute top-0 right-1/3 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-[120px]" />
       <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-300/20 rounded-full blur-[120px]" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="mb-6 md:mb-8">
           <h2
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-4"
+            className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold mb-3 md:mb-4"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background: "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
@@ -65,17 +65,17 @@ const Contact = () => {
             {t("contact.title")}
           </h2>
           <p
-            className="text-xl md:text-2xl lg:text-3xl max-w-3xl mb-4"
+            className="text-base sm:text-lg md:text-2xl lg:text-3xl max-w-3xl mb-4"
             style={{ fontFamily: "var(--font-moshreq)", color: "#155e75" }}
           >
             {t("contact.subtitle")}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8 mt-6 md:mt-8">
           {/* WhatsApp Card */}
           <div
-            className="rounded-2xl p-8 md:p-10 relative overflow-hidden flex flex-col"
+            className="rounded-2xl p-6 md:p-8 lg:p-10 relative overflow-hidden flex flex-col"
             style={panelStyle}
           >
             {/* Decorative top line */}
@@ -85,10 +85,10 @@ const Contact = () => {
             ></div>
 
             {/* Icon */}
-            <div className="flex-1 flex items-center justify-center py-8">
+            <div className="flex-1 flex items-center justify-center py-6 md:py-8">
               <div className="relative">
                 <div
-                  className="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex items-center justify-center"
+                  className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-2xl flex items-center justify-center"
                   style={{
                     background: "linear-gradient(135deg, #0891b2, #0d9488)",
                     boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
@@ -104,13 +104,13 @@ const Contact = () => {
             {/* Text + Button */}
             <div className="text-center">
               <h3
-                className="text-3xl md:text-4xl font-bold mb-3"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3"
                 style={{ fontFamily: "var(--font-devil-breeze)", color: "#ffffff" }}
               >
                 {t("contact.whatsapp.title")}
               </h3>
               <p
-                className="text-sm md:text-base leading-relaxed mb-8"
+                className="text-sm md:text-base leading-relaxed mb-6 md:mb-8"
                 style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}
               >
                 {t("contact.whatsapp.description")}
@@ -118,7 +118,7 @@ const Contact = () => {
 
               <button
                 onClick={handleWhatsApp}
-                className="w-full px-8 py-5 rounded-xl font-bold text-lg transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group text-white cursor-pointer"
+                className="w-full px-6 py-4 md:px-8 md:py-5 rounded-xl font-bold text-base md:text-lg transition-all transform hover:scale-[1.03] active:scale-95 relative overflow-hidden group text-white cursor-pointer"
                 style={{
                   fontFamily: "var(--font-moshreq)",
                   background: "linear-gradient(135deg, #0891b2, #0d9488)",
@@ -141,11 +141,11 @@ const Contact = () => {
 
           {/* Contact Info */}
           <div
-            className="rounded-2xl p-8 md:p-10 relative overflow-hidden"
+            className="rounded-2xl p-6 md:p-8 lg:p-10 relative overflow-hidden"
             style={panelStyle}
           >
             <h3
-              className="text-3xl md:text-4xl font-bold mb-8"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8"
               style={{ fontFamily: "var(--font-devil-breeze)", color: "#ffffff" }}
             >
               {t("contact.info.title")}

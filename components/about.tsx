@@ -47,7 +47,7 @@ const About = () => {
         </>
       )}
 
-      <div className="relative z-10 container mx-auto px-6 py-24 md:py-40">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 py-16 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-5 md:mb-8 leading-tight"
             style={{
               fontFamily: "var(--font-devil-breeze)",
               background:
@@ -74,7 +74,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl space-y-6 text-lg md:text-xl leading-relaxed text-dark"
+          className="max-w-4xl space-y-4 md:space-y-6 text-base md:text-xl leading-relaxed text-dark"
           style={{
             fontFamily: "var(--font-moshreq)",
             fontWeight: 400,

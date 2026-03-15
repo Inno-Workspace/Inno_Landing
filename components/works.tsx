@@ -67,17 +67,17 @@ const Works = () => {
       <div className="hidden md:block absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
       <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-10 md:mb-16">
           <h2
-            className="text-5xl md:text-7xl font-bold mb-6 text-white"
+            className="text-3xl sm:text-4xl md:text-7xl font-bold mb-4 md:mb-6 text-white"
             style={{ fontFamily: "var(--font-devil-breeze)" }}
           >
             {t("works.title")}
           </h2>
           <p
-            className="text-xl text-slate-300/80 leading-relaxed"
+            className="text-base md:text-xl text-slate-300/80 leading-relaxed"
             style={{ fontFamily: "var(--font-moshreq)" }}
           >
             {t("works.description")}
@@ -85,7 +85,7 @@ const Works = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           {works.map((work) => (
             <a
               key={work.id}
@@ -106,7 +106,7 @@ const Works = () => {
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(103, 232, 249, 0.12)"; }}
               >
                 {/* Image Container */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   <Image
                     src={work.image}
                     alt={work.title}
@@ -125,9 +125,9 @@ const Works = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 relative">
+                <div className="p-4 md:p-6 relative">
                   <h3
-                    className="text-2xl font-bold text-white mb-3 transition-all duration-300 group-hover:text-cyan-400"
+                    className="text-lg md:text-2xl font-bold text-white mb-2 md:mb-3 transition-all duration-300 group-hover:text-cyan-400"
                     style={{ fontFamily: "var(--font-devil-breeze)" }}
                   >
                     {work.title}

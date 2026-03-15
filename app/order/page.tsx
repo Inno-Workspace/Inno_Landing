@@ -68,7 +68,7 @@ function OrderForm() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           onClick={() => router.back()}
           dir="ltr"
-          className="flex items-center justify-center gap-2 mb-8 px-10 py-4 rounded-2xl text-lg font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          className="flex items-center justify-center gap-2 mb-6 md:mb-8 px-6 py-3 md:px-10 md:py-4 rounded-2xl text-base md:text-lg font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           style={{
             fontFamily: "var(--font-moshreq)",
             background: "linear-gradient(135deg, #0891b2, #0d9488)",
@@ -141,7 +141,7 @@ function OrderForm() {
             {/* Selected Plan Banner */}
             {plan && (
               <div
-                className="px-10 py-6 md:px-12 md:py-7 flex items-center justify-between"
+                className="px-5 py-5 sm:px-8 md:px-12 md:py-7 flex items-center justify-between"
                 style={{
                   background: "rgba(103, 232, 249, 0.04)",
                   borderBottom: "1px solid rgba(103, 232, 249, 0.08)",
@@ -184,7 +184,7 @@ function OrderForm() {
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="px-10 py-10 md:px-12 md:py-12 space-y-7">
+            <form onSubmit={handleSubmit} className="px-5 py-8 sm:px-8 md:px-12 md:py-12 space-y-6 md:space-y-7">
               {/* Name */}
               <div>
                 <label className="block text-base mb-2.5" style={labelStyle}>
@@ -356,7 +356,7 @@ function OrderForm() {
 
             {/* Footer */}
             <div
-              className="px-10 py-6 md:px-12 text-center"
+              className="px-5 py-5 sm:px-8 md:px-12 md:py-6 text-center"
               style={{
                 borderTop: "1px solid rgba(103, 232, 249, 0.06)",
               }}

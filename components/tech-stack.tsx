@@ -81,27 +81,27 @@ const TechStack = () => {
       <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
       <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-16 items-start">
           {/* LEFT SIDE - CLIENTS MARQUEE */}
           <div className="flex flex-col h-full">
-            <div className="rounded-2xl p-8 md:p-10" style={panelStyle}>
+            <div className="rounded-2xl p-5 sm:p-8 md:p-10" style={panelStyle}>
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-12"
+                className="mb-8 md:mb-12"
               >
                 <h2
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+                  className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4"
                   style={{ fontFamily: "var(--font-devil-breeze)" }}
                 >
                   {language === "ar" ? "عملاؤنا" : "Our Clients"}
                 </h2>
                 <p
-                  className="text-lg md:text-xl text-slate-300/80"
+                  className="text-base md:text-xl text-slate-300/80"
                   style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {language === "ar"
@@ -229,22 +229,22 @@ const TechStack = () => {
 
           {/* RIGHT SIDE - TECH STACK GRID */}
           <div className="flex flex-col h-full">
-            <div className="rounded-2xl p-8 md:p-10" style={panelStyle}>
+            <div className="rounded-2xl p-5 sm:p-8 md:p-10" style={panelStyle}>
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-12"
+                className="mb-8 md:mb-12"
               >
                 <h2
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+                  className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4"
                   style={{ fontFamily: "var(--font-devil-breeze)" }}
                 >
                   {language === "ar" ? "تقنياتنا" : "Our Tech Stack"}
                 </h2>
                 <p
-                  className="text-lg md:text-xl text-slate-300/80"
+                  className="text-base md:text-xl text-slate-300/80"
                   style={{ fontFamily: "var(--font-moshreq)" }}
                 >
                   {language === "ar"
