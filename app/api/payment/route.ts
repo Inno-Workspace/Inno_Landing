@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
       callback: `${baseUrl}/api/payment/callback`,
       hide_shipping: true,
       paypage_lang: language === "ar" ? "ar" : "en",
+      payment_methods: ["creditcard", "applepay"],
     };
 
     if (customer_name && customer_email && customer_phone) {

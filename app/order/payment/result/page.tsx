@@ -14,6 +14,13 @@ function PaymentResultContent() {
   const tranRef = searchParams.get("tranRef");
 
   const isSuccess = respStatus === "A";
+  const isCancelled = !respStatus || respStatus === "C";
+
+  // If cancelled, redirect back to payment page
+  if (isCancelled) {
+    router.back();
+    return null;
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
