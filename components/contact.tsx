@@ -47,8 +47,8 @@ const Contact = () => {
       />
 
       {/* Soft glow orbs — desktop only */}
-      <div className="hidden md:block absolute top-0 right-1/3 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-300/20 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-0 right-1/3 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-300/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="mb-6 md:mb-8">

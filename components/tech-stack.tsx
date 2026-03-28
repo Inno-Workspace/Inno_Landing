@@ -78,8 +78,8 @@ const TechStack = () => {
       />
 
       {/* Ambient glow orbs — desktop only */}
-      <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-3xl" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Two Column Layout */}

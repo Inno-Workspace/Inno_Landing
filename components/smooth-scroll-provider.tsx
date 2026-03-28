@@ -43,12 +43,10 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
     // Expose lenis instance globally for other components
     window.lenis = lenis;
 
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-
-    requestAnimationFrame(raf);
+    // Use GSAP ticker instead of raw RAF to avoid double-ticking
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
 
     gsap.ticker.lagSmoothing(0);
 

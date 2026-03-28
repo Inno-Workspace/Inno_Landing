@@ -41,6 +41,13 @@ const Works = () => {
 
       link: "https://www.snaya.sa",
     },
+    {
+      id: 4,
+      title: language === "ar" ? "الفا فاكتوري" : "Alpha Factory",
+      description: language === "ar" ? "منصة شاملة لإدارة إنتاج الفيديو تشمل تتبع المشاريع، الفوترة التلقائية، وإشعارات متعددة القنوات" : "A comprehensive video production management platform with project tracking, automated invoicing, and multi-channel notifications",
+      image: "/images/projects/AlphaFactory.png",
+      link: "https://www.alphafactory.net/",
+    },
   ];
 
   return (
@@ -64,8 +71,8 @@ const Works = () => {
       />
 
       {/* Ambient glow orbs — desktop only */}
-      <div className="hidden md:block absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-500/[0.07] rounded-full blur-3xl" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Header */}

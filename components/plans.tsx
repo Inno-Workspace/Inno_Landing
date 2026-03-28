@@ -1,7 +1,6 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
 
@@ -88,11 +87,14 @@ const plans: Plan[] = [
 
 const Plans = () => {
   const { t, language } = useLanguage();
-  const router = useRouter();
 
-  const handleBuyPlan = (planTitle: string, planPrice: string, planDesc: string) => {
-    router.push(
-      `/order?plan=${encodeURIComponent(planTitle)}&price=${encodeURIComponent(planPrice)}&desc=${encodeURIComponent(planDesc)}`
+  const handleBuyPlan = (planTitle: string, planPrice: string) => {
+    const msg = language === "ar"
+      ? `مرحباً! أبغى أطلب باقة "${planTitle}" بسعر ${planPrice} ${t("plans.currency")}`
+      : `Hello! I'd like to order the "${planTitle}" plan at ${planPrice} ${t("plans.currency")}`;
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
+      "_blank"
     );
   };
 
@@ -100,8 +102,8 @@ const Plans = () => {
     <section id="plans" className="relative w-full overflow-hidden py-24 md:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#ecfeff] via-[#f0fdfa] to-[#ecfeff]" />
 
-      <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
+      <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -285,7 +287,7 @@ const Plans = () => {
 
                     {/* CTA */}
                     <button
-                      onClick={() => handleBuyPlan(title, t(plan.priceKey), t(plan.descKey))}
+                      onClick={() => handleBuyPlan(title, t(plan.priceKey))}
                       className={`w-full rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer group ${
                         isFeatured ? "py-4 md:py-6 text-base md:text-lg" : "py-3.5 md:py-5 text-sm md:text-lg"
                       }`}
