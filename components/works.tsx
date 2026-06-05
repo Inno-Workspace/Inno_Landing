@@ -48,6 +48,18 @@ const Works = () => {
       image: "/images/projects/AlphaFactory.png",
       link: "https://www.alphafactory.net/",
     },
+    {
+      id: 5,
+      title: language === "ar" ? "مجلس الجمعيات الأهلية بالشرقية" : "Eastern Province NGO Council",
+      description: language === "ar" ? "نظام إدارة المشاريع والمهام لمجلس الجمعيات الأهلية بالشرقية" : "Projects and tasks management system for the Eastern Province NGO Council",
+      image: "/images/projects/shrgya.png",
+    },
+    {
+      id: 6,
+      title: language === "ar" ? "تطبيق المحادثة" : "Contact App",
+      description: language === "ar" ? "نظام فوري لتقديم خدمة المحادثة المباشرة داخل المواقع والأنظمة" : "An instant system for providing live chat service within websites and platforms",
+      image: "/images/projects/contactapp.png",
+    },
   ];
 
   return (
