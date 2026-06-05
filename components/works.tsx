@@ -56,9 +56,10 @@ const Works = () => {
     },
     {
       id: 6,
-      title: language === "ar" ? "تطبيق المحادثة" : "Contact App",
+      title: language === "ar" ? "نظام فوري" : "Fawry System",
       description: language === "ar" ? "نظام فوري لتقديم خدمة المحادثة المباشرة داخل المواقع والأنظمة" : "An instant system for providing live chat service within websites and platforms",
       image: "/images/projects/contactapp.png",
+      link: "https://fawry.trmyz.com/",
     },
   ];
 
