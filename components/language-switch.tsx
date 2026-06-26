@@ -32,7 +32,7 @@ const LanguageSwitch = () => {
         </span>
       </div>
 
-      {/* AR side */}
+      {/* A side */}
       <div
         className="relative z-10 h-full flex items-center justify-center px-4"
       >
