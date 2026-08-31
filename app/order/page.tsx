@@ -1,19 +1,21 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Suspense, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
-
-const WHATSAPP_NUMBER = "966552658605";
+import { CONTACT, content } from "@/lib/content";
+import { Arrow, Asterisk, Reveal, Wordmark } from "@/components/site/ui";
 
 function OrderForm() {
   const { t, language } = useLanguage();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const plan = searchParams.get("plan") || "";
-  const price = searchParams.get("price") || "";
-  const desc = searchParams.get("desc") || "";
+  const params = useSearchParams();
+
+  const plan = params.get("plan") || "";
+  const price = params.get("price") || "";
+  const desc = params.get("desc") || "";
+  const currency = content[language].plans.currency;
 
   const [form, setForm] = useState({
     name: "",
@@ -25,373 +27,236 @@ function OrderForm() {
     description: "",
   });
 
-  const handleChange = (
+  const change = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  ) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem("orderForm", JSON.stringify({ ...form, plan, price, desc }));
+    localStorage.setItem(
+      "orderForm",
+      JSON.stringify({ ...form, plan, price, desc })
+    );
     router.push(
-      `/order/payment?plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(price)}&name=${encodeURIComponent(form.name)}&desc=${encodeURIComponent(desc)}`
+      `/order/payment?plan=${encodeURIComponent(plan)}&price=${encodeURIComponent(
+        price
+      )}&name=${encodeURIComponent(form.name)}&desc=${encodeURIComponent(desc)}`
     );
   };
 
-  const inputStyle = {
-    fontFamily: "var(--font-moshreq)",
-    background: "rgba(103, 232, 249, 0.06)",
-    border: "1.5px solid rgba(103, 232, 249, 0.14)",
-    color: "#e2e8f0",
-    fontSize: "16px",
-  };
-
-  const labelStyle = {
-    fontFamily: "var(--font-moshreq)",
-    color: "#cbd5e1",
-    fontSize: "15px",
-  };
-
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ecfeff] via-[#f0fdfa] to-[#ecfeff]" />
-      <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
+    <main className="grain relative min-h-[100svh] overflow-hidden bg-ink text-white">
+      <div className="pointer-events-none absolute -end-32 -top-32 z-0 text-mint/10">
+        <Asterisk size={420} className="spin-slow" />
+      </div>
 
-      <div className="relative z-10 container mx-auto px-6 py-16 md:py-24">
-        {/* Back Button */}
-        <motion.button
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          onClick={() => router.back()}
-          dir="ltr"
-          className="flex items-center justify-center gap-2 mb-6 md:mb-8 px-6 py-3 md:px-10 md:py-4 rounded-2xl text-base md:text-lg font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-          style={{
-            fontFamily: "var(--font-moshreq)",
-            background: "linear-gradient(135deg, #0891b2, #0d9488)",
-            color: "#ffffff",
-            border: "none",
-            boxShadow: "0 12px 40px -8px rgba(8, 145, 178, 0.4)",
-            marginInlineStart: "0",
-            marginInlineEnd: "auto",
-          }}
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      <div className="relative z-[2] mx-auto max-w-[880px] px-5 pb-20 pt-8 sm:px-8 sm:pt-10">
+        <div className="flex items-center justify-between">
+          <Link href="/" aria-label="INNO">
+            <Wordmark size={20} />
+          </Link>
+          <button
+            onClick={() => router.back()}
+            className="group flex items-center gap-2.5 rounded-[4px] border border-white/22 px-4 py-2.5 text-sm text-white/70 transition-colors hover:border-mint hover:text-mint"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {language === "ar" ? "رجوع" : "Back"}
-        </motion.button>
+            <Arrow
+              size={15}
+              className="rotate-180 transition-transform duration-300 group-hover:-translate-x-1 rtl:rotate-0 rtl:group-hover:translate-x-1"
+            />
+            {t("order.back")}
+          </button>
+        </div>
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10 md:mb-16"
-        >
-          <span
-            className="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-6"
-            style={{
-              fontFamily: "var(--font-moshreq)",
-              background: "rgba(14, 116, 144, 0.08)",
-              color: "#0e7490",
-              border: "1px solid rgba(14, 116, 144, 0.15)",
-            }}
-          >
-            {t("order.step")}
-          </span>
-          <h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
-            style={{
-              fontFamily: "var(--font-devil-breeze)",
-              background:
-                "linear-gradient(135deg, #0f766e 0%, #0e7490 50%, #155e75 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
+        <Reveal>
+          <div className="eyebrow mt-14 text-mint">
+            <Asterisk size={12} />
+            <span className="font-ar normal-case tracking-[0.16em]">
+              {t("order.step")}
+            </span>
+            <span className="h-px flex-1 bg-white/14" />
+          </div>
+        </Reveal>
+
+        <Reveal delay={70}>
+          <h1 className="display mt-7 text-[clamp(2rem,6vw,3.4rem)]">
             {t("order.pageTitle")}
+            <span className="text-mint">.</span>
           </h1>
-        </motion.div>
+        </Reveal>
 
-        {/* Form Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="max-w-3xl mx-auto"
-        >
-          <div
-            className="rounded-3xl overflow-hidden"
-            style={{
-              background: "linear-gradient(175deg, #0c2633, #0a1e2b)",
-              border: "1px solid rgba(103, 232, 249, 0.08)",
-              boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.4)",
-            }}
-          >
-            {/* Selected Plan Banner */}
+        <Reveal delay={140}>
+          <div className="mt-10 overflow-hidden rounded-[6px] border border-white/14 bg-ink-2">
             {plan && (
-              <div
-                className="px-5 py-5 sm:px-8 md:px-12 md:py-7 flex items-center justify-between"
-                style={{
-                  background: "rgba(103, 232, 249, 0.04)",
-                  borderBottom: "1px solid rgba(103, 232, 249, 0.08)",
-                }}
-              >
+              <div className="flex items-center justify-between gap-4 border-b border-white/12 bg-mint/6 px-6 py-5 sm:px-8">
                 <div>
-                  <p
-                    className="text-sm mb-1"
-                    style={{ fontFamily: "var(--font-moshreq)", color: "#64748b" }}
-                  >
+                  <div className="text-xs text-white/45">
                     {t("order.selectedPlan")}
-                  </p>
-                  <p
-                    className="text-xl font-bold text-white"
-                    style={{ fontFamily: "var(--font-devil-breeze)" }}
-                  >
+                  </div>
+                  <div className="mt-1 text-lg font-semibold sm:text-xl">
                     {plan}
-                  </p>
+                  </div>
                 </div>
                 {price && (
                   <div className="flex items-baseline gap-1.5">
-                    <span
-                      className="text-3xl font-bold text-white"
-                      style={{ fontFamily: "var(--font-devil-breeze)" }}
-                    >
-                      {price}
+                    <span className="num text-2xl font-semibold text-mint sm:text-[30px]">
+                      {Number(price).toLocaleString("en-US")}
                     </span>
-                    <span
-                      className="text-sm"
-                      style={{
-                        fontFamily: "var(--font-moshreq)",
-                        color: "#64748b",
-                      }}
-                    >
-                      {t("plans.currency")}
-                    </span>
+                    <span className="text-xs text-white/50">{currency}</span>
                   </div>
                 )}
               </div>
             )}
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="px-5 py-8 sm:px-8 md:px-12 md:py-12 space-y-6 md:space-y-7">
-              {/* Name */}
-              <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
-                  {t("order.name")}
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder={t("order.namePlaceholder")}
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
-                  {t("order.phone")}
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder={t("order.phonePlaceholder")}
-                  dir="ltr"
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
-                  {t("order.email")}
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder={t("order.emailPlaceholder")}
-                  dir="ltr"
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Business Activity */}
-              <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
-                  {t("order.business")}
-                </label>
-                <input
-                  type="text"
-                  name="business"
-                  value={form.business}
-                  onChange={handleChange}
-                  placeholder={t("order.businessPlaceholder")}
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Visual Identity */}
-              <div>
-                <label className="block text-base mb-3" style={labelStyle}>
-                  {t("order.hasIdentity")}
-                </label>
-                <div className="flex gap-3">
-                  {[
-                    { value: "yes", label: t("order.identityYes") },
-                    { value: "no", label: t("order.identityNo") },
-                  ].map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() =>
-                        setForm((prev) => ({
-                          ...prev,
-                          hasIdentity: option.value,
-                        }))
-                      }
-                      className="px-8 py-3.5 rounded-xl text-base font-medium transition-all duration-200 cursor-pointer"
-                      style={{
-                        fontFamily: "var(--font-moshreq)",
-                        background:
-                          form.hasIdentity === option.value
-                            ? "rgba(34, 211, 238, 0.12)"
-                            : "rgba(103, 232, 249, 0.04)",
-                        color:
-                          form.hasIdentity === option.value
-                            ? "#22d3ee"
-                            : "#64748b",
-                        border:
-                          form.hasIdentity === option.value
-                            ? "1px solid rgba(34, 211, 238, 0.25)"
-                            : "1px solid rgba(103, 232, 249, 0.1)",
-                      }}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
+            <form onSubmit={submit} className="space-y-6 px-6 py-8 sm:px-8 sm:py-10">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="field-label" htmlFor="name">
+                    {t("order.name")}
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={change}
+                    placeholder={t("order.namePlaceholder")}
+                    className="field"
+                  />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="phone">
+                    {t("order.phone")}
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    dir="ltr"
+                    value={form.phone}
+                    onChange={change}
+                    placeholder={t("order.phonePlaceholder")}
+                    className="field"
+                  />
                 </div>
               </div>
 
-              {/* Country */}
-              <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
-                  {t("order.country")}
-                </label>
-                <input
-                  type="text"
-                  name="country"
-                  value={form.country}
-                  onChange={handleChange}
-                  placeholder={t("order.countryPlaceholder")}
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500"
-                  style={inputStyle}
-                />
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="field-label" htmlFor="email">
+                    {t("order.email")}
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    dir="ltr"
+                    value={form.email}
+                    onChange={change}
+                    placeholder={t("order.emailPlaceholder")}
+                    className="field"
+                  />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="business">
+                    {t("order.business")}
+                  </label>
+                  <input
+                    id="business"
+                    name="business"
+                    value={form.business}
+                    onChange={change}
+                    placeholder={t("order.businessPlaceholder")}
+                    className="field"
+                  />
+                </div>
               </div>
 
-              {/* Description */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <span className="field-label">{t("order.hasIdentity")}</span>
+                  <div className="flex gap-3">
+                    {[
+                      { value: "yes", label: t("order.identityYes") },
+                      { value: "no", label: t("order.identityNo") },
+                    ].map((o) => (
+                      <button
+                        key={o.value}
+                        type="button"
+                        onClick={() =>
+                          setForm((p) => ({ ...p, hasIdentity: o.value }))
+                        }
+                        className={`flex-1 rounded-[5px] border py-3.5 text-[15px] transition-colors ${
+                          form.hasIdentity === o.value
+                            ? "border-mint bg-mint text-ink font-semibold"
+                            : "border-white/16 text-white/60 hover:border-white/32"
+                        }`}
+                      >
+                        {o.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="country">
+                    {t("order.country")}
+                  </label>
+                  <input
+                    id="country"
+                    name="country"
+                    value={form.country}
+                    onChange={change}
+                    placeholder={t("order.countryPlaceholder")}
+                    className="field"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-base mb-2.5" style={labelStyle}>
+                <label className="field-label" htmlFor="description">
                   {t("order.description")}
                 </label>
                 <textarea
+                  id="description"
                   name="description"
-                  value={form.description}
-                  onChange={handleChange}
-                  placeholder={t("order.descriptionPlaceholder")}
                   rows={4}
-                  className="w-full px-5 py-4 rounded-xl text-base outline-none transition-colors focus:border-cyan-400/30 placeholder:text-slate-500 resize-none"
-                  style={inputStyle}
+                  value={form.description}
+                  onChange={change}
+                  placeholder={t("order.descriptionPlaceholder")}
+                  className="field resize-none"
                 />
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-5 rounded-2xl font-bold text-lg text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer mt-4"
-                style={{
-                  fontFamily: "var(--font-moshreq)",
-                  background: "linear-gradient(135deg, #0891b2, #0d9488)",
-                  boxShadow: "0 12px 40px -8px rgba(8, 145, 178, 0.4)",
-                }}
+                className="group flex w-full items-center justify-center gap-3 rounded-[5px] bg-mint py-4.5 text-base font-semibold text-ink transition-colors hover:bg-white"
               >
-                <span className="flex items-center justify-center gap-2">
-                  {t("order.cta")}
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-300 ${language === "ar" ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
+                {t("order.cta")}
+                <Arrow className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
               </button>
             </form>
 
-            {/* Footer */}
-            <div
-              className="px-5 py-5 sm:px-8 md:px-12 md:py-6 text-center"
-              style={{
-                borderTop: "1px solid rgba(103, 232, 249, 0.06)",
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  const msg =
-                    language === "ar"
-                      ? "مرحباً! عندي استفسار"
-                      : "Hello! I have a question.";
-                  window.open(
-                    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
-                    "_blank"
-                  );
-                }}
-                className="text-base transition-colors duration-200 hover:text-cyan-300 cursor-pointer"
-                style={{
-                  fontFamily: "var(--font-moshreq)",
-                  color: "#64748b",
-                }}
+            <div className="border-t border-white/10 px-6 py-5 text-center sm:px-8">
+              <a
+                href={`https://wa.me/${CONTACT.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[15px] text-white/45 transition-colors hover:text-mint"
               >
                 {t("order.footer")}
-              </button>
+              </a>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
-    </div>
+    </main>
   );
 }
 
 export default function OrderPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<div className="min-h-[100svh] bg-ink" />}>
       <OrderForm />
     </Suspense>
   );

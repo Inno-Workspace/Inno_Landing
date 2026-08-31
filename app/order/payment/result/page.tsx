@@ -1,131 +1,107 @@
 "use client";
 
-import { Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { Suspense, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/language-context";
+import { Arrow, Asterisk, Wordmark } from "@/components/site/ui";
 
-function PaymentResultContent() {
+function ResultContent() {
   const { language } = useLanguage();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const respStatus = searchParams.get("respStatus");
-  const respMessage = searchParams.get("respMessage");
-  const tranRef = searchParams.get("tranRef");
+  const params = useSearchParams();
+
+  const respStatus = params.get("respStatus");
+  const respMessage = params.get("respMessage");
+  const tranRef = params.get("tranRef");
 
   const isSuccess = respStatus === "A";
   const isCancelled = !respStatus || respStatus === "C";
 
-  // If cancelled, redirect back to payment page
-  if (isCancelled) {
-    router.back();
-    return null;
-  }
+  // A cancelled payment goes back to the payment step rather than showing a
+  // failure the customer did not cause.
+  useEffect(() => {
+    if (isCancelled) router.back();
+  }, [isCancelled, router]);
+
+  if (isCancelled) return <div className="min-h-[100svh] bg-ink" />;
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ecfeff] via-[#f0fdfa] to-[#ecfeff]" />
-      <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] bg-teal-200/25 rounded-full blur-[150px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-[150px]" />
-
-      <div className="relative z-10 container mx-auto px-6 py-16 md:py-24 flex items-center justify-center min-h-screen">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-lg w-full"
-        >
-          <div
-            className="rounded-3xl overflow-hidden text-center px-10 py-14 md:px-12"
-            style={{
-              background: "linear-gradient(175deg, #0c2633, #0a1e2b)",
-              border: "1px solid rgba(103, 232, 249, 0.08)",
-              boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.4)",
-            }}
-          >
-            {/* Icon */}
-            <div className="mb-6 flex justify-center">
-              {isSuccess ? (
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center"
-                  style={{ background: "rgba(16, 185, 129, 0.12)", border: "2px solid rgba(16, 185, 129, 0.3)" }}
-                >
-                  <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-              ) : (
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center"
-                  style={{ background: "rgba(239, 68, 68, 0.12)", border: "2px solid rgba(239, 68, 68, 0.3)" }}
-                >
-                  <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-              )}
-            </div>
-
-            {/* Title */}
-            <h1
-              className="text-3xl font-bold mb-3"
-              style={{
-                fontFamily: "var(--font-devil-breeze)",
-                color: isSuccess ? "#34d399" : "#f87171",
-              }}
-            >
-              {isSuccess
-                ? language === "ar" ? "تمت عملية الدفع بنجاح" : "Payment Successful"
-                : language === "ar" ? "فشلت عملية الدفع" : "Payment Failed"}
-            </h1>
-
-            {/* Message */}
-            <p
-              className="text-base mb-2"
-              style={{ fontFamily: "var(--font-moshreq)", color: "#94a3b8" }}
-            >
-              {isSuccess
-                ? language === "ar"
-                  ? "شكراً لك! سوف نتواصل معك خلال 24 ساعة"
-                  : "Thank you! We will contact you within 24 hours"
-                : respMessage || (language === "ar" ? "حدث خطأ أثناء الدفع" : "An error occurred during payment")}
-            </p>
-
-            {/* Transaction Ref */}
-            {tranRef && (
-              <p
-                className="text-sm mb-8"
-                style={{ fontFamily: "var(--font-moshreq)", color: "#64748b" }}
-              >
-                {language === "ar" ? "رقم المرجع: " : "Reference: "}{tranRef}
-              </p>
-            )}
-
-            {/* Action Button */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => router.push("/")}
-              className="px-10 py-4 rounded-2xl text-lg font-bold text-white cursor-pointer"
-              style={{
-                fontFamily: "var(--font-moshreq)",
-                background: "linear-gradient(135deg, #0891b2, #0d9488)",
-                boxShadow: "0 12px 40px -8px rgba(8, 145, 178, 0.4)",
-              }}
-            >
-              {language === "ar" ? "العودة للرئيسية" : "Back to Home"}
-            </motion.button>
-          </div>
-        </motion.div>
+    <main className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white">
+      <div className="pointer-events-none absolute -end-28 -top-28 z-0 text-mint/10">
+        <Asterisk size={400} className="spin-slow" />
       </div>
-    </div>
+
+      <div className="relative z-[2] px-5 pt-8 sm:px-8 sm:pt-10">
+        <Wordmark size={20} />
+      </div>
+
+      <div className="relative z-[2] flex flex-1 items-center justify-center px-5 py-16 sm:px-8">
+        <div className="w-full max-w-[34rem] rounded-[6px] border border-white/14 bg-ink-2 p-8 sm:p-11">
+          <div
+            className={`flex h-16 w-16 items-center justify-center rounded-full border-2 ${
+              isSuccess
+                ? "border-mint/40 bg-mint/12 text-mint"
+                : "border-red-400/40 bg-red-400/12 text-red-300"
+            }`}
+          >
+            {isSuccess ? (
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} aria-hidden="true">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
+                <path d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
+          </div>
+
+          <h1 className="display mt-7 text-[clamp(1.7rem,4.5vw,2.4rem)]">
+            {isSuccess
+              ? language === "ar"
+                ? "تم الدفع بنجاح"
+                : "Payment successful"
+              : language === "ar"
+                ? "ما تمت عملية الدفع"
+                : "Payment failed"}
+          </h1>
+
+          <p className="mt-4 text-[16.5px] leading-[1.85] text-white/62">
+            {isSuccess
+              ? language === "ar"
+                ? "شكرًا لك — بنتواصل معك خلال ٢٤ ساعة ونبدأ التنفيذ."
+                : "Thank you — we will contact you within 24 hours and start work."
+              : respMessage ||
+                (language === "ar"
+                  ? "صار خطأ أثناء الدفع. حاول مرة ثانية أو كلّمنا وبنساعدك."
+                  : "Something went wrong during payment. Try again, or message us.")}
+          </p>
+
+          {tranRef && (
+            <div className="mt-6 flex items-center gap-3 border-t border-white/12 pt-5">
+              <span className="text-xs text-white/45">
+                {language === "ar" ? "رقم المرجع" : "Reference"}
+              </span>
+              <span className="num text-sm text-white/80">{tranRef}</span>
+            </div>
+          )}
+
+          <button
+            onClick={() => router.push("/")}
+            className="group mt-9 flex w-full items-center justify-center gap-3 rounded-[5px] bg-mint py-4 text-base font-semibold text-ink transition-colors hover:bg-white"
+          >
+            {language === "ar" ? "العودة للرئيسية" : "Back to home"}
+            <Arrow className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+          </button>
+        </div>
+      </div>
+    </main>
   );
 }
 
 export default function PaymentResultPage() {
   return (
-    <Suspense>
-      <PaymentResultContent />
+    <Suspense fallback={<div className="min-h-[100svh] bg-ink" />}>
+      <ResultContent />
     </Suspense>
   );
 }
