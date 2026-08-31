@@ -328,6 +328,9 @@ export const content = {
       popular: "الأكثر طلبًا",
       currency: "ر.س",
       cta: "اطلب الباقة",
+      /** Prefilled while the order/payment flow is parked — see plans.tsx. */
+      waOrder: (title: string, price: string, currency: string) =>
+        `مرحبًا، أبغى أطلب باقة "${title}" (${price} ${currency}).`,
       aside: {
         payLabel: "طرق الدفع",
         daysValue: "7",
@@ -516,6 +519,9 @@ export const content = {
       popular: "Most requested",
       currency: "SAR",
       cta: "Order this plan",
+      /** Prefilled while the order/payment flow is parked — see plans.tsx. */
+      waOrder: (title: string, price: string, currency: string) =>
+        `Hello, I would like to order the "${title}" plan (${price} ${currency}).`,
       aside: {
         payLabel: "Payment methods",
         daysValue: "7",

@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+// Parked with the order flow — restore alongside the `orderHref` link below.
+// import Link from "next/link";
 import { useLanguage } from "@/contexts/language-context";
 import { CONTACT, content, type PlanContent } from "@/lib/content";
 import PlansAside from "./plans-aside";
@@ -28,15 +29,24 @@ function PlanCard({
   cta,
   currency,
   popular,
+  orderMessage,
 }: {
   plan: PlanContent;
   cta: string;
   currency: string;
   popular: string;
+  orderMessage: (title: string, price: string, currency: string) => string;
 }) {
-  const orderHref = `/order?plan=${encodeURIComponent(
-    plan.id
-  )}&price=${encodeURIComponent(plan.price)}&desc=${encodeURIComponent(plan.desc)}`;
+  // The order + payment flow is parked for now: the CTA opens WhatsApp with the
+  // plan already named instead. The pages under /order are untouched — drop the
+  // comment markers here to send visitors back through them.
+  // const orderHref = `/order?plan=${encodeURIComponent(
+  //   plan.id
+  // )}&price=${encodeURIComponent(plan.price)}&desc=${encodeURIComponent(plan.desc)}`;
+
+  const orderHref = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(
+    orderMessage(plan.title, Number(plan.price).toLocaleString("en-US"), currency)
+  )}`;
 
   return (
     <div
@@ -88,8 +98,10 @@ function PlanCard({
         ))}
       </ul>
 
-      <Link
+      <a
         href={orderHref}
+        target="_blank"
+        rel="noopener noreferrer"
         className={`group mt-8 flex items-center justify-center gap-2.5 rounded-[5px] py-4 text-[15px] transition-colors duration-300 ${
           plan.featured
             ? "bg-mint font-semibold text-ink hover:bg-white"
@@ -101,7 +113,7 @@ function PlanCard({
           size={16}
           className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
         />
-      </Link>
+      </a>
     </div>
   );
 }
@@ -171,6 +183,7 @@ export default function Plans() {
                   cta={c.cta}
                   currency={c.currency}
                   popular={c.popular}
+                  orderMessage={c.waOrder}
                 />
               </Reveal>
             ))}
