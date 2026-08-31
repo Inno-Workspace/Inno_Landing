@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 declare global {
   interface Window {
@@ -11,52 +9,70 @@ declare global {
   }
 }
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-interface SmoothScrollProviderProps {
+/**
+ * Lenis on pointer devices only — native scroll is smoother and cheaper on
+ * touch. Also owns in-page anchor navigation, since Lenis and the browser's
+ * own smooth scroll fight each other otherwise.
+ */
+export default function SmoothScrollProvider({
+  children,
+}: {
   children: ReactNode;
-}
-
-const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
+}) {
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
 
-    // Skip Lenis on mobile/tablet — native scroll is smoother and lighter
-    const isMobile = window.innerWidth < 768 || "ontouchstart" in window;
-    if (isMobile) return;
+    let lenis: Lenis | undefined;
+    let raf = 0;
 
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 0.8,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    if (!reduced && !coarse) {
+      lenis = new Lenis({
+        duration: 1.05,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+      });
+      window.lenis = lenis;
 
-    lenis.on("scroll", ScrollTrigger.update);
+      const loop = (time: number) => {
+        lenis?.raf(time);
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+    }
 
-    // Expose lenis instance globally for other components
-    window.lenis = lenis;
+    const onClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement | null)?.closest?.<HTMLAnchorElement>(
+        'a[href^="#"]'
+      );
+      if (!anchor) return;
 
-    // Use GSAP ticker instead of raw RAF to avoid double-ticking
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+      const id = anchor.getAttribute("href")?.slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
 
-    gsap.ticker.lagSmoothing(0);
+      e.preventDefault();
+      const offset = -68; // fixed header
+      if (lenis) {
+        lenis.scrollTo(target, { offset, duration: 1.1 });
+      } else {
+        const top = target.getBoundingClientRect().top + window.scrollY + offset;
+        window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
+      }
+      history.replaceState(null, "", `#${id}`);
+    };
+
+    document.addEventListener("click", onClick);
 
     return () => {
-      lenis.destroy();
+      document.removeEventListener("click", onClick);
+      cancelAnimationFrame(raf);
+      lenis?.destroy();
       delete window.lenis;
     };
   }, []);
 
   return <>{children}</>;
-};
-
-export default SmoothScrollProvider;
+}

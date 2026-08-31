@@ -1,30 +1,29 @@
-import Hero from "@/components/hero";
-import About from "@/components/about";
-import TechStack from "@/components/tech-stack";
-import Plans from "@/components/plans";
-import Works from "@/components/works";
-import Contact from "@/components/contact";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import TransitionOverlay from "@/components/transition-overlay";
+import Header from "@/components/site/header";
+import Hero from "@/components/site/hero";
+import About from "@/components/site/about";
+import Offer from "@/components/site/offer";
+import Works from "@/components/site/works";
+import Plans from "@/components/site/plans";
+import Contact from "@/components/site/contact";
+import Ribbon from "@/components/site/ribbon";
+import Footer from "@/components/site/footer";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 
 export default function Home() {
   return (
     <SmoothScrollProvider>
-      <TransitionOverlay />
       <Header />
-      <div className="page-content">
-        <main className="w-full min-h-screen">
-          <Hero />
-          <About />
-          <TechStack />
-          <Plans />
-          <Works />
-          <Contact />
-          <Footer />
-        </main>
-      </div>
+      <main className="w-full">
+        {/* Band rhythm: ink → bone → ink → bone → pale mint → ink → mint ribbon */}
+        <Hero />
+        <About />
+        <Offer />
+        <Works />
+        <Plans />
+        <Contact />
+      </main>
+      <Ribbon />
+      <Footer />
     </SmoothScrollProvider>
   );
 }
