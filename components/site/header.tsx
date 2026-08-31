@@ -120,10 +120,12 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile sheet */}
+      {/* Mobile sheet. `inert` when closed, not just aria-hidden — the links
+          inside stay keyboard-focusable otherwise, so tabbing walks into an
+          invisible menu. */}
       <div
         className={`fixed inset-0 z-[60] lg:hidden ${open ? "" : "pointer-events-none"}`}
-        aria-hidden={!open}
+        inert={!open}
       >
         <div
           onClick={() => setOpen(false)}
@@ -131,17 +133,20 @@ export default function Header() {
             open ? "opacity-100" : "opacity-0"
           }`}
         />
+        {/* Position, edge and border all live in .nav-sheet so they stay in
+            agreement. Width in viewport units, not a percentage: a percentage
+            resolves against the fixed element's containing block, which any
+            ancestor with a transform or filter can silently become. */}
         <div
-          className={`grain absolute inset-y-0 end-0 flex w-[86%] max-w-sm flex-col border-s border-mint/24 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            open ? "translate-x-0" : "translate-x-full rtl:-translate-x-full"
-          }`}
+          data-open={open}
+          className="nav-sheet grain flex w-[min(86vw,22rem)] flex-col bg-ink"
         >
-          <div className="flex h-[68px] items-center justify-between border-b border-white/10 px-5">
+          <div className="flex h-[68px] shrink-0 items-center justify-between border-b border-white/10 px-5">
             <Wordmark size={20} />
             <button
               onClick={() => setOpen(false)}
               aria-label={c.close}
-              className="flex h-11 w-11 items-center justify-center rounded-[4px] border border-white/22 text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-[4px] border border-white/22 text-white transition-colors hover:border-mint hover:text-mint"
             >
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.8}>
                 <path d="M1 1l14 14M15 1L1 15" />
@@ -149,7 +154,8 @@ export default function Header() {
             </button>
           </div>
 
-          <nav className="relative z-[4] flex flex-col px-5 py-2">
+          {/* Scrolls if the menu ever outgrows a short screen. */}
+          <nav className="relative z-[4] flex-1 overflow-y-auto px-5 py-2">
             {c.links.map((l, i) => (
               <a
                 key={l.href}
@@ -165,7 +171,7 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="relative z-[4] mt-auto p-5">
+          <div className="relative z-[4] shrink-0 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
             <a
               href="#plans"
               onClick={() => setOpen(false)}

@@ -662,6 +662,46 @@ a:focus-visible .mark-dot {
   }
 }
 
+/* ---- mobile nav sheet ----
+   Anchored to the reading-end edge and hidden by sliding out through it, so
+   the offset has to flip sign with direction. Driven from one variable rather
+   than a pair of competing `translate-x-full` / `rtl:-translate-x-full`
+   utilities, whose winner depended on Tailwind's internal sort order. */
+
+.nav-sheet {
+  position: absolute;
+  inset-block: 0;
+  /* Physical properties, deliberately. The edge it anchors to and the
+     direction it slides out through must be decided in the same place — a
+     logical `inset-inline-end` paired with a direction-flipped translate let
+     them disagree, which parked the panel half off the opposite edge. */
+  right: 0;
+  left: auto;
+  border-left: 1px solid var(--line-mint);
+  border-right: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+[dir="rtl"] .nav-sheet {
+  right: auto;
+  left: 0;
+  border-left: 0;
+  border-right: 1px solid var(--line-mint);
+  transform: translateX(-100%);
+}
+
+/* Last, and identical in both directions, so it always wins the transform. */
+.nav-sheet[data-open="true"] {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-sheet {
+    transition: none;
+  }
+}
+
 /* ---- ripple (WhatsApp badge) ---- */
 
 .ripple {
