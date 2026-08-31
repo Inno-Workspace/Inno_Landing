@@ -662,6 +662,33 @@ a:focus-visible .mark-dot {
   }
 }
 
+/* ---- mobile nav sheet ----
+   Anchored to the reading-end edge and hidden by sliding out through it, so
+   the offset has to flip sign with direction. Driven from one variable rather
+   than a pair of competing `translate-x-full` / `rtl:-translate-x-full`
+   utilities, whose winner depended on Tailwind's internal sort order. */
+
+.nav-sheet {
+  --sheet-off: 100%;
+  transform: translateX(var(--sheet-off));
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+[dir="rtl"] .nav-sheet {
+  --sheet-off: -100%;
+}
+
+/* Last, and matching in both directions, so it always wins. */
+.nav-sheet[data-open="true"] {
+  --sheet-off: 0%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-sheet {
+    transition: none;
+  }
+}
+
 /* ---- ripple (WhatsApp badge) ---- */
 
 .ripple {
