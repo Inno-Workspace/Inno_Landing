@@ -133,12 +133,13 @@ export default function Header() {
             open ? "opacity-100" : "opacity-0"
           }`}
         />
-        {/* Width in viewport units, not a percentage: a percentage resolves
-            against the fixed element's containing block, which any ancestor
-            with a transform or filter can silently become. */}
+        {/* Position, edge and border all live in .nav-sheet so they stay in
+            agreement. Width in viewport units, not a percentage: a percentage
+            resolves against the fixed element's containing block, which any
+            ancestor with a transform or filter can silently become. */}
         <div
           data-open={open}
-          className="nav-sheet grain absolute inset-y-0 end-0 flex w-[min(86vw,22rem)] flex-col border-s border-mint/24 bg-ink"
+          className="nav-sheet grain flex w-[min(86vw,22rem)] flex-col bg-ink"
         >
           <div className="flex h-[68px] shrink-0 items-center justify-between border-b border-white/10 px-5">
             <Wordmark size={20} />
